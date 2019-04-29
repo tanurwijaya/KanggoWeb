@@ -1,0 +1,18 @@
+projects:
+  KanggoApps:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        graphQLApiId: 4psjnm5ohnfv3aybg6anp2slka
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src/graphql
+        region: ap-southeast-1
+        maxDepth: 2
+      endpoints:
+        prod: >-
+          https://33zi4ajtona43jhurdxcujsoka.appsync-api.ap-southeast-1.amazonaws.com/graphql

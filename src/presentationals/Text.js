@@ -4,18 +4,18 @@ import styled from '@emotion/styled'
 
 const Text = (props) => {
     const { tiny, small, medium, large, larger, children, center, bold, color } = props
-    let fontSize = 18
+    let fontSize = 14
 
     if(tiny){
         fontSize = 10
     }else if(small){
-        fontSize = 14
+        fontSize = 12
     }else if(medium){
-        fontSize = 18
+        fontSize = 14
     }else if(large){
-        fontSize = 21
+        fontSize = 16
     }else if(larger){
-        fontSize = 32
+        fontSize = 21
     }
 
     if (typeof children === 'string' || typeof children === 'number' ) {

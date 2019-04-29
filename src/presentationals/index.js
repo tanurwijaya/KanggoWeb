@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import {LIGHT_GREY, WHITE, DARK_GREY, PRIMARY_BLUE, BLUE_DARKER} from '../themes/Colors'
 
 export const ViewWrapper = styled.div(props => ({
     display: 'flex',
@@ -8,6 +9,64 @@ export const ViewWrapper = styled.div(props => ({
     alignItems : props.itemCenter && 'center',
     justifyContent: props.spaceBetween && 'space-between',
     background: props.background,
+}))
+
+export const Container = styled.div( props => ({
+   display : 'flex',
+   flexDirection: props.row ? 'row' : 'column',
+   alignItems : props.center && 'center',
+   justifyContent: props.center && 'center',
+   height : props.center && '100%'
+}))
+
+export const TextField = styled.input( props => ({
+    display: 'flex',
+    padding : 8,
+    border : `1px solid ${LIGHT_GREY}`,
+    borderRadius: '4px',
+    width: props.width ? props.width : 'auto',
+    backgroundColor: WHITE,
+    alignItems: 'flex-start',
+    ":focus" : {
+        outline:'none',
+    },
+    "::placeholder" : {
+        color : DARK_GREY,
+        fontSize : props.placeholderSize
+    },
+    "::-webkit-input-placeholder":{
+        color: DARK_GREY,
+        fontSize : props.placeholderSize
+    },
+    "::-moz-placeholder":{
+        color: DARK_GREY,
+        fontSize : props.placeholderSize
+    }
+}))
+
+export const Button = styled.button ( props => ({
+    background : PRIMARY_BLUE,
+    padding : '4px 24px',
+    border : `1px solid ${PRIMARY_BLUE}`,
+    borderRadius: '4px',
+    ":hover":{
+        cursor:'pointer'
+    },
+    ":focus" : {
+        outline:'none'
+    },
+    ":active":{
+        background: BLUE_DARKER,
+        borderColor: BLUE_DARKER
+    }
+}))
+
+export const Item = styled.div( props => ({
+    display: 'flex',
+    marginTop : 8,
+    marginBottom : 8,
+    alignItems : props.center && 'center',
+   justifyContent: props.center && 'center',
 }))
 
 export const Wrapper = styled.div(props => ({

@@ -1,5 +1,6 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
+import gql from 'graphql-tag';
 
 export const getUser = `query GetUser($email: String!, $password: String!) {
   getUser(email: $email, password: $password) {
@@ -90,20 +91,12 @@ export const listAdmins = `query ListAdmins(
   }
 }
 `;
-export const queryAdminsByEmailIdIndex = `query QueryAdminsByEmailIdIndex($email: String!, $first: Int, $after: String) {
-  queryAdminsByEmailIdIndex(email: $email, first: $first, after: $after) {
+export const queryAdminsByEmailIdIndex = gql`query QueryAdminsByEmailIdIndex($email: String!) {
+  queryAdminsByEmailIdIndex(email: $email) {
     items {
       id
       email
-      password
       nama_komunitas
-      url_logo_komunitas
-      bidang_komunitas
-      tahun_dibentuk
-      deskripsi
-      nama_admin
-      contact_person_phone
-      nomor_rekening
     }
     nextToken
   }

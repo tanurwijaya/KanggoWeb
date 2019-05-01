@@ -65,6 +65,7 @@ export const Item = styled.div( props => ({
     display: 'flex',
     marginTop : 8,
     marginBottom : 8,
+    flexDirection: props.column && 'column',
     alignItems : props.center && 'center',
    justifyContent: props.center && 'center',
 }))

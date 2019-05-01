@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import MainLogin from './components/authentication/MainLogin'
+import MainLogin from './components/authentication/login'
 import * as serviceWorker from './serviceWorker';
 import AWSAppSyncClient from "aws-appsync";
 import { Rehydrated } from 'aws-appsync-react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo';
+import {Routes} from './routes'
 import appSyncConfig from './aws-exports'
 
 const client = new AWSAppSyncClient({
@@ -19,11 +21,13 @@ const client = new AWSAppSyncClient({
   });
 
   const WithProvider = () => (
+    <BrowserRouter>
     <ApolloProvider client={client}>
       {/* <Rehydrated> */}
-        <MainLogin />
+        <Routes />
       {/* </Rehydrated> */}
     </ApolloProvider>
+    </BrowserRouter>
   );
 
 ReactDOM.render(<WithProvider />, document.getElementById('root'));

@@ -96,7 +96,8 @@ export const queryAdminsByEmailIdIndex = gql`query QueryAdminsByEmailIdIndex($em
     items {
       id
       email
-      nama_komunitas
+      nama_komunitas,
+      url_logo_komunitas
     }
     nextToken
   }

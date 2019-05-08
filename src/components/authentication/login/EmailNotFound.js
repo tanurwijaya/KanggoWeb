@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
-import { Button } from '../../../presentationals';
+import { Button, Container, Item } from '../../../presentationals';
+import Text from '../../../presentationals/Text'
+import { WHITE } from '../../../themes/Colors';
 
-class EmailNotFound extends Component {
+export default class EmailNotFound extends Component {
   render() {
+    console.log(this.props)
     return (
-      <div>
-        <Text>Akun dengan email test@example.com tidak ditemukan</Text>
-        <Button>Buat Akun</Button>
-        <Button>Coba Email Lain</Button>
-      </div>
+      <Container>
+        <Item>
+        <Text large>Akun dengan email test@example.com tidak ditemukan</Text>
+        </Item>
+        <Item center>
+        <Button><Text color={WHITE}>Buat Akun</Text></Button>
+        </Item>
+        <Item center plain>
+        <Button><Text color={WHITE}>Coba Email Lain</Text></Button>
+        </Item>
+        </Container>
     )
   }
 }

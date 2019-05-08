@@ -12,6 +12,7 @@ export const Routes = () => {
       </Route>
       <Route exact path="/register" component={MainRegister} />
       <Route exact path="/login" component={MainLogin} />
+      {/* <Route component={Notfound}/> */}
     </Switch>
   )
 }

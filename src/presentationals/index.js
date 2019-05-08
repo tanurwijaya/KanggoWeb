@@ -45,9 +45,9 @@ export const TextField = styled.input( props => ({
 }))
 
 export const Button = styled.button ( props => ({
-    background : PRIMARY_BLUE,
+    background : !props.disabled ? PRIMARY_BLUE : LIGHT_GREY,
     padding : '4px 24px',
-    border : `1px solid ${PRIMARY_BLUE}`,
+    border :  `1px solid ${!props.disabled ? PRIMARY_BLUE : LIGHT_GREY}`,
     borderRadius: '4px',
     ":hover":{
         cursor:'pointer'
@@ -63,8 +63,8 @@ export const Button = styled.button ( props => ({
 
 export const Item = styled.div( props => ({
     display: 'flex',
-    marginTop : 8,
-    marginBottom : 8,
+    marginTop : !props.plain && 8,
+    marginBottom : !props.plain && 8,
     flexDirection: props.column && 'column',
     alignItems : props.center && 'center',
    justifyContent: props.center && 'center',

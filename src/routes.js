@@ -3,6 +3,7 @@ import MainLogin from './components/authentication/login'
 import MainRegister from './components/authentication/register'
 
 import { Route, Switch, Redirect } from 'react-router-dom'
+import MainScreen from './containers/main';
 
 export const Routes = () => {
   return (
@@ -12,6 +13,7 @@ export const Routes = () => {
       </Route>
       <Route exact path="/register" component={MainRegister} />
       <Route exact path="/login" component={MainLogin} />
+      <Route exact path="/home" component={MainScreen} />
       {/* <Route component={Notfound}/> */}
     </Switch>
   )

@@ -58,7 +58,6 @@ class SelectablePills extends Component {
   }
 
   singleSelected = (indexSelected) => {
-    console.log('clear index')
     const { list } = this.state
     let updatedData = []
     list.map((item, index) => {

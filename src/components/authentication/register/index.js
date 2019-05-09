@@ -143,8 +143,7 @@ class MainRegister extends Component {
     const { data } = await this.props.client.mutate({
       mutation: gql(createAdmin),
       variables: {
-        input:{
-          email: this.state.email,
+        email: this.state.email,
         password: this.state.password,
         nama_komunitas: this.state.name,
         url_logo_komunitas: '',
@@ -153,7 +152,6 @@ class MainRegister extends Component {
         deskripsi: this.state.description,
         nama_admin: this.state.adminName,
         contact_person_phone: this.state.contactPerson
-        }
       }
     })
     console.log(data)

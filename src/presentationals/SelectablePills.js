@@ -25,6 +25,7 @@ class SelectablePills extends Component {
     let view = []
     this.state.list.map((item, index) => {
       view.push(<div
+      key={item.value}
         onClick={() => this.onItemPressed(index)}
         style={{
           padding: 8,

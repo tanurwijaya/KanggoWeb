@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Text from '../../presentationals/Text'
-import { ViewWrapper, Wrapper } from '../../presentationals/index'
+import Text from '../../../presentationals/Text'
+import { ViewWrapper, Wrapper } from '../../../presentationals/index'
 
-const RunningProgram = (props) => {
+const OnProgessActivity = (props) => {
     const { eventName, numRegistered, numUnprocess, style } = props
     return (
-        <ViewWrapper itemCenter flex={1} background={'#000'} spaceBetween>
+        <ViewWrapper style={{marginLeft:32, marginRight:32, marginTop:16,marginBottom:16}} itemCenter flex={1} background={'#000'} spaceBetween>
             <Wrapper>
                 <Wrapper column style={{ marginRight: 72 }}>
                     <Text color={'white'} bold large>Running Program</Text>
-                    <Text color={'white'} medium>{eventName}</Text>
+                    <Text color={'white'} small>{eventName}</Text>
                 </Wrapper>
 
                 <Wrapper column>
@@ -24,7 +24,7 @@ const RunningProgram = (props) => {
                 </Wrapper>
             </Wrapper>
 
-            <ButtonRight onClick={() => alert('klik')}><Text color={'white'} small>Lihat Detail</Text></ButtonRight>
+            <ButtonRight onClick={() => alert('klik')}><b>Lihat Detail</b></ButtonRight>
         </ViewWrapper>
     )
 }
@@ -41,4 +41,4 @@ const ButtonRight = styled.button(props => ({
     }
 }))
 
-export default RunningProgram
+export default OnProgessActivity

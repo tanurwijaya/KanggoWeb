@@ -77,3 +77,18 @@ export const Wrapper = styled.div(props => ({
     alignItems: 'start',
     margin: !props.plain && 16
 }))
+
+export const KegiatanCardWrapper = styled.div(props => ({
+    width: 240,
+    height: 160,
+    background: WHITE,
+    border: '1px solid #C4C4C4',
+    borderRadius: 16,
+    MozBorderRadius:16,
+    boxShadow : '0 0 11px rgba(33,33,33,.2)',
+    margin: 16,
+    ":hover":{
+        cursor:'pointer',
+        boxShadow : '0 0 21px rgba(33,33,33,.5)'
+    },
+}))

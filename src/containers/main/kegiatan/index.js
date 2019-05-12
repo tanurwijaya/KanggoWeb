@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import CreateKegiatanModal from './CreateKegiatanModal';
-import { Button } from 'react-bootstrap';
-import Text from "../../../presentationals/Text"
-import { Container } from '../../../presentationals';
-import TambahKegiatanCard from './TambahKegiatanCard';
+
 import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
 import { addActivity } from '../../../graphql/mutations';
+
+import ListKegiatan from './ListKegiatan';
+import OnProgessActivity from './OnProgressActivity';
 
 class KegiatanScreen extends Component {
 
@@ -14,26 +14,24 @@ class KegiatanScreen extends Component {
         isModalCreateVisible: false,
         namaKegiatan: '',
         jenisKegiatan: '',
+        listKegiatan: []
     }
 
     render() {
-        const { isModalCreateVisible, namaKegiatan, jenisKegiatan } = this.state
+        const { isModalCreateVisible, namaKegiatan, jenisKegiatan, listKegiatan } = this.state
         return (
             <>
 
-
-
-                <div style={{ position: 'absolute', display: 'flex' }}>
-                    <Container column>
-                        <Text large>Kegiatan Sebelumnya</Text>
-                        <div style={{ display: 'flex', flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-                            <TambahKegiatanCard
-                                onCardClicked={this.onAddCardPressed}
-                            />
-                            <div style={{ width: 300, height: 200, margin: 16, background: 'grey' }}></div>
-                        </div>
-                    </Container>
-                </div>
+                <OnProgessActivity
+                    eventName={'Testing dari props'}
+                    numRegistered={32}
+                    numUnprocess={1}
+                />
+                
+                <ListKegiatan
+                    listKegiatan={['Test nama kegiatan 1', 'Test nama kegiatan 2', 'Test nama kegiatan 3', 'Test nama kegiatan 4', 'Test nama kegiatan 5']}
+                    onAddCardPressed={this.onAddCardPressed}
+                />
 
                 <CreateKegiatanModal
                     onChangeActivityName={this.onChangeActivityName}
@@ -75,19 +73,18 @@ class KegiatanScreen extends Component {
     }
 
     onCreateKegiatan = async () => {
-        const {client} = this.props
-        const {data} = await client.mutate({
+        const { client } = this.props
+        const { data } = await client.mutate({
             mutation: gql(addActivity),
             variables: {
-                input:{
+                input: {
                     title: this.state.namaKegiatan,
-                tipeKegiatan : this.state.jenisKegiatan 
+                    tipeKegiatan: this.state.jenisKegiatan
                 }
-             }
+            }
         })
         console.log(data)
-        // console.log(this.props)
-        // console.log('Jenis kegiatan', this.state.jenisKegiatan)
+        //Navigate to detail kegiatan
     }
 }
 

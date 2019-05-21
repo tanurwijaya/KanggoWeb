@@ -109,8 +109,15 @@ export const deleteAdmin = `mutation DeleteAdmin($input: DeleteAdminInput!) {
   }
 }
 `;
-export const addActivity = `mutation AddActivity($input: CreateKegiatanTypeInput!) {
-  createKegiatanType(input: $input) {
+// export const addActivity = `mutation AddActivity($input: CreateKegiatanTypeInput!) {
+//   createKegiatanType(input: $input) {
+//     id
+//   }
+// }
+// `;
+
+export const addActivity = `mutation AddActivity($input: CreateActivityInput!) {
+  createActivity(input: $input) {
     id
   }
 }

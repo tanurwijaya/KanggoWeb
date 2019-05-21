@@ -4,7 +4,7 @@ import { Container, KegiatanCardWrapper } from '../../../presentationals';
 import TambahKegiatanCard from './TambahKegiatanCard';
 import { WHITE } from '../../../themes/Colors';
 
-export default function ListKegiatan({ onAddCardPressed, listKegiatan }) {
+export default function ListKegiatan({ onAddCardPressed, listKegiatan, history }) {
   return (
     <div style={{ position: 'absolute', display: 'flex' }}>
       <Container style={{ marginLeft: 16, marginRight: 16 }} column>
@@ -16,6 +16,7 @@ export default function ListKegiatan({ onAddCardPressed, listKegiatan }) {
             onCardClicked={onAddCardPressed}
           />
           <RenderList
+          history={history}
             listKegiatan={listKegiatan}
           />
 
@@ -25,14 +26,14 @@ export default function ListKegiatan({ onAddCardPressed, listKegiatan }) {
   )
 }
 
-function RenderList({ listKegiatan }) {
+function RenderList({ history, listKegiatan }) {
   let view = []
   listKegiatan.map((item, index) => {
     view.push(
       <KegiatanCardWrapper>
-        <div style={{ display: 'flex', flex: 1, flexDirection: 'column', padding: 16, justifyContent: 'flex-end', alignItems: 'flex-start', height: '100%' }}>
-          <Text large>{item}</Text>
-          <Text tiny>{'1 Orang'}</Text>
+        <div onClick={()=>console.log(history.push('event/'+item.id))} style={{ display: 'flex', flex: 1, flexDirection: 'column', padding: 16, justifyContent: 'flex-end', alignItems: 'flex-start', height: '100%' }}>
+          <Text large>{item.activityName}</Text>
+          <Text tiny>{item.participant}</Text>
         </div>
       </KegiatanCardWrapper>
     )

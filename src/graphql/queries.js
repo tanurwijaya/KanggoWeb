@@ -103,3 +103,11 @@ export const queryAdminsByEmailIdIndex = gql`query QueryAdminsByEmailIdIndex($em
   }
 }
 `;
+
+export const getOrganizationActivity = gql`query getOrganizationActivity($organizationID: ID!) {
+  getOrganizationActivity(organizationID: $organizationID) {
+    id
+    activityName
+  }
+}
+`;

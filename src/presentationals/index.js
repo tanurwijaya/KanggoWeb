@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import {LIGHT_GREY, WHITE, DARK_GREY, PRIMARY_BLUE, BLUE_DARKER} from '../themes/Colors'
+import {LIGHT_GREY, WHITE, DARK_GREY, PRIMARY_BLUE, BLUE_DARKER, BLACK} from '../themes/Colors'
 
 export const ViewWrapper = styled.div(props => ({
     display: 'flex',
@@ -25,7 +25,66 @@ export const TextField = styled.input( props => ({
     border : `1px solid ${LIGHT_GREY}`,
     borderRadius: '4px',
     width: props.width ? props.width : 'auto',
+    backgroundColor: props.disabled ? LIGHT_GREY : WHITE,
+    alignItems: 'flex-start',
+    ":focus" : {
+        outline:'none',
+    },
+    "::placeholder" : {
+        color : DARK_GREY,
+        fontSize : props.placeholderSize
+    },
+    "::-webkit-input-placeholder":{
+        color: DARK_GREY,
+        fontSize : props.placeholderSize
+    },
+    "::-moz-placeholder":{
+        color: DARK_GREY,
+        fontSize : props.placeholderSize
+    }
+}))
+
+export const UnderlineInput = styled.input( props => ({
+    display: 'flex',
+    paddingBottom : 8,
+    paddingTop: 8,
+    borderBottom : `1px solid ${LIGHT_GREY}`,
+    borderTop: `0`,
+    borderLeft: `0`,
+    borderRight: `0`,
+    width: props.width ? props.width : 'auto',
     backgroundColor: WHITE,
+    alignItems: 'flex-start',
+    outline:'none',
+    ":focus" : {
+        borderBottom : `1px solid ${BLACK}`,
+        outline:'none',
+    },
+    "::placeholder" : {
+        color : DARK_GREY,
+        fontSize : props.placeholderSize
+    },
+    "::-webkit-input-placeholder":{
+        color: DARK_GREY,
+        fontSize : props.placeholderSize
+    },
+    "::-moz-placeholder":{
+        color: DARK_GREY,
+        fontSize : props.placeholderSize
+    }
+}))
+
+export const AreaField = styled.textarea( props => ({
+    display: 'flex',
+    padding : 8,
+    height: 80,
+    minHeight: 80,
+    maxHeight: 300,
+    maxLines: 5,
+    border : `1px solid ${LIGHT_GREY}`,
+    borderRadius: '4px',
+    width: props.width ? props.width : 'auto',
+    backgroundColor: props.disabled ? LIGHT_GREY : WHITE,
     alignItems: 'flex-start',
     ":focus" : {
         outline:'none',
@@ -91,4 +150,17 @@ export const KegiatanCardWrapper = styled.div(props => ({
         cursor:'pointer',
         boxShadow : '0 0 21px rgba(33,33,33,.5)'
     },
+}))
+
+export const SidebarItem = styled.div(props => ({
+    display: 'flex',
+    padding: 16,
+    alignItems: 'center',
+    background: props.selected ?'white' :'black',
+    borderTop: '1px solid white',
+    borderColor: '#fff',
+    flexDirection: 'row',
+    ":hover":{
+        cursor:'pointer'
+    }
 }))

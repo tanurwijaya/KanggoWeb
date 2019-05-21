@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
 import KegiatanScreen from './kegiatan';
 
-const REGISTER_PAGE = {
-  PASSWORD : 'password_page',
-  MAIN: 'main_page',
-  ADMIN: 'admin_page'
+const TABS = {
+  EVENT: 'tab_event',
+  SETTINGS: 'tab_settings',
+  DASHBOARD: 'tab_dashboard'
 }
 
 class MainScreen extends Component {
 
   state = {
-    
+
   }
 
   render() {
-    return(
-        <KegiatanScreen/>
-    )
+    const { history, selected } = this.props
+    console.log(this.props)
+    if (selected === 'Events') return <KegiatanScreen history={history} />
+    else return null
+    
   }
 
 }

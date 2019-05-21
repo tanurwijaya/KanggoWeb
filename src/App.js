@@ -1,35 +1,52 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import RunningProgram from './components/widget/RunningProgram';
-import { ViewWrapper } from './presentationals';
+import { ViewWrapper, SidebarItem } from './presentationals';
 import Text from './presentationals/Text'
 import MainScreen from './containers/main'
 
-const listItem = ['Dashboard', 'Members', 'Campaign', 'Settings']
+const listItem = ['Dashboard', 'Members', 'Events', 'Settings']
 class App extends Component {
   render() {
+    const { history } = this.props
     return (
-      <ViewWrapper style={{display:'flex',flex:1, height:'100%'}} plain flex={1} row>
-        <div style={{ display:'flex', flexDirection:'column', background:'black', height:'100%'}}>
+      <ViewWrapper style={{ display: 'flex', flex: 1, height: '100%' }} plain flex={1} row>
+        <div style={{ display: 'flex', flexDirection: 'column', background: 'black', height: '100%' }}>
           <SidebarHeader name={'1000 Guru Tangsel'} />
-          <div style={{display:'flex',flex:1,flexDirection:'column'}}>
-          {listItem.map((item) =>
-            <div style={{ display: 'flex', padding: 16, alignItems: 'center', background: 'black', borderTop: '1px solid white', borderColor: '#fff', flexDirection: 'row' }}>
-              <div style={{ height: 32, width: 32, background: 'white', marginRight: 16 }}></div>
-              <Text color={'white'}>{item}</Text>
-            </div>
-            
-          )}
+          <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
+            {listItem.map((item) =>
+              <SidebarItem onClick={()=>this.onSidebarItemPressed(item)} selected={item === this.getSelectedTab()}>
+                <div style={{ height: 32, width: 32, background: item === this.getSelectedTab() ? 'black' : 'white', marginRight: 16 }}></div>
+                <Text color={item === this.getSelectedTab() ? 'black' : 'white'}>{item}</Text>
+              </SidebarItem>
+
+            )}
           </div>
         </div>
 
 
-        <div style={{flex: 1 }}>
-          <MainScreen/>
+        <div style={{ flex: 1 }}>
+          <MainScreen
+          selected={this.getSelectedTab()}
+          history={history} />
         </div>
 
       </ViewWrapper>
     )
+  }
+
+  getSelectedTab() {
+    const { url } = this.props.match
+    if (url.includes('events')) return 'Events'
+    if (url.includes('event')) return 'Events'
+    if (url.includes('members')) return 'Members'
+    else if (url.includes('settings')) return 'Settings'
+    else return 'Dashboard'
+  }
+
+  onSidebarItemPressed = (item) => {
+    const {history} = this.props
+    history.push('/'+item.toLowerCase())
   }
 }
 

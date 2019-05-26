@@ -104,8 +104,8 @@ export const queryAdminsByEmailIdIndex = gql`query QueryAdminsByEmailIdIndex($em
 }
 `;
 
-export const getOrganizationActivity = gql`query getOrganizationActivity($organizationID: ID!) {
-  getOrganizationActivity(organizationID: $organizationID) {
+export const getActivity = gql`query getListActivity($organizationID: ID!, $activityType : String) {
+  getActivity(organizationID: $organizationID, activityType : $activityType) {
     id
     activityName
   }

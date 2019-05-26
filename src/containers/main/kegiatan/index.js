@@ -9,7 +9,7 @@ import ListKegiatan from './ListKegiatan';
 
 import OnProgessActivity from './OnProgressActivity';
 import DetailKegiatan from '../../DetailKegiatan';
-import { getOrganizationActivity } from '../../../graphql/queries'
+import { getActivity } from '../../../graphql/queries'
 
 const kegiatan = [
     {
@@ -122,11 +122,13 @@ class KegiatanScreen extends Component {
 
     getListActivity = async() => {
         const { data } = await this.props.client.query({
-            query: getOrganizationActivity,
-            variables: { organizationID: "dff62540-793c-11e9-89df-c11b52bc8ee5" }
+            query: getActivity,
+            variables: { organizationID: "dff62540-793c-11e9-89df-c11b52bc8ee5",
+            activityType: ""
+         }
           })
-          if(data && data.getOrganizationActivity && data.getOrganizationActivity.length){
-              this.setState({listKegiatan : data.getOrganizationActivity })
+          if(data && data.getActivity && data.getActivity.length){
+              this.setState({listKegiatan : data.getActivity })
           }
           console.log(data)
     }

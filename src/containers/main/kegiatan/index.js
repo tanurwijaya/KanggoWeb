@@ -10,25 +10,7 @@ import ListKegiatan from './ListKegiatan';
 import OnProgessActivity from './OnProgressActivity';
 import DetailKegiatan from '../../DetailKegiatan';
 import { getActivity } from '../../../graphql/queries'
-
-const kegiatan = [
-    {
-        id: 'EVT-0001',
-        name: 'Test Nama Kegiatan 1',
-        participant: 5,
-
-    },
-    {
-        id: 'EVT-0002',
-        name: 'Test Nama Kegiatan 2',
-        participant: 14,
-    },
-    {
-        id: 'EVT-0003',
-        name: 'Test Nama Kegiatan 3',
-        participant: 24,
-    }
-]
+import { API, graphqlOperation } from 'aws-amplify'
 
 class KegiatanScreen extends Component {
 
@@ -121,16 +103,17 @@ class KegiatanScreen extends Component {
     }
 
     getListActivity = async() => {
-        const { data } = await this.props.client.query({
-            query: getActivity,
-            variables: { organizationID: "dff62540-793c-11e9-89df-c11b52bc8ee5",
-            activityType: ""
-         }
-          })
-          if(data && data.getActivity && data.getActivity.length){
-              this.setState({listKegiatan : data.getActivity })
-          }
-          console.log(data)
+        // const { data } = await this.props.client.query({
+        //     query: getActivity,
+        //     variables: { organizationID: "dff62540-793c-11e9-89df-c11b52bc8ee5",
+        //     activityType: ""
+        //  }
+        //   })
+        //   if(data && data.getActivity && data.getActivity.length){
+        //       this.setState({listKegiatan : data.getActivity })
+        //   }
+        //   console.log(data)
+        return API.graphql(graphqlOperation(getActivity))
     }
 }
 

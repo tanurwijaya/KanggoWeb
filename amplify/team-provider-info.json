@@ -9,6 +9,11 @@
             "UnauthRoleName": "kanggoweb-20190429213208-unauthRole",
             "StackName": "kanggoweb-20190429213208",
             "StackId": "arn:aws:cloudformation:ap-southeast-1:996768769543:stack/kanggoweb-20190429213208/91a922d0-6a8b-11e9-af23-0a14ee878cf4"
+        },
+        "categories": {
+            "auth": {
+                "cognito89224beb": {}
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ import { withApollo, Query, ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
 import ThirdSectionRegister from './ThirdSection';
 import {genSaltSync, hashSync} from 'bcryptjs'
+import { Auth } from 'aws-amplify'
 
 const REGISTER_PAGE = {
   PASSWORD : 'password_page',
@@ -140,21 +141,31 @@ class MainRegister extends Component {
     //CALL APPSYNC REGISTER ADMIN
     // let password = this.hashingPassword(this.state.password)
     /** todo's : mutation register */
-    const { data } = await this.props.client.mutate({
-      mutation: gql(createAdmin),
-      variables: {
+    // const { data } = await this.props.client.mutate({
+    //   mutation: gql(createAdmin),
+    //   variables: {
+    //     email: this.state.email,
+    //     password: this.state.password,
+    //     nama_komunitas: this.state.name,
+    //     url_logo_komunitas: '',
+    //     bidang_komunitas: '',
+    //     tahun_dibentuk: this.state.years,
+    //     deskripsi: this.state.description,
+    //     nama_admin: this.state.adminName,
+    //     contact_person_phone: this.state.contactPerson
+    //   }
+    // })
+    Auth.signUp({
+      username: this.state.email,
+      // email: this.state.email,
+      password: this.state.password,
+      attributes:{
         email: this.state.email,
-        password: this.state.password,
-        nama_komunitas: this.state.name,
-        url_logo_komunitas: '',
-        bidang_komunitas: '',
-        tahun_dibentuk: this.state.years,
-        deskripsi: this.state.description,
-        nama_admin: this.state.adminName,
-        contact_person_phone: this.state.contactPerson
+        name : this.state.adminName
       }
-    })
-    console.log(data)
+    }).then(data => console.log('data',data))
+    .catch(err => console.log('err',err) )
+    // console.log(data)
   }
 }
 

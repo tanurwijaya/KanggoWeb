@@ -9,6 +9,7 @@ import { WHITE } from '../../../themes/Colors'
 import { queryAdminsByEmailIdIndex, getAdmin } from '../../../graphql/queries'
 import { withApollo, Query, ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Auth } from 'aws-amplify'
 
 class MainLogin extends Component {
 
@@ -37,20 +38,28 @@ class MainLogin extends Component {
   }
 
   onLoginPress = async () => {
-    const { data } = await this.props.client.query({
-      query: gql(getAdmin),
-      variables: { email: this.state.email, password: this.state.password }
-    })
-    if(data && data.getAdmin && data.getAdmin.id){
-      // this.props.history.push('/asd')
-    }
-    // if(data && data.queryAdminsByEmailIdIndex && data.queryAdminsByEmailIdIndex.items && data.queryAdminsByEmailIdIndex.items.length){
-    //   let item = data.queryAdminsByEmailIdIndex.items[0]
-    //   this.setState({
-    //     namaOrganisasi : item.nama_komunitas,
-    //     id : item.id 
-    //   })
+    // const { data } = await this.props.client.query({
+    //   query: gql(getAdmin),
+    //   variables: { email: this.state.email, password: this.state.password }
+    // })
+    // if(data && data.getAdmin && data.getAdmin.id){
+    //   // this.props.history.push('/asd')
     // }
+    // // if(data && data.queryAdminsByEmailIdIndex && data.queryAdminsByEmailIdIndex.items && data.queryAdminsByEmailIdIndex.items.length){
+    // //   let item = data.queryAdminsByEmailIdIndex.items[0]
+    // //   this.setState({
+    // //     namaOrganisasi : item.nama_komunitas,
+    // //     id : item.id 
+    // //   })
+    // // }
+
+    Auth.signIn({
+      username: this.state.email,
+      password: this.state.password
+    }).then(data => console.log('data',data))
+    .catch(err => console.log('err',err))
+
+
   }
 
   onEmailChange = (event) => {

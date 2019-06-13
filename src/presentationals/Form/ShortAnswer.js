@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Text from '../Text'
-import { TextField } from '..';
+import { LIGHT_GREY } from '../../themes/Colors';
+import FormItem from './FormItem';
 
-export default function ShortAnswer(){
+export default function ShortAnswer({onRemovePressed, onFormQuestionChange}){
     return(
-        <div style={{display:'flex', flex:1, flexDirection:'column', margin: 16}}>
-        <Text large >Pertanyaannya</Text>
-        <TextField disabled value={'Test'}/>
-        </div>
+        <FormItem onRemovePressed={()=>onRemovePressed()} onFormQuestionChange={(value)=>onFormQuestionChange(value)}>
+            <Text style={{width:'80%',borderBottom: `1px solid ${LIGHT_GREY}`,marginBottom:8}} color={LIGHT_GREY} small>Short Answer Text</Text>
+        </FormItem>
     )
 }

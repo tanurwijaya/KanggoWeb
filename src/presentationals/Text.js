@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 const Text = (props) => {
-    const { tiny, small, medium, large, larger, children, center, bold, color } = props
+    const { tiny, small, medium, large, larger, children, center, bold, color, style } = props
     let fontSize = 14
 
     if(tiny){
@@ -21,15 +21,15 @@ const Text = (props) => {
     if (typeof children === 'string' || typeof children === 'number' ) {
         if (center) {
             if (bold) {
-                return <StyledText style={{color: color, fontSize:fontSize}} bold center>{children}</StyledText>
+                return <StyledText style={{...style, color: color, fontSize:fontSize}} bold center>{children}</StyledText>
             } else {
-                return <StyledText style={{color: color, fontSize:fontSize}} center>{children}</StyledText>
+                return <StyledText style={{...style, color: color, fontSize:fontSize}} center>{children}</StyledText>
             }
         } else {
             if (bold) {
-                return <StyledText style={{color: color, fontSize:fontSize}} bold>{children}</StyledText>
+                return <StyledText style={{...style, color: color, fontSize:fontSize}} bold>{children}</StyledText>
             } else {
-                return <StyledText style={{color: color, fontSize:fontSize}}>{children}</StyledText>
+                return <StyledText style={{...style, color: color, fontSize:fontSize}}>{children}</StyledText>
             }
         }
     }

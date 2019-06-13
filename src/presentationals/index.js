@@ -1,132 +1,133 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import {LIGHT_GREY, WHITE, DARK_GREY, PRIMARY_BLUE, BLUE_DARKER, BLACK} from '../themes/Colors'
+import { LIGHT_GREY, WHITE, DARK_GREY, PRIMARY_BLUE, BLUE_DARKER, BLACK } from '../themes/Colors'
 
 export const ViewWrapper = styled.div(props => ({
     display: 'flex',
-    flex : 1,
+    flex: 1,
     flexDirection: props.row && 'row',
-    alignItems : props.itemCenter && 'center',
+    alignItems: props.itemCenter && 'center',
     justifyContent: props.spaceBetween && 'space-between',
     background: props.background,
 }))
 
-export const Container = styled.div( props => ({
-   display : 'flex',
-   flexDirection: props.row ? 'row' : 'column',
-   alignItems : props.center && 'center',
-   justifyContent: props.center && 'center',
-   height : props.center && '100%'
+export const Container = styled.div(props => ({
+    display: 'flex',
+    flexDirection: props.row ? 'row' : 'column',
+    alignItems: props.center && 'center',
+    justifyContent: props.center && 'center',
+    height: props.center && '100%'
 }))
 
-export const TextField = styled.input( props => ({
+export const TextField = styled.input(props => ({
     display: 'flex',
-    padding : 8,
-    border : `1px solid ${LIGHT_GREY}`,
+    padding: 8,
+    border: `1px solid ${LIGHT_GREY}`,
     borderRadius: '4px',
     width: props.width ? props.width : 'auto',
     backgroundColor: props.disabled ? LIGHT_GREY : WHITE,
     alignItems: 'flex-start',
-    ":focus" : {
-        outline:'none',
+    ":focus": {
+        outline: 'none',
     },
-    "::placeholder" : {
-        color : DARK_GREY,
-        fontSize : props.placeholderSize
-    },
-    "::-webkit-input-placeholder":{
+    "::placeholder": {
         color: DARK_GREY,
-        fontSize : props.placeholderSize
+        fontSize: props.placeholderSize
     },
-    "::-moz-placeholder":{
+    "::-webkit-input-placeholder": {
         color: DARK_GREY,
-        fontSize : props.placeholderSize
+        fontSize: props.placeholderSize
+    },
+    "::-moz-placeholder": {
+        color: DARK_GREY,
+        fontSize: props.placeholderSize
     }
 }))
 
-export const UnderlineInput = styled.input( props => ({
+export const UnderlineInput = styled.input(props => ({
     display: 'flex',
-    paddingBottom : 8,
+    paddingBottom: 8,
     paddingTop: 8,
-    borderBottom : `1px solid ${LIGHT_GREY}`,
+    borderBottom: `1px solid ${LIGHT_GREY}`,
     borderTop: `0`,
     borderLeft: `0`,
     borderRight: `0`,
+    fontSize: props.fontSize && props.fontSize,
     width: props.width ? props.width : 'auto',
     backgroundColor: WHITE,
     alignItems: 'flex-start',
-    outline:'none',
-    ":focus" : {
-        borderBottom : `1px solid ${BLACK}`,
-        outline:'none',
+    outline: 'none',
+    ":focus": {
+        borderBottom: `1px solid ${BLACK}`,
+        outline: 'none',
     },
-    "::placeholder" : {
-        color : DARK_GREY,
-        fontSize : props.placeholderSize
-    },
-    "::-webkit-input-placeholder":{
+    "::placeholder": {
         color: DARK_GREY,
-        fontSize : props.placeholderSize
+        fontSize: props.placeholderSize
     },
-    "::-moz-placeholder":{
+    "::-webkit-input-placeholder": {
         color: DARK_GREY,
-        fontSize : props.placeholderSize
+        fontSize: props.placeholderSize
+    },
+    "::-moz-placeholder": {
+        color: DARK_GREY,
+        fontSize: props.placeholderSize
     }
 }))
 
-export const AreaField = styled.textarea( props => ({
+export const AreaField = styled.textarea(props => ({
     display: 'flex',
-    padding : 8,
+    padding: 8,
     height: 80,
     minHeight: 80,
     maxHeight: 300,
     maxLines: 5,
-    border : `1px solid ${LIGHT_GREY}`,
+    border: `1px solid ${LIGHT_GREY}`,
     borderRadius: '4px',
     width: props.width ? props.width : 'auto',
     backgroundColor: props.disabled ? LIGHT_GREY : WHITE,
     alignItems: 'flex-start',
-    ":focus" : {
-        outline:'none',
+    ":focus": {
+        outline: 'none',
     },
-    "::placeholder" : {
-        color : DARK_GREY,
-        fontSize : props.placeholderSize
-    },
-    "::-webkit-input-placeholder":{
+    "::placeholder": {
         color: DARK_GREY,
-        fontSize : props.placeholderSize
+        fontSize: props.placeholderSize
     },
-    "::-moz-placeholder":{
+    "::-webkit-input-placeholder": {
         color: DARK_GREY,
-        fontSize : props.placeholderSize
+        fontSize: props.placeholderSize
+    },
+    "::-moz-placeholder": {
+        color: DARK_GREY,
+        fontSize: props.placeholderSize
     }
 }))
 
-export const Button = styled.button ( props => ({
-    background : !props.disabled ? PRIMARY_BLUE : LIGHT_GREY,
-    padding : '4px 24px',
-    border :  `1px solid ${!props.disabled ? PRIMARY_BLUE : LIGHT_GREY}`,
+export const Button = styled.button(props => ({
+    background: !props.disabled ? PRIMARY_BLUE : LIGHT_GREY,
+    padding: '4px 24px',
+    border: `1px solid ${!props.disabled ? PRIMARY_BLUE : LIGHT_GREY}`,
     borderRadius: '4px',
-    ":hover":{
-        cursor:'pointer'
+    ":hover": {
+        cursor: 'pointer'
     },
-    ":focus" : {
-        outline:'none'
+    ":focus": {
+        outline: 'none'
     },
-    ":active":{
+    ":active": {
         background: BLUE_DARKER,
         borderColor: BLUE_DARKER
     }
 }))
 
-export const Item = styled.div( props => ({
+export const Item = styled.div(props => ({
     display: 'flex',
-    marginTop : !props.plain && 8,
-    marginBottom : !props.plain && 8,
+    marginTop: !props.plain && 8,
+    marginBottom: !props.plain && 8,
     flexDirection: props.column && 'column',
-    alignItems : props.center && 'center',
-   justifyContent: props.center && 'center',
+    alignItems: props.center && 'center',
+    justifyContent: props.center && 'center',
 }))
 
 export const Wrapper = styled.div(props => ({
@@ -143,12 +144,12 @@ export const KegiatanCardWrapper = styled.div(props => ({
     background: WHITE,
     border: '1px solid #C4C4C4',
     borderRadius: 16,
-    MozBorderRadius:16,
-    boxShadow : '0 0 11px rgba(33,33,33,.2)',
+    MozBorderRadius: 16,
+    boxShadow: '0 0 11px rgba(33,33,33,.2)',
     margin: 16,
-    ":hover":{
-        cursor:'pointer',
-        boxShadow : '0 0 21px rgba(33,33,33,.5)'
+    ":hover": {
+        cursor: 'pointer',
+        boxShadow: '0 0 21px rgba(33,33,33,.5)'
     },
 }))
 
@@ -156,11 +157,54 @@ export const SidebarItem = styled.div(props => ({
     display: 'flex',
     padding: 16,
     alignItems: 'center',
-    background: props.selected ?'white' :'black',
+    background: props.selected ? 'white' : 'black',
     borderTop: '1px solid white',
     borderColor: '#fff',
     flexDirection: 'row',
-    ":hover":{
-        cursor:'pointer'
+    ":hover": {
+        cursor: 'pointer'
+    }
+}))
+
+export const FormItemWrapper = styled.div(props => ({
+    display: 'flex',
+
+    flexDirection: 'column',
+    paddingTop: 32,
+    paddingBottom: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
+    margin: 16,
+    boxShadow: '0 0 21px rgba(33,33,33,.5)'
+}))
+
+export const FormInputQuestion = styled.input(props => ({
+    display: 'flex',
+    paddingBottom: 8,
+    paddingTop: 8,
+    borderBottom: `1px solid ${DARK_GREY}`,
+    borderTop: `0`,
+    borderLeft: `0`,
+    borderRight: `0`,
+    marginBottom: 16,
+    width: props.width ? props.width : 'auto',
+    backgroundColor: WHITE,
+    alignItems: 'flex-start',
+    outline: 'none',
+    ":focus": {
+        borderBottom: `1px solid ${BLACK}`,
+        outline: 'none',
+    },
+    "::placeholder": {
+        color: DARK_GREY,
+        fontSize: props.placeholderSize
+    },
+    "::-webkit-input-placeholder": {
+        color: DARK_GREY,
+        fontSize: props.placeholderSize
+    },
+    "::-moz-placeholder": {
+        color: DARK_GREY,
+        fontSize: props.placeholderSize
     }
 }))

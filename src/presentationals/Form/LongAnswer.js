@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Text from '../Text'
-import { TextField, AreaField } from '..';
+import { LIGHT_GREY } from '../../themes/Colors';
+import FormItem from './FormItem';
 
-export default function LongAnswer(){
+export default function LongAnswer({onRemovePressed, onFormQuestionChange}){
     return(
-        <div style={{display:'flex', flex:1, flexDirection:'column', margin: 16}}>
-        <Text large >Pertanyaannya</Text>
-        <AreaField disabled value={'Test'}/>
-        </div>
+        <FormItem onRemovePressed={()=>onRemovePressed()} onFormQuestionChange={(value)=>onFormQuestionChange(value)}>
+            <Text style={{width:'80%',borderBottom: `1px dotted ${LIGHT_GREY}`,marginBottom:8}} color={LIGHT_GREY} small>Long Answer Text</Text>
+        </FormItem>
     )
 }

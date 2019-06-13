@@ -1,30 +1,35 @@
 import React, { Component } from 'react'
 import Text from '../Text'
 import { TextField, AreaField, UnderlineInput } from '..';
+import FormItem from './FormItem';
 
 class RadioButton extends Component {
 
   state = {
-    list: ['A', 'B'],
-    input : ''
+    list: [],
+    input: ''
+  }
+
+  componentDidUpdate = () => {
+    this.props.onFormOptionsChange(this.state.list)
   }
 
   render() {
+    
     return (
-      <div style={{ display: 'flex', flex: 1, flexDirection: 'column', margin: 16 }}>
-        <Text large >Pertanyaannya</Text>
-        <RenderRadio list={this.state.list} />
-        <UnderlineInput value={this.state.input} onKeyDown={this.onKeyDown} onChange={this.onInputChange}/>
-      </div>
+      <FormItem onRemovePressed={() => this.props.onRemovePressed()} onFormQuestionChange={(value)=>this.props.onFormQuestionChange(value)}>
+        {this.renderRadio()}
+        <UnderlineInput style={{marginLeft: 22}} value={this.state.input} onKeyDown={this.onKeyDown} onChange={this.onInputChange} width={'80%'} />
+      </FormItem>
     )
   }
 
   onKeyDown = (e) => {
     if (e.key === 'Enter') {
-      const {list } = this.state
+      const { list } = this.state
       list.push(this.state.input)
-      this.setState({list, input : ''},()=>
-      console.log(this.state.input)
+      this.setState({ list, input: '' }, () =>
+        console.log(this.state.input)
       )
     }
   }
@@ -33,19 +38,41 @@ class RadioButton extends Component {
     this.setState({ input: event.target.value })
   }
 
+  renderRadio() {
+    let view = []
+    const {list} = this.state
+    list.map((item, index) => {
+      view.push(
+        <div key={index} style={{ padiding: 8, display: 'flex', flexDirection: 'row' }}>
+          <input style={{ alignItems: 'center', alignSelf: 'center', marginRight: 8 }} type={'radio'} disabled />
+          <UnderlineInput fontSize={12} width={'80%'} value={item} onChange={(event)=> this.onSingleOptionChange(event.target.value, index)}/>
+        </div>
+      )
+    })
+    return view
+  }
+
+  onSingleOptionChange = (text, index) => {
+    const {list} = this.state
+    list[index] = text
+    this.setState({list})
+  }
+
+
+
 }
 
-function RenderRadio({ list }) {
-  let view = []
-  list.map((item, index) => {
-    view.push(
-      <div style={{padiding:8}}>
-        <input type={'radio'}/>
-          <Text style={{marginLeft:8}}>{item}</Text>
-      </div>
-        )
-      })
-      return view
-    }
-    
+// function RenderRadio({ list }) {
+//   let view = []
+//   list.map((item, index) => {
+//     view.push(
+//       <div key={index} style={{padiding:8, display:'flex', flexDirection:'row'}}>
+//         <input style={{alignItems: 'center', alignSelf:'center', marginRight: 8}} type={'radio'} disabled/>
+//           <UnderlineInput fontSize={12} width={'80%'} value={item} onChange={}/>
+//       </div>
+//         )
+//       })
+//       return view
+//     }
+
 export default RadioButton

@@ -10,6 +10,8 @@ import ListKegiatan from './ListKegiatan';
 import OnProgessActivity from './OnProgressActivity';
 import DetailKegiatan from '../../DetailKegiatan';
 import { getActivity } from '../../../graphql/queries'
+import FormKegiatan from '../../DetailKegiatan/Form';
+import EditKegiatan from '../../EditKegiatan';
 
 const kegiatan = [
     {
@@ -46,8 +48,10 @@ class KegiatanScreen extends Component {
     render() {
         const { isModalCreateVisible, namaKegiatan, jenisKegiatan, listKegiatan } = this.state
         const { history } = this.props
-        if (history.location.pathname.includes('/event/')) {
-            return <DetailKegiatan />
+        if (history.location.pathname.includes('/event/') && !history.location.pathname.includes('edit') ) {
+            return <DetailKegiatan history={history} />
+        } else if (history.location.pathname.includes('/edit')){
+            return <EditKegiatan history={history} />
         } else {
             return (
                 <>

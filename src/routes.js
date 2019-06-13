@@ -7,6 +7,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import MainScreen from './containers/main';
 import DetailKegiatan from './containers/DetailKegiatan';
 import EditKegiatan from './containers/EditKegiatan';
+import FormKegiatan from './containers/DetailKegiatan/Form';
 
 export const Routes = () => {
   return (
@@ -23,7 +24,8 @@ export const Routes = () => {
       <Route exact path="/members" component={App} />
       <Route exact path="/events" component={App} />
       <Route exact path="/event/:event_id" component={App} />
-      <Route exact path="/event/:event_id/edit" component={EditKegiatan} />
+      <Route exact path="/event/:event_id/edit" component={App} />
+      <Route exact path="/event/:event_id/form" component={App} />
       <Route exact path="/settings" component={App} />
       {/* <Route component={Notfound}/> */}
     </Switch>

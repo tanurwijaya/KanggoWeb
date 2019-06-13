@@ -37,8 +37,10 @@ class App extends Component {
 
   getSelectedTab() {
     const { url } = this.props.match
+    console.log(url)
     if (url.includes('events')) return 'Events'
     if (url.includes('event')) return 'Events'
+    if (url.includes('edit')) return 'Events'
     if (url.includes('members')) return 'Members'
     else if (url.includes('settings')) return 'Settings'
     else return 'Dashboard'

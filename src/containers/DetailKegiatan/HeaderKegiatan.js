@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Text from '../../presentationals/Text'
 import { ViewWrapper, Wrapper, Container } from '../../presentationals'
-import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
+import {faTrash} from '@fortawesome/free-solid-svg-icons'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 

@@ -12,9 +12,7 @@ import FormKegiatan from './containers/DetailKegiatan/Form';
 export const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/">
-        <Redirect to={"/app"} />
-      </Route>
+      <Route exact path="/" component={App} />
       <Route exact path="/register" component={MainRegister} />
       <Route exact path="/app" component={App} />
       <Route exact path="/login" component={MainLogin} />
@@ -22,11 +20,11 @@ export const Routes = () => {
 
       <Route exact path="/dashboard" component={App} />
       <Route exact path="/members" component={App} />
-      <Route exact path="/events" component={App} />
-      <Route exact path="/event/:event_id" component={App} />
-      <Route exact path="/event/:event_id/edit" component={App} />
-      <Route exact path="/event/:event_id/form" component={App} />
-      <Route exact path="/settings" component={App} />
+      <Route exact path="/kegiatan" component={App} />
+      <Route exact path="/kegiatan/:event_id" component={App} />
+      <Route exact path="/kegiatan/:event_id/edit" component={App} />
+      <Route exact path="/kegiatan/:event_id/form" component={App} />
+      <Route exact path="/profile" component={App} />
       {/* <Route component={Notfound}/> */}
     </Switch>
   )

@@ -111,7 +111,7 @@ class EditKegiatan extends Component {
   }
 
   onSaveForm = () => {
-    console.log(this.state.forms)
+
   }
 
 }

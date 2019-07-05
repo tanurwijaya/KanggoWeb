@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import KegiatanScreen from './kegiatan';
+import ProfileScreen from '../Profile'
 
 const TABS = {
   EVENT: 'tab_event',
@@ -15,10 +16,8 @@ class MainScreen extends Component {
 
   render() {
     const { history, selected } = this.props
-    console.log(this.props)
     if (selected === 'Events') return <KegiatanScreen history={history} />
-    else return null
-    
+    else if(selected === 'Profile') return <ProfileScreen/>    
   }
 
 }

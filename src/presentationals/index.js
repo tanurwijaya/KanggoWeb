@@ -21,7 +21,10 @@ export const Container = styled.div(props => ({
 
 export const TextField = styled.input(props => ({
     display: 'flex',
-    padding: 8,
+    paddingTop:4,
+    paddingBottom:4,
+    paddingLeft: 8,
+    paddingRight:8,
     border: `1px solid ${LIGHT_GREY}`,
     borderRadius: '4px',
     width: props.width ? props.width : 'auto',
@@ -77,7 +80,10 @@ export const UnderlineInput = styled.input(props => ({
 
 export const AreaField = styled.textarea(props => ({
     display: 'flex',
-    padding: 8,
+    paddingTop:4,
+    paddingBottom:4,
+    paddingLeft: 8,
+    paddingRight:8,
     height: 80,
     minHeight: 80,
     maxHeight: 300,
@@ -110,7 +116,7 @@ export const Button = styled.button(props => ({
     border: `1px solid ${!props.disabled ? PRIMARY_BLUE : LIGHT_GREY}`,
     borderRadius: '4px',
     ":hover": {
-        cursor: 'pointer'
+        cursor: !props.disabled && 'pointer'
     },
     ":focus": {
         outline: 'none'
@@ -208,3 +214,16 @@ export const FormInputQuestion = styled.input(props => ({
         fontSize: props.placeholderSize
     }
 }))
+
+export const SecondaryButton = styled.div(props => ({
+    border: "1px solid #FF6961",
+    marginRight: 32,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
+    borderRadius: 4,
+    ":hover": {
+      cursor: "pointer"
+    }
+  }));

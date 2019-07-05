@@ -5,7 +5,7 @@ export const onCreateUser = `subscription OnCreateUser(
   $name: String
   $email: String
   $password: String
-  $location: LocationInput
+  $location: String
   $create_at: AWSTimestamp
 ) {
   onCreateUser(
@@ -15,13 +15,10 @@ export const onCreateUser = `subscription OnCreateUser(
     location: $location
     create_at: $create_at
   ) {
+    id
     name
     email
-    password
-    location {
-      latitude
-      longitude
-    }
+    location
     create_at
   }
 }
@@ -40,13 +37,10 @@ export const onUpdateUser = `subscription OnUpdateUser(
     location: $location
     create_at: $create_at
   ) {
+    id
     name
     email
-    password
-    location {
-      latitude
-      longitude
-    }
+    location
     create_at
   }
 }
@@ -65,35 +59,11 @@ export const onDeleteUser = `subscription OnDeleteUser(
     location: $location
     create_at: $create_at
   ) {
+    id
     name
     email
-    password
-    location {
-      latitude
-      longitude
-    }
+    location
     create_at
-  }
-}
-`;
-export const onCreateSubdivision = `subscription OnCreateSubdivision($province: String, $city: AWSJSON) {
-  onCreateSubdivision(province: $province, city: $city) {
-    province
-    city
-  }
-}
-`;
-export const onUpdateSubdivision = `subscription OnUpdateSubdivision($province: String, $city: AWSJSON) {
-  onUpdateSubdivision(province: $province, city: $city) {
-    province
-    city
-  }
-}
-`;
-export const onDeleteSubdivision = `subscription OnDeleteSubdivision($province: String, $city: AWSJSON) {
-  onDeleteSubdivision(province: $province, city: $city) {
-    province
-    city
   }
 }
 `;
@@ -113,15 +83,18 @@ export const onCreateAdmin = `subscription OnCreateAdmin(
   ) {
     id
     email
-    password
-    nama_komunitas
-    url_logo_komunitas
-    bidang_komunitas
-    tahun_dibentuk
-    deskripsi
-    nama_admin
-    contact_person_phone
-    nomor_rekening
+    organizationName
+    urlLogo
+    focusType
+    year
+    description
+    adminName
+    contactPersonPhone
+    isOrganizationVerified
+    bankAccountHolder
+    bankAccountNumber
+    bankIconImg
+    bankName
   }
 }
 `;
@@ -141,15 +114,18 @@ export const onUpdateAdmin = `subscription OnUpdateAdmin(
   ) {
     id
     email
-    password
-    nama_komunitas
-    url_logo_komunitas
-    bidang_komunitas
-    tahun_dibentuk
-    deskripsi
-    nama_admin
-    contact_person_phone
-    nomor_rekening
+    organizationName
+    urlLogo
+    focusType
+    year
+    description
+    adminName
+    contactPersonPhone
+    isOrganizationVerified
+    bankAccountHolder
+    bankAccountNumber
+    bankIconImg
+    bankName
   }
 }
 `;
@@ -169,15 +145,18 @@ export const onDeleteAdmin = `subscription OnDeleteAdmin(
   ) {
     id
     email
-    password
-    nama_komunitas
-    url_logo_komunitas
-    bidang_komunitas
-    tahun_dibentuk
-    deskripsi
-    nama_admin
-    contact_person_phone
-    nomor_rekening
+    organizationName
+    urlLogo
+    focusType
+    year
+    description
+    adminName
+    contactPersonPhone
+    isOrganizationVerified
+    bankAccountHolder
+    bankAccountNumber
+    bankIconImg
+    bankName
   }
 }
 `;

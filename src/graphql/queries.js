@@ -1,17 +1,104 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
-import gql from 'graphql-tag';
 
-export const getUser = `query GetUser($email: String!, $password: String!) {
-  getUser(email: $email, password: $password) {
+export const getFundraisingProgress = `query GetFundraisingProgress($activityID: ID!) {
+  getFundraisingProgress(activityID: $activityID) {
+    donationTotal
+    donationTarget
+  }
+}
+`;
+export const getVolunteerForm = `query GetVolunteerForm($formID: ID!) {
+  getVolunteerForm(formID: $formID) {
+    id
+    forms {
+      type
+      question
+      options
+    }
+  }
+}
+`;
+export const getAnsweredForm = `query GetAnsweredForm($formID: ID!, $userID: ID!) {
+  getAnsweredForm(formID: $formID, userID: $userID) {
+    id
+    forms {
+      type
+      question
+      options
+    }
+  }
+}
+`;
+export const getBankDestination = `query GetBankDestination {
+  getBankDestination {
+    id
+    bankName
+    bankLogo
+    bankBranch
+    bankAccountNumber
+    bankAccountNameHolder
+  }
+}
+`;
+export const checkUserEmail = `query CheckUserEmail($email: String!) {
+  checkUserEmail(email: $email) {
+    id
     name
     email
-    password
-    location {
-      latitude
-      longitude
-    }
+    location
     create_at
+  }
+}
+`;
+export const checkAdminEmail = `query CheckAdminEmail($email: String!) {
+  checkAdminEmail(email: $email) {
+    id
+    email
+    organizationName
+    urlLogo
+    focusType
+    year
+    description
+    adminName
+    contactPersonPhone
+    isOrganizationVerified
+    bankAccountHolder
+    bankAccountNumber
+    bankIconImg
+    bankName
+  }
+}
+`;
+export const getUser = `query GetUser($email: String!, $password: String!) {
+  getUser(email: $email, password: $password) {
+    id
+    name
+    email
+    location
+    create_at
+  }
+}
+`;
+export const getActivityDetail = `query GetActivityDetail($activityID: ID!) {
+  getActivityDetail(activityID: $activityID) {
+    id
+    activityName
+    activityType
+    imgThumbnail
+    activityDescription
+    organizationID
+    organizationName
+    organizationSmallLogo
+    isOrganizationVerified
+    isOpenForPublic
+    isVirtualActivity
+    location
+    formID
+    activityDateStart
+    activityDateEnd
+    createAt
+    deletedAt
   }
 }
 `;
@@ -22,31 +109,11 @@ export const listUsers = `query ListUsers(
 ) {
   listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
+      id
       name
       email
-      password
+      location
       create_at
-    }
-    nextToken
-  }
-}
-`;
-export const getSubdivision = `query GetSubdivision($province: String!) {
-  getSubdivision(province: $province) {
-    province
-    city
-  }
-}
-`;
-export const listSubdivisions = `query ListSubdivisions(
-  $filter: TableSubdivisionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSubdivisions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      province
-      city
     }
     nextToken
   }
@@ -56,58 +123,58 @@ export const getAdmin = `query GetAdmin($email: String!, $password: String!) {
   getAdmin(email: $email, password: $password) {
     id
     email
-    password
-    nama_komunitas
-    url_logo_komunitas
-    bidang_komunitas
-    tahun_dibentuk
-    deskripsi
-    nama_admin
-    contact_person_phone
-    nomor_rekening
+    organizationName
+    urlLogo
+    focusType
+    year
+    description
+    adminName
+    contactPersonPhone
+    isOrganizationVerified
+    bankAccountHolder
+    bankAccountNumber
+    bankIconImg
+    bankName
   }
 }
 `;
-export const listAdmins = `query ListAdmins(
-  $filter: TableAdminFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listAdmins(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      email
-      password
-      nama_komunitas
-      url_logo_komunitas
-      bidang_komunitas
-      tahun_dibentuk
-      deskripsi
-      nama_admin
-      contact_person_phone
-      nomor_rekening
-    }
-    nextToken
+export const getOrganizationById = `query GetOrganizationById($organizationID: String!) {
+  getOrganizationById(organizationID: $organizationID) {
+    id
+    email
+    name
+    urlogo
+    focusType
+    year
+    description
+    adminName
+    contactPersonPhone
+    bankAccountNumber
+    bankAccountHolder
+    bankName
+    bankIconImg
   }
 }
 `;
-export const queryAdminsByEmailIdIndex = gql`query QueryAdminsByEmailIdIndex($email: String!) {
-  queryAdminsByEmailIdIndex(email: $email) {
-    items {
-      id
-      email
-      nama_komunitas,
-      url_logo_komunitas
-    }
-    nextToken
-  }
-}
-`;
-
-export const getActivity = gql`query getListActivity($organizationID: ID!, $activityType : String) {
-  getActivity(organizationID: $organizationID, activityType : $activityType) {
+export const getActivity = `query GetActivity($organizationID: ID, $activityType: String) {
+  getActivity(organizationID: $organizationID, activityType: $activityType) {
     id
     activityName
+    activityType
+    imgThumbnail
+    activityDescription
+    organizationID
+    organizationName
+    organizationSmallLogo
+    isOrganizationVerified
+    isOpenForPublic
+    isVirtualActivity
+    location
+    formID
+    activityDateStart
+    activityDateEnd
+    createAt
+    deletedAt
   }
 }
 `;

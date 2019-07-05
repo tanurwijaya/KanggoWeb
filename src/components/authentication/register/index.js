@@ -132,7 +132,6 @@ class MainRegister extends Component {
   hashingPassword = (text) => {
     let salt = genSaltSync(10)
     let hash = hashSync(text, salt)
-    // console.log(hash)
     return hash
   }
 
@@ -154,7 +153,6 @@ class MainRegister extends Component {
         contact_person_phone: this.state.contactPerson
       }
     })
-    console.log(data)
   }
 }
 

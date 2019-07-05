@@ -1,63 +1,122 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
+export const createFormResponse = `mutation CreateFormResponse($input: FormResponseInput!) {
+  createFormResponse(input: $input) {
+    responseID
+    userID
+    formID
+    formResponse {
+      type
+      question
+      answer
+      options
+    }
+    createAt
+  }
+}
+`;
 export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
+    id
     name
     email
-    password
-    location {
-      latitude
-      longitude
-    }
+    location
     create_at
+  }
+}
+`;
+export const createVolunteerForm = `mutation CreateVolunteerForm($input: CreateVolunteerFormInput!) {
+  createVolunteerForm(input: $input) {
+    id
+    forms {
+      type
+      question
+      options
+    }
+  }
+}
+`;
+export const createActivity = `mutation CreateActivity($input: CreateActivityInput!) {
+  createActivity(input: $input) {
+    id
+    activityName
+    activityType
+    imgThumbnail
+    activityDescription
+    organizationID
+    organizationName
+    organizationSmallLogo
+    isOrganizationVerified
+    isOpenForPublic
+    isVirtualActivity
+    location
+    formID
+    activityDateStart
+    activityDateEnd
+    createAt
+    deletedAt
+  }
+}
+`;
+export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInput!) {
+  updateActivity(input: $input) {
+    id
+    activityName
+    activityType
+    imgThumbnail
+    activityDescription
+    organizationID
+    organizationName
+    organizationSmallLogo
+    isOrganizationVerified
+    isOpenForPublic
+    isVirtualActivity
+    location
+    formID
+    activityDateStart
+    activityDateEnd
+    createAt
+    deletedAt
+  }
+}
+`;
+export const joinActivity = `mutation JoinActivity($input: JoinActivityInput!) {
+  joinActivity(input: $input) {
+    userID
+    activityID
+    activityType
+    donationAmount
+    donationTransferDetail {
+      id
+      bankName
+      bankLogo
+      bankBranch
+      bankAccountNumber
+      bankAccountNameHolder
+    }
+    stuffCategory
+    stuffShippingDetail
   }
 }
 `;
 export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
+    id
     name
     email
-    password
-    location {
-      latitude
-      longitude
-    }
+    location
     create_at
   }
 }
 `;
 export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
   deleteUser(input: $input) {
+    id
     name
     email
-    password
-    location {
-      latitude
-      longitude
-    }
+    location
     create_at
-  }
-}
-`;
-export const createSubdivision = `mutation CreateSubdivision($input: CreateSubdivisionInput!) {
-  createSubdivision(input: $input) {
-    province
-    city
-  }
-}
-`;
-export const updateSubdivision = `mutation UpdateSubdivision($input: UpdateSubdivisionInput!) {
-  updateSubdivision(input: $input) {
-    province
-    city
-  }
-}
-`;
-export const deleteSubdivision = `mutation DeleteSubdivision($input: DeleteSubdivisionInput!) {
-  deleteSubdivision(input: $input) {
-    province
-    city
   }
 }
 `;
@@ -65,15 +124,18 @@ export const createAdmin = `mutation CreateAdmin($input: CreateAdminInput!) {
   createAdmin(input: $input) {
     id
     email
-    password
-    nama_komunitas
-    url_logo_komunitas
-    bidang_komunitas
-    tahun_dibentuk
-    deskripsi
-    nama_admin
-    contact_person_phone
-    nomor_rekening
+    organizationName
+    urlLogo
+    focusType
+    year
+    description
+    adminName
+    contactPersonPhone
+    isOrganizationVerified
+    bankAccountHolder
+    bankAccountNumber
+    bankIconImg
+    bankName
   }
 }
 `;
@@ -81,15 +143,18 @@ export const updateAdmin = `mutation UpdateAdmin($input: UpdateAdminInput!) {
   updateAdmin(input: $input) {
     id
     email
-    password
-    nama_komunitas
-    url_logo_komunitas
-    bidang_komunitas
-    tahun_dibentuk
-    deskripsi
-    nama_admin
-    contact_person_phone
-    nomor_rekening
+    organizationName
+    urlLogo
+    focusType
+    year
+    description
+    adminName
+    contactPersonPhone
+    isOrganizationVerified
+    bankAccountHolder
+    bankAccountNumber
+    bankIconImg
+    bankName
   }
 }
 `;
@@ -97,28 +162,18 @@ export const deleteAdmin = `mutation DeleteAdmin($input: DeleteAdminInput!) {
   deleteAdmin(input: $input) {
     id
     email
-    password
-    nama_komunitas
-    url_logo_komunitas
-    bidang_komunitas
-    tahun_dibentuk
-    deskripsi
-    nama_admin
-    contact_person_phone
-    nomor_rekening
-  }
-}
-`;
-// export const addActivity = `mutation AddActivity($input: CreateKegiatanTypeInput!) {
-//   createKegiatanType(input: $input) {
-//     id
-//   }
-// }
-// `;
-
-export const addActivity = `mutation AddActivity($input: CreateActivityInput!) {
-  createActivity(input: $input) {
-    id
+    organizationName
+    urlLogo
+    focusType
+    year
+    description
+    adminName
+    contactPersonPhone
+    isOrganizationVerified
+    bankAccountHolder
+    bankAccountNumber
+    bankIconImg
+    bankName
   }
 }
 `;

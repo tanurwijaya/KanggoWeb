@@ -5,7 +5,6 @@ import { WHITE } from '../../../themes/Colors';
 
 export default class EmailNotFound extends Component {
   render() {
-    console.log(this.props)
     return (
       <Container>
         <Item>

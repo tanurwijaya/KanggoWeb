@@ -1,25 +1,41 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Text from '../../../presentationals/Text'
 import { Container, TextField, Item, Button } from '../../../presentationals/index'
-import { WHITE } from '../../../themes/Colors';
+import { WHITE, PRIMARY_BLUE } from '../../../themes/Colors';
+import Spinner from "react-spinner-material";
 
-export default function InsertEmail({ onCheckPress, onEmailChange, onEnterEmail }) {
+export default function InsertEmail({ onCheckPress, onEmailChange, onEnterEmail,isButtonDisabled, isFetching}) {
   return (
     <div>
-
-      <div style={{ display: 'flex', alignContent: 'center', justifyContent: 'center', marginBottom: 16 }}>
-        <div style={{ width: 100, height: 100, borderRadius: 50, background: 'grey' }}></div>
-      </div>
-
-      <Text>Email</Text>
+      <Text large>Email</Text>
 
       <Item>
-        <TextField width={'200px'} placeholder={'test@example.com'} onChange={onEmailChange} onKeyDown={onEnterEmail} />
+        <TextField
+          width={"100%"}
+          placeholder={"test@example.com"}
+          onChange={onEmailChange}
+          onKeyDown={onEnterEmail}
+        />
       </Item>
 
       <Item center>
-        <Button onClick={onCheckPress}><Text tiny color={WHITE}>CEK</Text></Button>
+        {isFetching ? (
+          <div style={{ marginTop: 8 }}>
+            <Spinner
+              size={24}
+              spinnerColor={PRIMARY_BLUE}
+              spinnerWidth={2}
+              visible={true}
+            />
+          </div>
+        ) : (
+          <Button disabled={isButtonDisabled} onClick={onCheckPress}>
+            <Text large color={WHITE}>
+              CEK
+            </Text>
+          </Button>
+        )}
       </Item>
     </div>
-  )
+  );
 }

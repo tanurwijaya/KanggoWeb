@@ -29,7 +29,7 @@ class RadioButton extends Component {
       const { list } = this.state
       list.push(this.state.input)
       this.setState({ list, input: '' }, () =>
-        console.log(this.state.input)
+        null
       )
     }
   }

@@ -4,7 +4,7 @@ import Text from '../../../presentationals/Text'
 import { ViewWrapper, Wrapper } from '../../../presentationals/index'
 
 const OnProgessActivity = (props) => {
-    const { eventName, numRegistered, numUnprocess, style } = props
+    const { eventName, numRegistered, numUnprocess, style, onClickDetail } = props
     return (
         <ViewWrapper style={{marginLeft:32, marginRight:32, marginTop:16,marginBottom:16}} itemCenter flex={1} background={'#000'} spaceBetween>
             <Wrapper>
@@ -24,7 +24,7 @@ const OnProgessActivity = (props) => {
                 </Wrapper>
             </Wrapper>
 
-            <ButtonRight onClick={() => alert('klik')}><b>Lihat Detail</b></ButtonRight>
+            <ButtonRight onClick={() => onClickDetail()}><b>Lihat Detail</b></ButtonRight>
         </ViewWrapper>
     )
 }

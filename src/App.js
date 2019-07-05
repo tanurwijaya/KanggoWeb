@@ -5,7 +5,7 @@ import { ViewWrapper, SidebarItem } from './presentationals';
 import Text from './presentationals/Text'
 import MainScreen from './containers/main'
 
-const listItem = ['Dashboard', 'Members', 'Events', 'Settings']
+const listItem = ['Kegiatan', 'Profile']
 class App extends Component {
   render() {
     const { history } = this.props
@@ -37,13 +37,11 @@ class App extends Component {
 
   getSelectedTab() {
     const { url } = this.props.match
-    console.log(url)
-    if (url.includes('events')) return 'Events'
-    if (url.includes('event')) return 'Events'
-    if (url.includes('edit')) return 'Events'
-    if (url.includes('members')) return 'Members'
-    else if (url.includes('settings')) return 'Settings'
-    else return 'Dashboard'
+    if (url.includes('kegiatan')) return 'Events'
+    if (url.includes('kegiatan')) return 'Events'
+    if (url.includes('kegiatan')) return 'Events'
+    else if (url.includes('profile')) return 'Profile'
+    else return 'Events'
   }
 
   onSidebarItemPressed = (item) => {

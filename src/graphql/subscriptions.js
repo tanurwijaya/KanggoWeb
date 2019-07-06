@@ -18,8 +18,7 @@ export const onCreateUser = `subscription OnCreateUser(
     id
     name
     email
-    location
-    create_at
+    createAt
   }
 }
 `;
@@ -40,8 +39,7 @@ export const onUpdateUser = `subscription OnUpdateUser(
     id
     name
     email
-    location
-    create_at
+    createAt
   }
 }
 `;
@@ -62,8 +60,7 @@ export const onDeleteUser = `subscription OnDeleteUser(
     id
     name
     email
-    location
-    create_at
+    createAt
   }
 }
 `;

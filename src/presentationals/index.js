@@ -127,6 +127,23 @@ export const Button = styled.button(props => ({
     }
 }))
 
+export const SecondaryButton = styled.button(props => ({
+    background: WHITE,
+    padding: '4px 24px',
+    border: `1px solid ${!props.disabled ? PRIMARY_BLUE : LIGHT_GREY}`,
+    borderRadius: '4px',
+    ":hover": {
+        cursor: !props.disabled && 'pointer'
+    },
+    ":focus": {
+        outline: 'none'
+    },
+    ":active": {
+        background: BLUE_DARKER,
+        borderColor: BLUE_DARKER
+    }
+}))
+
 export const Item = styled.div(props => ({
     display: 'flex',
     marginTop: !props.plain && 8,
@@ -215,15 +232,15 @@ export const FormInputQuestion = styled.input(props => ({
     }
 }))
 
-export const SecondaryButton = styled.div(props => ({
-    border: "1px solid #FF6961",
-    marginRight: 32,
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 16,
-    paddingRight: 16,
-    borderRadius: 4,
-    ":hover": {
-      cursor: "pointer"
-    }
-  }));
+// export const SecondaryButton = styled.div(props => ({
+//     border: "1px solid #FF6961",
+//     marginRight: 32,
+//     paddingTop: 8,
+//     paddingBottom: 8,
+//     paddingLeft: 16,
+//     paddingRight: 16,
+//     borderRadius: 4,
+//     ":hover": {
+//       cursor: "pointer"
+//     }
+//   }));

@@ -15,6 +15,7 @@ export const getVolunteerForm = `query GetVolunteerForm($formID: ID!) {
       type
       question
       options
+      answer
     }
   }
 }
@@ -26,6 +27,7 @@ export const getAnsweredForm = `query GetAnsweredForm($formID: ID!, $userID: ID!
       type
       question
       options
+      answer
     }
   }
 }
@@ -46,8 +48,7 @@ export const checkUserEmail = `query CheckUserEmail($email: String!) {
     id
     name
     email
-    location
-    create_at
+    createAt
   }
 }
 `;
@@ -75,8 +76,7 @@ export const getUser = `query GetUser($email: String!, $password: String!) {
     id
     name
     email
-    location
-    create_at
+    createAt
   }
 }
 `;
@@ -91,7 +91,6 @@ export const getActivityDetail = `query GetActivityDetail($activityID: ID!) {
     organizationName
     organizationSmallLogo
     isOrganizationVerified
-    isOpenForPublic
     isVirtualActivity
     location
     formID
@@ -112,8 +111,7 @@ export const listUsers = `query ListUsers(
       id
       name
       email
-      location
-      create_at
+      createAt
     }
     nextToken
   }
@@ -167,7 +165,6 @@ export const getActivity = `query GetActivity($organizationID: ID, $activityType
     organizationName
     organizationSmallLogo
     isOrganizationVerified
-    isOpenForPublic
     isVirtualActivity
     location
     formID

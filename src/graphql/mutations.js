@@ -21,8 +21,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     id
     name
     email
-    location
-    create_at
+    createAt
   }
 }
 `;
@@ -33,6 +32,7 @@ export const createVolunteerForm = `mutation CreateVolunteerForm($input: CreateV
       type
       question
       options
+      answer
     }
   }
 }
@@ -48,7 +48,6 @@ export const createActivity = `mutation CreateActivity($input: CreateActivityInp
     organizationName
     organizationSmallLogo
     isOrganizationVerified
-    isOpenForPublic
     isVirtualActivity
     location
     formID
@@ -70,7 +69,6 @@ export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInp
     organizationName
     organizationSmallLogo
     isOrganizationVerified
-    isOpenForPublic
     isVirtualActivity
     location
     formID
@@ -105,8 +103,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     id
     name
     email
-    location
-    create_at
+    createAt
   }
 }
 `;
@@ -115,8 +112,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     id
     name
     email
-    location
-    create_at
+    createAt
   }
 }
 `;

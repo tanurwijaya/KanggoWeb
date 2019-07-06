@@ -1,76 +1,65 @@
-import React, { Component } from 'react'
-import Text from '../../../presentationals/Text'
-import { Container, TextField, Item, Button } from '../../../presentationals/index'
-import { WHITE, PRIMARY_BLUE } from '../../../themes/Colors'
-import DragAndDrop from '../../../presentationals/ImageDragDrop';
-import SelectablePills from '../../../presentationals/SelectablePills';
+import React, { Component } from "react";
+import Text from "../../../presentationals/Text";
+import {
+  Container,
+  TextField,
+  Item,
+  Button
+} from "../../../presentationals/index";
+import { WHITE, PRIMARY_BLUE } from "../../../themes/Colors";
 
 class SecondSection extends Component {
-    render() {
-        const {onInputNameChange, onLogoChange, onFocusFieldSelected, onYearsChange, onDescriptionChange, isButtonDisabled, onButtonPressed} = this.props
-        return (
-            <div>
-                <div style={{ width: '66%', height: 4, background: PRIMARY_BLUE, marginBottom:32 }}></div>
-            <Container center>
-                <Text large>Create your account</Text>
+  render() {
+    const {
+      onAdminNameChange,
+      isButtonDisabled,
+      onContactPersonChange,
+      onChangePassword,
+      onChangeRetypePassword,
+      onButtonPressed
+    } = this.props;
+    return (
+      <div>
+        <div
+          style={{
+            width: "66%",
+            height: 4,
+            background: PRIMARY_BLUE,
+            marginBottom: 32
+          }}
+        />
+        <Container center>
+          <Text larger>Create your account</Text>
 
-                <div>
-                    <Item column>
-                        <Text>Nama organisasi / komunitas</Text>
-                        <TextField onChange={onInputNameChange} />
-                    </Item>
+          <div style={{ width: "30%" }}>
+            <Item column>
+              <Text>Nama admin</Text>
+              <TextField onChange={onAdminNameChange} />
+            </Item>
 
-                    <Item column>
-                        <Text>Logo organisasi / komunitas</Text>
-                        <DragAndDrop>
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    flex: 1,
-                                    flexDirection: 'column',
-                                    border: 'dashed grey 2px',
-                                    backgroundColor: '#fff',
-                                    height: 160,
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    padding: 16
-                                }}
-                            >
+            <Item column>
+              <Text>Contact person phone</Text>
+              <TextField type="tel" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" onChange={onContactPersonChange} />
+            </Item>
 
-                                <Text>Drag and drop your images here or</Text>
-                                <div style={{ marginTop: 16 }}>
-                                    <button>Upload your file</button>
-                                </div>
+            <Item column>
+              <Text>Password</Text>
+              <TextField type="password" onChange={onChangePassword} />
+            </Item>
 
-                            </div>
-                        </DragAndDrop>
-                    </Item>
+            <Item column>
+              <Text>Ulangi password</Text>
+              <TextField type="password" onChange={onChangeRetypePassword} />
+            </Item>
+          </div>
 
-                    <Item column>
-                        <Text>Fokus organisasi / komunitas</Text>
-                        <Item>
-                            <SelectablePills onSelected={(list)=>onFocusFieldSelected(list)} list={['Pendidikan', 'Lingkungan', 'Sosial', 'Bencana']} />
-                        </Item>
-                    </Item>
-
-                    <Item column>
-                        <Text>Tahun berdiri</Text>
-                        <TextField onChange={onYearsChange}/>
-                    </Item>
-
-                    <Item column>
-                        <Text>Deskripsi</Text>
-                        <TextField onChange={onDescriptionChange} />
-                    </Item>
-                </div>
-
-                <Button onClick={onButtonPressed} disabled={isButtonDisabled}><Text color={WHITE}>Selanjutnya</Text></Button>
-
-            </Container>
-            </div>
-        )
-    }
-
+          <Button onClick={onButtonPressed} disabled={isButtonDisabled}>
+            <Text color={WHITE}>Buat Akun</Text>
+          </Button>
+        </Container>
+      </div>
+    );
+  }
 }
 
-export default SecondSection
+export default SecondSection;

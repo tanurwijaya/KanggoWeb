@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import FirstSectionRegister from './FirstSection';
 import SecondSectionRegister from './SecondSection';
 import { createAdmin } from '../../../graphql/mutations'
-import { withApollo, Query, ApolloConsumer } from 'react-apollo';
+import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
-import ThirdSectionRegister from './ThirdSection';
-import {genSaltSync, hashSync} from 'bcryptjs'
+import { Redirect } from 'react-router-dom'
 
 const REGISTER_PAGE = {
   PASSWORD : 'password_page',
@@ -31,41 +30,44 @@ class MainRegister extends Component {
   }
 
   render() {
-    const { page, password, retypePassword, name, logo, focusField, years, description, adminName, contactPerson, error } = this.state
+    const { page, password, retypePassword, name, focusField, years, description, adminName, contactPerson, error } = this.state
+    if(localStorage.getItem('userid')){
+      return <Redirect to="/"></Redirect>
+    }
+
     if(page === REGISTER_PAGE.PASSWORD){
-      return(
+      return (
         <FirstSectionRegister
-        email = {'alvintest@test.com'}
-        onChangeEmail={this.onChangeEmail}
-        onChangePassword={this.onChangePassword}
-        onChangeRetypePassword={this.onChangeRetypePassword}
-        isButtonDisabled={!(password && retypePassword) || error}
-        onButtonPressed={this.goToSecondForm}
-        error={error}
+          email={"alvintest@test.com"}
+          onChangeEmail={this.onChangeEmail}
+          isButtonDisabled={
+            !(password && retypePassword && name && focusField,
+            years,
+            description) || error
+          }
+          onButtonPressed={this.goToSecondForm}
+          onInputNameChange={this.onInputNameChange}
+          onLogoChange={this.onLogoChange}
+          onFocusFieldSelected={list => this.onFocusFieldSelected(list)}
+          onYearsChange={this.onYearsChange}
+          onDescriptionChange={this.onDescriptionChange}
+          error={error}
         />
-      )
+      );
     }
     if (page === REGISTER_PAGE.MAIN) {
       return (
         <SecondSectionRegister
-          onInputNameChange={this.onInputNameChange}
-          onLogoChange={this.onLogoChange}
-          onFocusFieldSelected={(list) => this.onFocusFieldSelected(list)}
-          onYearsChange={this.onYearsChange}
-          onDescriptionChange={this.onDescriptionChange}
-          isButtonDisabled={!(name && focusField, years, description)}
-          onButtonPressed={this.goToThirdForm}
-        />
-      )
-    } else {
-      return <ThirdSectionRegister
         onAdminNameChange={this.onAdminNameChange}
         onContactPersonChange={this.onContactPersonChange}
-        isButtonDisabled={!(adminName && contactPerson)}
-        onButtonPressed={this.registerAdmin}
-      />
+        onChangePassword={this.onChangePassword}
+        onChangeRetypePassword={this.onChangeRetypePassword}
+          isButtonDisabled={!(adminName && contactPerson && password && retypePassword)}
+          onButtonPressed={this.registerAdmin}
+        />
+      )
     }
-
+    return null
   }
 
   onChangeEmail = (event) => {
@@ -125,20 +127,8 @@ class MainRegister extends Component {
     }
   }
 
-  goToThirdForm = () => {
-    this.setState({ page: REGISTER_PAGE.ADMIN })
-  }
-
-  hashingPassword = (text) => {
-    let salt = genSaltSync(10)
-    let hash = hashSync(text, salt)
-    return hash
-  }
 
   registerAdmin = async () => {
-    //CALL APPSYNC REGISTER ADMIN
-    // let password = this.hashingPassword(this.state.password)
-    /** todo's : mutation register */
     const { data } = await this.props.client.mutate({
       mutation: gql(createAdmin),
       variables: {

@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import Text from '../../../presentationals/Text'
 import { Container } from '../../../presentationals/index'
 import EmailNotFound from './EmailNotFound'
 import InsertEmail from './InsertEmail'
 import InsertPassword from './InsertPassword'
-import { WHITE } from '../../../themes/Colors'
 import { checkAdminEmail, getAdmin } from '../../../graphql/queries'
 import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
 import KanggoLogo from '../../../assets/images/app_icon.png'
+import { Redirect } from 'react-router-dom'
 
 class MainLogin extends Component {
   state = {
@@ -22,28 +21,21 @@ class MainLogin extends Component {
 
   onCheckPress = async () => {
     this.setState({emailLoading: true})
-    console.log('1')
-    const {data} = await this.props.client.query({
+    await this.props.client.query({
       query: gql(checkAdminEmail),
       variables: { email: this.state.email }
-    }).catch(res => {
-      console.log('res',res)
-    });
-    if (
-      data &&
-      data.checkAdminEmail
-    ) {
-      let item = data.checkAdminEmail;
-      this.setState({
-        organisasi: item,
-        emailLoading: false
-      });
-    } else {
-      // navigate to init register
+    }).then( ({data}) =>{
+      if(data.checkAdminEmail && data.checkAdminEmail.id){
+          this.setState({
+            organisasi: data.checkAdminEmail,
+            emailLoading: false
+          });
+      }
+    }).catch(e => {
       this.setState({ shouldShowRegister: true,
         emailLoading: false
        });
-    }
+    });
   };
 
   validateEmail = email => {
@@ -52,39 +44,18 @@ class MainLogin extends Component {
   };
 
   onLoginPress = async () => {
-    const response = await this.props.client.query({
+    const {history} = this.props
+    await this.props.client.query({
       query: gql(getAdmin),
-      options: { fetchPolicy: 'no-cache' },
       variables: { email: this.state.email, password: this.state.password }
     }).then(({data})=>{
       if(data && data.getAdmin && data.getAdmin.id){
-        // localStorage.setItem('userid', data.getAdmin.id);
         localStorage.setItem('userid', data.getAdmin.id);
+        history.push('/')
       }
-    }).catch((res)=>{
-      console.log('catch',res)
+    }).catch((e)=>{
+      alert('Password tidak sesuai')
     });
-
-    console.log('response',response)
-    if(response && response.errors){
-      console.log('error')
-    }else if(response && response.data && response.data.getAdmin){
-      console.log('masuk')
-    }
-
-    
-
-    // if (data && data.getAdmin && data.getAdmin.id) {
-    //   // this.props.history.push('/asd')
-    //   console.log(data.getAdmin)
-    // }
-    // if(data && data.checkAdminEmail && data.checkAdminEmail.items && data.checkAdminEmail.items.length){
-    //   let item = data.checkAdminEmail.items[0]
-    //   this.setState({
-    //     namaOrganisasi : item.nama_komunitas,
-    //     id : item.id
-    //   })
-    // }
   };
 
   onEmailChange = event => {
@@ -107,19 +78,33 @@ class MainLogin extends Component {
     }
   };
 
-  onCancelRegister = () => {
+  hideModal = () => {
     this.setState({ shouldShowRegister: false });
   };
+  
 
   render() {
     const { organisasi, shouldShowRegister, email,emailLoading  } = this.state;
+    const {history} = this.props
+
+    if(localStorage.getItem('userid')){
+      return <Redirect to="/"></Redirect>
+    }
+
+    if(shouldShowRegister){
+      return (
+        <Container center>
+          <EmailNotFound
+          email={email}
+          hideModal={this.hideModal}
+          doRegister={()=>history.push(`/register/${email}`)}
+          />
+        </Container>
+      );
+    }
     return (
       <Container center>
         <div>
-          {/* {shouldShowRegister && 
-          <EmailNotFound/>
-          } */}
-          {/* <EmailNotFound/> */}
           <div
             style={{
               display: "flex",

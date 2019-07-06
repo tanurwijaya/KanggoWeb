@@ -20,26 +20,33 @@ class SelectablePills extends Component {
 
   renderList = () => {
     let view = [];
+    const {isWrap} = this.props
+    // const {isWrap} = this.props
     this.state.list.map((item, index) => {
       view.push(
         <div
           key={item.value}
           onClick={() => this.onItemPressed(index)}
           style={{
-            padding: 8,
-            border: "1px solid black",
-            marginLeft: index === 0 ? 0 : 8,
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft:16,
+            paddingRight:16,
+            border: `1px solid ${PRIMARY_BLUE}`,
+            borderRadius : 4,
+            marginRight: 8,
+            marginBottom: 8,
             background: item.selected ? PRIMARY_BLUE : "white"
           }}
         >
-          <Text medium color={item.selected ? WHITE : BLACK}>
+          <Text medium color={item.selected ? WHITE : PRIMARY_BLUE}>
             {item.value}
           </Text>
         </div>
       );
     });
     return (
-      <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
+      <div style={{ display: "flex", flex: 1, flexWrap: isWrap && "wrap", flexDirection: "row" }}>
         {view}
       </div>
     );

@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import RunningProgram from './components/widget/RunningProgram';
 import { ViewWrapper, SidebarItem } from './presentationals';
 import Text from './presentationals/Text'
 import MainScreen from './containers/main'
+import { Redirect } from 'react-router-dom'
+import KanggoLogo from './assets/images/kanggo_white.png'
 
 const listItem = ['Kegiatan', 'Profile']
 class App extends Component {
+
   render() {
     const { history } = this.props
+    if(!localStorage.getItem('userid')){
+      return <Redirect to="/login"></Redirect>
+    }
     return (
       <ViewWrapper style={{ display: 'flex', flex: 1, height: '100%' }} plain flex={1} row>
         <div style={{ display: 'flex', flexDirection: 'column', background: 'black', height: '100%' }}>
-          <SidebarHeader name={'1000 Guru Tangsel'} />
+          <SidebarHeader/>
           <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
             {listItem.map((item) =>
               <SidebarItem onClick={()=>this.onSidebarItemPressed(item)} selected={item === this.getSelectedTab()}>
@@ -36,6 +40,7 @@ class App extends Component {
   }
 
   getSelectedTab() {
+    console.log(this.props)
     const { url } = this.props.match
     if (url.includes('kegiatan')) return 'Events'
     if (url.includes('kegiatan')) return 'Events'
@@ -53,10 +58,7 @@ class App extends Component {
 const SidebarHeader = ({ image, name }) => {
   return (
     <div style={{ background: 'black', display: 'flex', flexDirection: 'row', padding: 24, alignItems: 'center', maxWidth: 280 }}>
-      <div style={{ width: 80, height: 80, borderRadius: 40, background: 'white', marginRight: 16 }}></div>
-      <div style={{ maxWidth: 180 }}>
-        <Text color={'#fff'} medium bold>{name}</Text>
-      </div>
+      <img style={{ width: "70%" }} src={KanggoLogo} alt="logo" />
     </div>
   )
 }

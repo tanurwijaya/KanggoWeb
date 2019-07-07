@@ -140,11 +140,11 @@ export const getOrganizationById = `query GetOrganizationById($organizationID: S
   getOrganizationById(organizationID: $organizationID) {
     id
     email
-    name
-    urlogo
-    focusType
-    year
+    organizationName
     description
+    urlLogo
+    year
+    focusType
     adminName
     contactPersonPhone
     bankAccountNumber

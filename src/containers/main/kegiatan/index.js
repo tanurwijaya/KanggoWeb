@@ -27,11 +27,11 @@ class KegiatanScreen extends Component {
 
     render() {
         const { isModalCreateVisible, namaKegiatan, jenisKegiatan, listKegiatan, loadingCreate } = this.state
-        const { history } = this.props
+        const { history, client } = this.props
         if (history.location.pathname.includes('/kegiatan/') && !history.location.pathname.includes('edit') ) {
             return <DetailKegiatan history={history} />
         } else if (history.location.pathname.includes('/edit')){
-            return <EditKegiatan history={history} />
+            return <EditKegiatan history={history} client={client} />
         } else {
             return (
                 <>

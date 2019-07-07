@@ -15,7 +15,8 @@ class App extends Component {
     }
     return (
       <ViewWrapper style={{ display: 'flex', flex: 1, height: '100%' }} plain flex={1} row>
-        <div style={{ display: 'flex', flexDirection: 'column', background: 'black', height: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', background: 'black', height: '100%', paddingBottom: 32 }}>
+
           <SidebarHeader/>
           <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
             {listItem.map((item) =>
@@ -26,6 +27,11 @@ class App extends Component {
 
             )}
           </div>
+
+          <div style={{bottom: 0, alignSelf:'center'}}>
+            {/* <Text color={'#FFF'}>as</Text> */}
+            <Text color={'#FFF'}>versi 1.0</Text>
+            </div>
         </div>
 
 

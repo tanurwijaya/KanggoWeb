@@ -22,7 +22,7 @@ class DetailKegiatan extends Component {
   componentDidMount = () => {
     const { history } = this.props;
     if (history && history.location) {
-      let activityID = history.location.pathname.replace("/event/", "");
+      let activityID = history.location.pathname.replace("/kegiatan/", "");
       this.getActivityDetail(activityID);
     }
   };
@@ -57,7 +57,7 @@ class DetailKegiatan extends Component {
           <HeaderKegiatan
           eventName={detailData.activityName}
           />
-          <Wrapper plain column>
+          {/* <Wrapper plain column>
             <Text large>Ada 4 pendaftar yang belum diproses</Text>
             <Button style={{ marginTop: 8, marginBottom: 32 }}>
               <Text color={WHITE}>Proses Sekarang</Text>
@@ -75,7 +75,7 @@ class DetailKegiatan extends Component {
 
             <Text large>Peserta diterima</Text>
             <ParticipantsList />
-          </Wrapper>
+          </Wrapper> */}
         </div>
       );
     }

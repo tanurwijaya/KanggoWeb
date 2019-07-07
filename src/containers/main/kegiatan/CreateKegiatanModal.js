@@ -39,7 +39,7 @@ export default function CreateKegiatanModal({ isVisible,close, show, onBackdropP
                    <SelectablePills
                      single
                      onSelected={list => onSelectActivityType(list)}
-                     list={["Barang", "Makanan", "Uang", "Volunteer"]}
+                     list={["Fundraising", "Volunteer"]}
                    />
                  </div>
                </Item>

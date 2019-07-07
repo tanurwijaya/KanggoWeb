@@ -51,7 +51,6 @@ class DetailKegiatan extends Component {
         </Item>
       );
     } else {
-        console.log(detailData)
       return (
         <div style={{ marginLeft: 32, marginRight: 32 }}>
           <HeaderKegiatan

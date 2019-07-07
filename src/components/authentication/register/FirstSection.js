@@ -15,8 +15,6 @@ class FirstSection extends Component {
 
   render() {
     const {
-      email,
-      error,
       onInputNameChange,
       onYearsChange,
       onDescriptionChange,

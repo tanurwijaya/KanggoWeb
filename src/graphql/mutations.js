@@ -116,7 +116,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
   }
 }
 `;
-export const createAdmin = `mutation CreateAdmin($input: CreateAdminInput!) {
+export const createAdmin = `mutation CreateAdmin($input: CreateOrganizationInput!) {
   createAdmin(input: $input) {
     id
     email

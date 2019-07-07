@@ -22,15 +22,23 @@ class MainRegister extends Component {
     name: "",
     logo: "",
     focusField: [],
-    years: "",
+    year: "",
     description: "",
     adminName: "",
     contactPerson: "",
     error : ""
   }
 
+  componentDidMount = () => {
+    const {match} = this.props
+    console.log(match)
+    if(match && match.params && match.params.email){
+      this.setState({email:match.params.email})
+    }
+  }
+
   render() {
-    const { page, password, retypePassword, name, focusField, years, description, adminName, contactPerson, error } = this.state
+    const { page, password, retypePassword, name, focusField, year, description, adminName, contactPerson, error } = this.state
     if(localStorage.getItem('userid')){
       return <Redirect to="/"></Redirect>
     }
@@ -38,20 +46,17 @@ class MainRegister extends Component {
     if(page === REGISTER_PAGE.PASSWORD){
       return (
         <FirstSectionRegister
-          email={"alvintest@test.com"}
-          onChangeEmail={this.onChangeEmail}
           isButtonDisabled={
             !(password && retypePassword && name && focusField,
-            years,
-            description) || error
+            year,
+            description)
           }
-          onButtonPressed={this.goToSecondForm}
+          onButtonPressed={()=>this.setState({ page: REGISTER_PAGE.MAIN })}
           onInputNameChange={this.onInputNameChange}
           onLogoChange={this.onLogoChange}
           onFocusFieldSelected={list => this.onFocusFieldSelected(list)}
           onYearsChange={this.onYearsChange}
           onDescriptionChange={this.onDescriptionChange}
-          error={error}
         />
       );
     }
@@ -62,16 +67,13 @@ class MainRegister extends Component {
         onContactPersonChange={this.onContactPersonChange}
         onChangePassword={this.onChangePassword}
         onChangeRetypePassword={this.onChangeRetypePassword}
-          isButtonDisabled={!(adminName && contactPerson && password && retypePassword)}
-          onButtonPressed={this.registerAdmin}
+          isButtonDisabled={!(adminName && contactPerson && password && retypePassword)||error}
+          onButtonPressed={()=>this.checkRetypePassword()}
+          error={error}
         />
       )
     }
     return null
-  }
-
-  onChangeEmail = (event) => {
-    this.setState({ email: event.target.value})
   }
 
   onChangePassword = (event) => {
@@ -101,7 +103,7 @@ class MainRegister extends Component {
   }
 
   onYearsChange = (event) => {
-    this.setState({ years: event.target.value })
+    this.setState({ year: event.target.value })
   }
 
   onDescriptionChange = (event) => {
@@ -116,32 +118,42 @@ class MainRegister extends Component {
     this.setState({ contactPerson: event.target.value })
   }
 
-  goToSecondForm = () => {
+  checkRetypePassword = () => {
     const {password, retypePassword} = this.state
     let error = ''
     if(password !== retypePassword){
-      error = "(password tidak sesuai)"
+      error = "password tidak sesuai"
+      alert(error)
       this.setState({error})
     }else{
-      this.setState({ page: REGISTER_PAGE.MAIN })
+      this.registerAdmin()
     }
   }
 
 
   registerAdmin = async () => {
-    const { data } = await this.props.client.mutate({
+    const {history} = this.props
+    await this.props.client.mutate({
       mutation: gql(createAdmin),
-      variables: {
+      variables: {input:{
         email: this.state.email,
         password: this.state.password,
-        nama_komunitas: this.state.name,
-        url_logo_komunitas: '',
-        bidang_komunitas: '',
-        tahun_dibentuk: this.state.years,
-        deskripsi: this.state.description,
-        nama_admin: this.state.adminName,
-        contact_person_phone: this.state.contactPerson
+        organizationName: this.state.name,
+        urlLogo: '-',
+        focusType: this.state.focusField,
+        year: this.state.year,
+        description: this.state.description,
+        adminName: this.state.adminName,
+        contactPersonPhone: this.state.contactPerson
       }
+    }
+    }).then(({data})=>{
+      if(data && data.createAdmin && data.createAdmin.id){
+        localStorage.setItem('userid', data.createAdmin.id);
+        history.push('/')
+      }
+    }).catch(error => {
+      alert('Gagal melakukan pendaftaran, silakan coba lagi nanti')
     })
   }
 }

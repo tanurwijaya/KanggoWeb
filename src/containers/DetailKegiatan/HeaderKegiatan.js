@@ -8,7 +8,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 const HeaderKegiatan = (props) => {
     const { eventName, numRegistered, numUnprocess, style } = props
-    console.log('eventName',props)
     return (
         <ViewWrapper itemCenter style={{ marginBottom: 16, marginTop: 16 }} >
         {/* <Container center style={{borderRadius:'50%', background:'grey', width: 48, height:48, marginRight:16}}>

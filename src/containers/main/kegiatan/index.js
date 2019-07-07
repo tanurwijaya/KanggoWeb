@@ -36,16 +36,10 @@ class KegiatanScreen extends Component {
             return (
                 <>
 
-                    <OnProgessActivity
-                        eventName={'Testing dari props'}
-                        numRegistered={32}
-                        numUnprocess={1}
-                    />
-
                     <ListKegiatan
                         onClick={(activityID)=>this.goToDetailActivity(activityID)}
                         history={this.props.history}
-                        listKegiatan={this.state.listKegiatan}
+                        listKegiatan={listKegiatan}
                         onAddCardPressed={this.onAddCardPressed}
                     />
 

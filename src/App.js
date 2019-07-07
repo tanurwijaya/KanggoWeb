@@ -28,14 +28,16 @@ class App extends Component {
             )}
           </div>
 
-          <div style={{bottom: 0, alignSelf:'center'}}>
-            {/* <Text color={'#FFF'}>as</Text> */}
+          <div style={{bottom: 0, alignSelf:'center',display:'flex',flexDirection:'column'}}>
+            <div style={{borderTop:'1px solid #FF6961', borderBottom:'1px solid #FF6961',display:'flex',flex:1,padding:8, marginBottom:32}}>
+              <Text style={{display:'flex',flex:1}} color={'#FF6961'}>Logout</Text>
+            </div>
             <Text color={'#FFF'}>versi 1.0</Text>
             </div>
         </div>
 
 
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, overflowY:'scroll' }}>
           <MainScreen
           selected={this.getSelectedTab()}
           history={history} />
@@ -46,13 +48,12 @@ class App extends Component {
   }
 
   getSelectedTab() {
-    console.log(this.props)
     const { url } = this.props.match
-    if (url.includes('kegiatan')) return 'Events'
-    if (url.includes('kegiatan')) return 'Events'
-    if (url.includes('kegiatan')) return 'Events'
+    if (url.includes('kegiatan')) return 'Kegiatan'
+    if (url.includes('kegiatan')) return 'Kegiatan'
+    if (url.includes('kegiatan')) return 'Kegiatan'
     else if (url.includes('profile')) return 'Profile'
-    else return 'Events'
+    else return 'Kegiatan'
   }
 
   onSidebarItemPressed = (item) => {

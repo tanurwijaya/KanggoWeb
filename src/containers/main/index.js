@@ -10,13 +10,9 @@ const TABS = {
 
 class MainScreen extends Component {
 
-  state = {
-
-  }
-
   render() {
     const { history, selected } = this.props
-    if (selected === 'Events') return <KegiatanScreen history={history} />
+    if (selected === 'Kegiatan') return <KegiatanScreen history={history} />
     else if(selected === 'Profile') return <ProfileScreen/>    
   }
 

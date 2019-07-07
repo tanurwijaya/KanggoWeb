@@ -11,10 +11,10 @@ export default function ListKegiatan({
   onClick
 }) {
   return (
-    <div style={{ position: "absolute", display: "flex" }}>
+    <div style={{ position: "absolute", display: "flex", marginTop:32 }}>
       <Container style={{ marginLeft: 16, marginRight: 16 }} column>
         <div style={{ marginLeft: 16, marginRight: 16 }}>
-          <Text large>Kegiatan Sebelumnya</Text>
+          <Text large>Kegiatan Sedang Berjalan</Text>
         </div>
         <div
           style={{
@@ -39,25 +39,28 @@ export default function ListKegiatan({
 function RenderList({ history, listKegiatan, onClick }) {
   let view = [];
   listKegiatan.map((item, index) => {
-    view.push(
-      <KegiatanCardWrapper key={index}>
-        <div
-          onClick={() => onClick(item.id)}
-          style={{
-            display: "flex",
-            flex: 1,
-            flexDirection: "column",
-            padding: 16,
-            justifyContent: "flex-end",
-            alignItems: "flex-start",
-            height: "100%"
-          }}
-        >
-          <Text large>{item.activityName}</Text>
-          <Text tiny>{item.participant}</Text>
-        </div>
-      </KegiatanCardWrapper>
-    );
+    if (!item.deletedAt) {
+      //kasih validasi date end lagi
+      view.push(
+        <KegiatanCardWrapper key={index}>
+          <div
+            onClick={() => onClick(item.id)}
+            style={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              padding: 16,
+              justifyContent: "flex-end",
+              alignItems: "flex-start",
+              height: "100%"
+            }}
+          >
+            <Text large>{item.activityName}</Text>
+            <Text tiny>{item.participant}</Text>
+          </div>
+        </KegiatanCardWrapper>
+      );
+    }
   });
   return view;
 }

@@ -18,7 +18,7 @@ const HeaderKegiatan = (props) => {
                 <Text color={'white'} bold large>{eventName}</Text>
             </Wrapper>
 
-            <Wrapper>
+            {/* <Wrapper>
                 <Wrapper column>
                     <Text color={'white'} large bold>32</Text>
                     <Text color={'white'} medium>Mendaftar</Text>
@@ -28,7 +28,7 @@ const HeaderKegiatan = (props) => {
                     <Text color={'white'} large bold>4</Text>
                     <Text color={'white'} medium>Belum diproses</Text>
                 </Wrapper>
-            </Wrapper>
+            </Wrapper> */}
         </ViewWrapper>
         </ViewWrapper>
     )

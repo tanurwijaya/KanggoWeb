@@ -178,7 +178,7 @@ export const KegiatanCardWrapper = styled.div(props => ({
 
 export const Dropdown = styled.select(props => ({
 display:'flex',
-background:'white',
+background: props.disabled ? LIGHT_GREY :'white',
 height:32,
 width: props.width ? props.width : 'auto',
 }))
@@ -205,7 +205,8 @@ export const FormItemWrapper = styled.div(props => ({
     paddingLeft: 16,
     paddingRight: 16,
     margin: 16,
-    boxShadow: '0 0 21px rgba(33,33,33,.5)'
+    border: `1px solid ${LIGHT_GREY}`,
+    borderRadius: 8
 }))
 
 export const FormInputQuestion = styled.input(props => ({

@@ -3,11 +3,12 @@ import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
 import Text from "../../presentationals/Text";
 import HeaderKegiatan from "./HeaderKegiatan";
-import { Button, Wrapper, Item } from "../../presentationals";
-import { WHITE, LIGHT_GREY } from "../../themes/Colors";
+import { Button, Wrapper, Item, TextField, Dropdown } from "../../presentationals";
+import { WHITE, LIGHT_GREY, DARK_GREY } from "../../themes/Colors";
 import { getActivityDetail } from "../../graphql/queries";
 import ParticipantsList from "./ParticipantsList";
 import Spinner from "react-spinner-material";
+import parse from 'html-react-parser';
 
 class DetailKegiatan extends Component {
   state = {
@@ -56,25 +57,33 @@ class DetailKegiatan extends Component {
           <HeaderKegiatan
           eventName={detailData.activityName}
           />
-          {/* <Wrapper plain column>
-            <Text large>Ada 4 pendaftar yang belum diproses</Text>
-            <Button style={{ marginTop: 8, marginBottom: 32 }}>
-              <Text color={WHITE}>Proses Sekarang</Text>
-            </Button>
+          
+          <Wrapper column style={{ marginTop: 24 }} plain>
+          <Text large style={{ marginBottom: 4 }}>
+            Nama kegiatan
+          </Text>
+          <TextField disabled value={detailData.activityName} style={{width:'80%'}}/>
+        </Wrapper>
 
-            <div
-              onClick={this.onClickForm}
-              style={{
-                width: "100%",
-                height: 50,
-                background: LIGHT_GREY,
-                marginBottom: 32
-              }}
-            />
+        <Wrapper column style={{ marginTop: 24 }} plain>
+          <Text large style={{ marginBottom: 4 }}>
+            Deskripsi Kegiatan
+          </Text>
 
-            <Text large>Peserta diterima</Text>
-            <ParticipantsList />
-          </Wrapper> */}
+          <div style={{width:'80%', borderRadius:8, minHeight: 100, background:LIGHT_GREY, padding: 8}}>
+            {detailData.activityDescription && parse(detailData.activityDescription)}
+          </div>
+        </Wrapper>
+
+        <Wrapper column style={{ marginTop: 24 }} plain>
+          <Text large style={{ marginBottom: 4 }}>
+            Lokasi
+          </Text>
+          <TextField disabled value={detailData.location} style={{width:'80%'}}/>
+        </Wrapper>
+
+
+        
         </div>
       );
     }

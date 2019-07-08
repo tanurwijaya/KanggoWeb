@@ -12,9 +12,8 @@ import {
   ViewWrapper,
   Dropdown
 } from "../../presentationals";
-import { WHITE, LIGHT_GREY, DARK_GREY } from "../../themes/Colors";
+import { LIGHT_GREY, DARK_GREY } from "../../themes/Colors";
 import { getActivityDetail } from "../../graphql/queries";
-import HeaderKegiatan from "../DetailKegiatan/HeaderKegiatan";
 import Spinner from "react-spinner-material";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -104,8 +103,8 @@ class EditKegiatan extends Component {
       }
     }
     }).then(({data})=>{
-      if(!data && data.updateActivity && data.updateActivity.error){
-        history.push('/')
+      if(data && data.updateActivity && !data.updateActivity.error){
+        history.push(`/kegiatan/${this.state.activityID}`)
       }
     }).catch(error => {
       console.log(error)

@@ -3,11 +3,11 @@ import ShortAnswer from '../../presentationals/Form/ShortAnswer';
 import LongAnswer from '../../presentationals/Form/LongAnswer';
 import RadioButton from '../../presentationals/Form/RadioButton';
 import { PRIMARY_BLUE, WHITE } from '../../themes/Colors';
-import AddQuestions from '../VolunteerForm/AddQuestions';
+import AddQuestions from './AddQuestions';
 import Text from '../../presentationals/Text'
 import { Button } from '../../presentationals';
 
-class EditKegiatan extends Component {
+class VolunteerForm extends Component {
 
   /**
    * Form
@@ -111,9 +111,9 @@ class EditKegiatan extends Component {
   }
 
   onSaveForm = () => {
-
+    console.log(this.state.forms)
   }
 
 }
 
-export default EditKegiatan
+export default VolunteerForm

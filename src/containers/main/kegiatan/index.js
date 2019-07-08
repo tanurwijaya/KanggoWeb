@@ -10,6 +10,7 @@ import DetailKegiatan from '../../DetailKegiatan';
 import { getActivity } from '../../../graphql/queries'
 import FormKegiatan from '../../DetailKegiatan/Form';
 import EditKegiatan from '../../EditKegiatan';
+import VolunteerForm from '../../VolunteerForm';
 
 class KegiatanScreen extends Component {
 
@@ -28,10 +29,12 @@ class KegiatanScreen extends Component {
     render() {
         const { isModalCreateVisible, namaKegiatan, jenisKegiatan, listKegiatan, loadingCreate } = this.state
         const { history, client } = this.props
-        if (history.location.pathname.includes('/kegiatan/') && !history.location.pathname.includes('edit') ) {
+        if (history.location.pathname.includes('/kegiatan/') && !history.location.pathname.includes('edit') && !history.location.pathname.includes('form') ) {
             return <DetailKegiatan history={history} />
         } else if (history.location.pathname.includes('/edit')){
             return <EditKegiatan history={history} client={client} />
+        }else if(history.location.pathname.includes('form')){
+            return <VolunteerForm/>
         } else {
             return (
                 <>

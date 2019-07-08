@@ -176,6 +176,13 @@ export const KegiatanCardWrapper = styled.div(props => ({
     },
 }))
 
+export const Dropdown = styled.select(props => ({
+display:'flex',
+background:'white',
+height:32,
+width: props.width ? props.width : 'auto',
+}))
+
 export const SidebarItem = styled.div(props => ({
     display: 'flex',
     padding: 16,

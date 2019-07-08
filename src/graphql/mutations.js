@@ -60,22 +60,8 @@ export const createActivity = `mutation CreateActivity($input: CreateActivityInp
 `;
 export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInput!) {
   updateActivity(input: $input) {
-    id
-    activityName
-    activityType
-    imgThumbnail
-    activityDescription
-    organizationID
-    organizationName
-    organizationSmallLogo
-    isOrganizationVerified
-    isVirtualActivity
-    location
-    formID
-    activityDateStart
-    activityDateEnd
-    createAt
-    deletedAt
+    message
+    error
   }
 }
 `;

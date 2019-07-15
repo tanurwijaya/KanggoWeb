@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Text from '../../presentationals/Text';
 import { PRIMARY_BLUE, RED_ERROR, GREEN } from '../../themes/Colors';
 
-class ParticipantsList extends Component {
+class FundraisingList extends Component {
 
   componentDidMount = () => {
     //fetch data user
@@ -15,25 +15,22 @@ class ParticipantsList extends Component {
       <>
         <table>
           <tr>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Tanggal mendaftar</th>
-            <th>Status</th>
+            <th>Nama Pemilik Rekening</th>
+            <th>Bank Tujuan</th>
+            <th>Transfer Date</th>
+            <th>Jumlah Transfer</th>
           </tr>
           <tr>
-            <td>Alvin</td>
-            <td>alvin@tanurwijaya.com</td>
+            <td>Alvin Tanurwijaya</td>
+            <td>BCA</td>
             <td>081212121212</td>
             <td>17 Oktober 2019</td>
-            <td><Text color={GREEN}>Diterima</Text></td>
           </tr>
           <tr>
-            <td>Alvin</td>
-            <td>dzakwanilham@gmail.com</td>
+            <td>Dzakwan</td>
+            <td>BCA</td>
             <td>081212121212</td>
-            <td>19 Oktober 2019</td>
-            <td><Text color={RED_ERROR}>Ditolak</Text></td>
+            <td>17 Oktober 2019</td>
           </tr>
         </table>
         {/* <div style={{ alignSelf: 'flex-end', marginTop: 8 }}>
@@ -45,4 +42,4 @@ class ParticipantsList extends Component {
   }
 }
 
-export default ParticipantsList
+export default FundraisingList

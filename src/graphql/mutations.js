@@ -16,6 +16,13 @@ export const createFormResponse = `mutation CreateFormResponse($input: FormRespo
   }
 }
 `;
+export const addFormToActivity = `mutation AddFormToActivity($input: AddFormToActivityInput!) {
+  addFormToActivity(input: $input) {
+    message
+    error
+  }
+}
+`;
 export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     id

@@ -24,6 +24,7 @@ import 'react-quill/dist/quill.snow.css';
 import Header from "./Header";
 import moment from 'moment'
 import { updateActivity } from '../../graphql/mutations'
+import Switch from 'react-switch'
 
 class EditKegiatan extends Component {
   state = {
@@ -32,7 +33,9 @@ class EditKegiatan extends Component {
     endDate: "",
     activityName: "",
     location:"",
-    activityID: ""
+    activityID: "",
+    activityType:"",
+    fundraisingTarget:""
   };
 
   componentDidMount = () => {
@@ -60,6 +63,7 @@ class EditKegiatan extends Component {
             startDate: activityDateStart ? moment(activityDateStart, "YYYY-MM-DD").toDate() : null,
             endDate: activityDateEnd ? moment(activityDateEnd, "YYYY-MM-DD").toDate() : null,
             activityName: activityName,
+            activityType: activityType,
             location: location
            });
         }
@@ -87,6 +91,11 @@ class EditKegiatan extends Component {
     this.setState({activityName : event.target.value})
   }
 
+  onFundraisingTargetChange = (event) => {
+    const {value} = event.target
+    this.setState({fundraisingTarget:value.replace(/[^0-9]/g, '')})
+  }
+
   onSavePressed = async () => {
     const {client, history} = this.props
     await client.mutate({
@@ -110,6 +119,11 @@ class EditKegiatan extends Component {
       console.log(error)
       alert('Gagal mengubah data kegiatan, silakan coba lagi nanti')
     })
+  }
+
+  navigateToCreateForm = () => {
+    const {history} = this.props
+    history.push(`/kegiatan/${this.state.activityID}/form`)
   }
 
   render() {
@@ -136,6 +150,17 @@ class EditKegiatan extends Component {
           </Text>
           <TextField onChange={this.onActivityNameChange} value={activityName} style={{width:'80%'}}/>
         </Wrapper>
+
+        {this.state.activityType === "Fundraising" &&
+        <Wrapper column style={{ marginTop: 24 }} plain>
+          <Text large style={{ marginBottom: 4 }}>
+            Target penggalangan dana
+          </Text>
+          <TextField onChange={this.onFundraisingTargetChange} value={this.state.fundraisingTarget} style={{width:'80%'}}/>
+        </Wrapper>
+        }
+
+
 
         <Wrapper column style={{ marginTop: 24 }} plain>
           <Text large style={{ marginBottom: 4 }}>
@@ -186,29 +211,38 @@ class EditKegiatan extends Component {
           </Wrapper>
         </ViewWrapper>
 
+        {this.state.activityType === "Volunteer" &&
         <Wrapper column style={{ marginTop: 24 }} plain>
-          <Text large>Harus mengisi form untuk mendaftar</Text>
-          <Text color={DARK_GREY} style={{ marginBottom: 4 }}>
-            Jika opsi ini dipilih maka pengguna yang akan mendaftar
-            diharuskan mengisi form terlebih dahulu
-          </Text>
+          <ViewWrapper style={{width:'80%'}} spaceBetween>
+          <Text style={{flex:1}} large>Harus mengisi form untuk mendaftar</Text>
+          <Switch/>
+          </ViewWrapper>
+        
+        <Text color={DARK_GREY} style={{ marginBottom: 4 }}>
+          Jika opsi ini dipilih maka pengguna yang akan mendaftar
+          diharuskan mengisi form terlebih dahulu
+        </Text>
+        
 
-          <AddFormWrapper onClick={() => alert("click")}>
-            <FontAwesomeIcon
-              style={{
-                height: 24,
-                width: 24,
-                color: DARK_GREY,
-                alignSelf: "center",
-                marginBottom: 8
-              }}
-              icon={faPlus}
-            />
-            <Text color={DARK_GREY} large center>
-              Buat Form Pendaftaran
-            </Text>
-          </AddFormWrapper>
-        </Wrapper>
+        <AddFormWrapper onClick={() => this.navigateToCreateForm()}>
+          <FontAwesomeIcon
+            style={{
+              height: 24,
+              width: 24,
+              color: DARK_GREY,
+              alignSelf: "center",
+              marginBottom: 8
+            }}
+            icon={faPlus}
+          />
+          <Text color={DARK_GREY} large center>
+            Buat Form Pendaftaran
+          </Text>
+        </AddFormWrapper>
+      </Wrapper>
+      }
+
+        
       </div>
     );
   }

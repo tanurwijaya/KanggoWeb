@@ -66,7 +66,6 @@ class ProfileScreen extends Component {
       >
         <ViewWrapper itemCenter flex={1} background={"#000"} spaceBetween>
           <Wrapper>
-            <div style={{ width: 80, height: 80, background: "#fff" }} />
             <div style={{ alignSelf: "center", marginLeft: 8 }}>
               <Text larger color={"#fff"}>
                 {organizationName}

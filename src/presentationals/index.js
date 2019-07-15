@@ -19,6 +19,20 @@ export const Container = styled.div(props => ({
     height: props.center && '100%'
 }))
 
+export const LogoutButton = styled.div(props => ({
+  borderTop: "1px solid #FF6961",
+  borderBottom: "1px solid #FF6961",
+  display: "flex",
+  flex: 1,
+  padding: 8,
+  marginBottom: 32,
+  width: "100%",
+  justifyContent: "center",
+  ":hover": {
+    cursor: !props.disabled && 'pointer'
+},
+}));
+
 export const TextField = styled.input(props => ({
     display: 'flex',
     paddingTop:4,

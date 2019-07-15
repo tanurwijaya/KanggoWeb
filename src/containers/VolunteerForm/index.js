@@ -3,9 +3,13 @@ import ShortAnswer from '../../presentationals/Form/ShortAnswer';
 import LongAnswer from '../../presentationals/Form/LongAnswer';
 import RadioButton from '../../presentationals/Form/RadioButton';
 import { PRIMARY_BLUE, WHITE } from '../../themes/Colors';
+import { withApollo } from 'react-apollo';
+import gql from 'graphql-tag';
 import AddQuestions from './AddQuestions';
 import Text from '../../presentationals/Text'
+import { withRouter } from 'react-router-dom';
 import { Button } from '../../presentationals';
+import { createVolunteerForm, addFormToActivity } from '../../graphql/mutations'
 
 class VolunteerForm extends Component {
 
@@ -54,7 +58,7 @@ class VolunteerForm extends Component {
     } else if (type === 'RadioButton') {
       forms.push({
         type: 'RadioButton',
-        option: []
+        options: []
       })
     }
     this.setState({ forms })
@@ -76,7 +80,7 @@ class VolunteerForm extends Component {
             key={index}
             onFormQuestionChange={(question)=>this.onFormQuestionChange(index,question)}
             onRemovePressed={() => this.onRemoveQuestion(index)}
-          />)
+          />) 
       } else if (form.type === 'RadioButton') {
         view.push(
           <RadioButton
@@ -98,8 +102,8 @@ class VolunteerForm extends Component {
 
   onOptionItemChange = (index, options) => {
     const { forms } = this.state
-    if(forms[index] && forms[index]['option'] != options){
-      forms[index]['option'] = options
+    if(forms[index] && forms[index]['options'] != options){
+      forms[index]['options'] = options
     this.setState({ forms })
     }
   }
@@ -110,10 +114,40 @@ class VolunteerForm extends Component {
     this.setState({ forms })
   }
 
-  onSaveForm = () => {
-    console.log(this.state.forms)
+  onSaveForm = async () => {
+    const {client} = this.props
+    await client.mutate({
+      mutation: gql(createVolunteerForm),
+      variables: {
+          input: {
+            organizationID: localStorage.getItem('userid'),
+            forms: this.state.forms
+          }
+      }
+  }).then(({data})=>{
+    this.attachFormToActivity(data.createVolunteerForm.id)
+  }).catch(err=>{
+    alert("Gagal membuar form, silakan coba lagi nanti")
+  })
+  }
+
+  attachFormToActivity = async (formID) => {
+    const {client, match} = this.props
+    if(match.params.event_id){
+      await client.mutate({
+        mutation: gql(addFormToActivity),
+        variables: {
+            input: {
+              activityID: match.params.event_id,
+              organizationID: localStorage.getItem('userid'),
+              formID : formID
+            }
+        }
+    })
+    }
   }
 
 }
 
-export default VolunteerForm
+
+export default withRouter(withApollo(VolunteerForm))

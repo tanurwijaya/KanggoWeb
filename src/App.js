@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import { ViewWrapper, SidebarItem } from './presentationals';
+import { ViewWrapper, SidebarItem, LogoutButton } from './presentationals';
 import Text from './presentationals/Text'
 import MainScreen from './containers/main'
 import { Redirect } from 'react-router-dom'
 import KanggoLogo from './assets/images/kanggo_white.png'
+import { faChalkboard, faUser } from '@fortawesome/free-solid-svg-icons'
+import { withRouter } from 'react-router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const listItem = ['Kegiatan', 'Profile']
+const listItem = [{label:'Kegiatan',icon:faChalkboard},{label:'Profile',icon:faUser}]
 class App extends Component {
+
+  handleLogout = async() => {
+    await localStorage.clear()
+    console.log(this.props)
+    this.props.history.replace('/')
+  }
 
   render() {
     const { history } = this.props
@@ -20,19 +29,19 @@ class App extends Component {
           <SidebarHeader/>
           <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
             {listItem.map((item) =>
-              <SidebarItem onClick={()=>this.onSidebarItemPressed(item)} selected={item === this.getSelectedTab()}>
-                <div style={{ height: 32, width: 32, background: item === this.getSelectedTab() ? 'black' : 'white', marginRight: 16 }}></div>
-                <Text color={item === this.getSelectedTab() ? 'black' : 'white'}>{item}</Text>
+              <SidebarItem onClick={()=>this.onSidebarItemPressed(item)} selected={item.label === this.getSelectedTab()}>
+                <FontAwesomeIcon style={{ height: 32, width: 32, color: item.label === this.getSelectedTab() ? 'black' : 'white', marginRight: 16 }} icon={item.icon} />
+                <Text color={item.label === this.getSelectedTab() ? 'black' : 'white'}>{item.label}</Text>
               </SidebarItem>
 
             )}
           </div>
 
-          <div style={{bottom: 0, alignSelf:'center',display:'flex',flexDirection:'column'}}>
-            <div style={{borderTop:'1px solid #FF6961', borderBottom:'1px solid #FF6961',display:'flex',flex:1,padding:8, marginBottom:32}}>
-              <Text style={{display:'flex',flex:1}} color={'#FF6961'}>Logout</Text>
-            </div>
-            <Text color={'#FFF'}>versi 1.0</Text>
+          <div style={{bottom: 0, alignSelf:'center',width:'100%', display:'flex',flexDirection:'column'}}>
+            <LogoutButton onClick={()=>this.handleLogout()}>
+              <Text center style={{display:'flex',flex:1, justifyContent:'center'}} color={'#FF6961'}>Logout</Text>
+              </LogoutButton>
+            <Text center color={'#FFF'}>versi 1.0</Text>
             </div>
         </div>
 
@@ -58,7 +67,7 @@ class App extends Component {
 
   onSidebarItemPressed = (item) => {
     const {history} = this.props
-    history.push('/'+item.toLowerCase())
+    history.push('/'+item.label.toLowerCase())
   }
 }
 
@@ -70,4 +79,4 @@ const SidebarHeader = ({ image, name }) => {
   )
 }
 
-export default App;
+export default withRouter(App);

@@ -40,7 +40,7 @@ const HeaderKegiatan = (props) => {
               <Button onClick={() => navigateToEdit()}>
                 <Text color={WHITE}>Edit</Text>
               </Button>
-            </Wrapper>
+            </Wrapper>x
 
             {/*  <Wrapper column>
                     <Text color={'white'} large bold>4</Text>

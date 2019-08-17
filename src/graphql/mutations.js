@@ -3,7 +3,6 @@
 
 export const createFormResponse = `mutation CreateFormResponse($input: FormResponseInput!) {
   createFormResponse(input: $input) {
-    responseID
     userID
     formID
     formResponse {
@@ -11,6 +10,7 @@ export const createFormResponse = `mutation CreateFormResponse($input: FormRespo
       question
       answer
       options
+      selected
     }
     createAt
   }
@@ -57,6 +57,7 @@ export const createActivity = `mutation CreateActivity($input: CreateActivityInp
     isOrganizationVerified
     isVirtualActivity
     location
+    fundraisingTarget
     formID
     activityDateStart
     activityDateEnd
@@ -72,11 +73,27 @@ export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInp
   }
 }
 `;
+export const deleteActivity = `mutation DeleteActivity($input: DeleteActivityInput!) {
+  deleteActivity(input: $input) {
+    message
+    error
+  }
+}
+`;
 export const joinActivity = `mutation JoinActivity($input: JoinActivityInput!) {
   joinActivity(input: $input) {
+    user {
+      id
+      name
+      email
+      createAt
+    }
     userID
     activityID
     activityType
+    activityName
+    organizationName
+    formResponseID
     donationAmount
     donationTransferDetail {
       id
@@ -86,8 +103,8 @@ export const joinActivity = `mutation JoinActivity($input: JoinActivityInput!) {
       bankAccountNumber
       bankAccountNameHolder
     }
-    stuffCategory
-    stuffShippingDetail
+    status
+    createAt
   }
 }
 `;
@@ -163,6 +180,13 @@ export const deleteAdmin = `mutation DeleteAdmin($input: DeleteAdminInput!) {
     bankAccountNumber
     bankIconImg
     bankName
+  }
+}
+`;
+export const addTransferConfirmation = `mutation AddTransferConfirmation($input: AddTransferConfirmationInput!) {
+  addTransferConfirmation(input: $input) {
+    id
+    createAt
   }
 }
 `;

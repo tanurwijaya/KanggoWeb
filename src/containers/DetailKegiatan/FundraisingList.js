@@ -1,45 +1,54 @@
-import React, { Component } from 'react'
-import Text from '../../presentationals/Text';
-import { PRIMARY_BLUE, RED_ERROR, GREEN } from '../../themes/Colors';
+import React, { Component } from "react";
+import Text from "../../presentationals/Text";
+import {thousandSeparator} from '../../utils/common'
+import { PRIMARY_BLUE, RED_ERROR, GREEN } from "../../themes/Colors";
 
 class FundraisingList extends Component {
-
   componentDidMount = () => {
     //fetch data user
-  }
-
-
+  };
 
   render() {
+    const { data } = this.props;
+    console.log(data);
+    if (!data) return null;
+    else if (
+      !data.getParticipants.participants ||
+      data.getParticipants.participants.legth < 1
+    )
+      return null;
     return (
       <>
         <table>
-          <tr>
-            <th>Nama Pemilik Rekening</th>
-            <th>Bank Tujuan</th>
-            <th>Transfer Date</th>
-            <th>Jumlah Transfer</th>
-          </tr>
-          <tr>
-            <td>Alvin Tanurwijaya</td>
-            <td>BCA</td>
-            <td>081212121212</td>
-            <td>17 Oktober 2019</td>
-          </tr>
-          <tr>
-            <td>Dzakwan</td>
-            <td>BCA</td>
-            <td>081212121212</td>
-            <td>17 Oktober 2019</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Nama Pemilik Rekening</th>
+              <th>Bank Tujuan</th>
+              <th>Transfer Date</th>
+              <th>Jumlah Transfer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.getParticipants.participants.map(participant => {
+              console.log(data.getParticipants.participants.length);
+              return (
+                <tr key={participant.joinDate}>
+                  <td>Alvin Tanurwijaya</td>
+                  <td>BCA</td>
+                  <td>081212121212</td>
+                  <td>{`Rp${thousandSeparator(participant.donationAmount)}`}</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
         {/* <div style={{ alignSelf: 'flex-end', marginTop: 8 }}>
           <button style={{ marginRight: 8 }}>{'<'}</button>
           <button>{'>'}</button>
         </div> */}
       </>
-    )
+    );
   }
 }
 
-export default FundraisingList
+export default FundraisingList;

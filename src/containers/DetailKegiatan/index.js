@@ -5,7 +5,7 @@ import Text from "../../presentationals/Text";
 import HeaderKegiatan from "./HeaderKegiatan";
 import { Button, Wrapper, Item, TextField, Dropdown } from "../../presentationals";
 import { WHITE, LIGHT_GREY, DARK_GREY } from "../../themes/Colors";
-import { getActivityDetail } from "../../graphql/queries";
+import { getActivityDetail, getParticipants } from "../../graphql/queries";
 import ParticipantsList from "./ParticipantsList";
 import Spinner from "react-spinner-material";
 import parse from 'html-react-parser';
@@ -13,7 +13,8 @@ import FundraisingList from "./FundraisingList";
 
 class DetailKegiatan extends Component {
   state = {
-    detailData: null
+    detailData: null,
+    participantData: null
   };
 
   onClickForm = () => {
@@ -26,16 +27,41 @@ class DetailKegiatan extends Component {
     if (history && history.location) {
       let activityID = history.location.pathname.replace("/kegiatan/", "");
       this.getActivityDetail(activityID);
+      this.getFundraisingParticipant();
     }
+  };
+
+  getVolunteerParticipant = () => {};
+
+  getFundraisingParticipant = async () => {
+    const { history } = this.props;
+    let activityID = history.location.pathname.replace("/kegiatan/", "");
+    await this.props.client
+      .query({
+        query: gql(getParticipants),
+        variables: { activityID: activityID, organizationID: "" }
+      })
+      .then(({ data }) => {
+        this.setState({ participantData: data });
+      })
+      .catch(error => {
+        alert('Terjadi kesalahan, silakan coba lagi');
+      });
   };
 
   componentDidUpdate = (_, prevState) => {
     const { history } = this.props;
-    if (history && history.location && prevState.detailData !== this.state.detailData) {
+    // alert('update nih')
+    // console.log('is same data',prevState.detailData !== this.state.detailData)
+    if (
+      this.state.detailData != null &&
+      prevState.detailData !== this.state.detailData
+    ) {
       // let activityID = history.location.pathname.replace("/kegiatan/", "");
       // this.getActivityDetail(activityID);
+    } else {
     }
-  }
+  };
 
   getActivityDetail = async activityID => {
     const { data } = await this.props.client.query({
@@ -61,14 +87,14 @@ class DetailKegiatan extends Component {
   isFormValid = () => {};
 
   renderTable = () => {
-    const { detailData } = this.state;
+    const { detailData, participantData } = this.state;
     if (detailData.activityType === "Fundraising") {
       return (
         <>
           <Text bold color={"#000"}>
             Daftar Donatur
           </Text>
-          <FundraisingList />
+          <FundraisingList data={participantData} />
         </>
       );
     } else if (detailData.activityType === "Volunteer") {
@@ -77,7 +103,7 @@ class DetailKegiatan extends Component {
           <Text bold color={"#000"}>
             Daftar peserta
           </Text>
-          <ParticipantsList />
+          <ParticipantsList data={participantData} />
         </>
       );
     }
@@ -107,22 +133,21 @@ class DetailKegiatan extends Component {
           />
 
           {detailData.activityType === "Volunteer" && (
-            <Wrapper
-              column
-              style={{ marginTop: 24, marginBottom: 32 }}
-              plain
-            >
+            <Wrapper column style={{ marginTop: 24, marginBottom: 32 }} plain>
               <Text bold color={"#000"} style={{ marginBottom: 8 }}>
                 Ada 4 peserta yang belum di proses
               </Text>
-              <Button onClick={()=>history.push(history.location.pathname + "/responses")}>
+              <Button
+                onClick={() =>
+                  history.push(history.location.pathname + "/responses")
+                }
+              >
                 <Text color={"white"}>Proses Sekarang</Text>
               </Button>
             </Wrapper>
           )}
 
           {this.renderTable()}
-
         </div>
       );
     }

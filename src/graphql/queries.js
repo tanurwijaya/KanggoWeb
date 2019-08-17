@@ -1,6 +1,21 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
+export const getFormResponseByStatus = `query GetFormResponseByStatus($formID: ID!, $status: String!) {
+  getFormResponseByStatus(formID: $formID, status: $status) {
+    userID
+    formID
+    formResponse {
+      type
+      question
+      answer
+      options
+      selected
+    }
+    createAt
+  }
+}
+`;
 export const getFundraisingProgress = `query GetFundraisingProgress($activityID: ID!) {
   getFundraisingProgress(activityID: $activityID) {
     donationTotal
@@ -20,8 +35,8 @@ export const getVolunteerForm = `query GetVolunteerForm($formID: ID!) {
   }
 }
 `;
-export const getAnsweredForm = `query GetAnsweredForm($formID: ID!, $userID: ID!) {
-  getAnsweredForm(formID: $formID, userID: $userID) {
+export const getUserAnsweredForm = `query GetUserAnsweredForm($formID: ID!, $userID: ID!) {
+  getUserAnsweredForm(formID: $formID, userID: $userID) {
     id
     forms {
       type
@@ -93,6 +108,7 @@ export const getActivityDetail = `query GetActivityDetail($activityID: ID!) {
     isOrganizationVerified
     isVirtualActivity
     location
+    fundraisingTarget
     formID
     activityDateStart
     activityDateEnd
@@ -154,8 +170,16 @@ export const getOrganizationById = `query GetOrganizationById($organizationID: S
   }
 }
 `;
-export const getActivity = `query GetActivity($organizationID: ID, $activityType: String) {
-  getActivity(organizationID: $organizationID, activityType: $activityType) {
+export const getActivity = `query GetActivity(
+  $organizationID: ID
+  $activityType: String
+  $location: String
+) {
+  getActivity(
+    organizationID: $organizationID
+    activityType: $activityType
+    location: $location
+  ) {
     id
     activityName
     activityType
@@ -167,11 +191,78 @@ export const getActivity = `query GetActivity($organizationID: ID, $activityType
     isOrganizationVerified
     isVirtualActivity
     location
+    fundraisingTarget
     formID
     activityDateStart
     activityDateEnd
     createAt
     deletedAt
+  }
+}
+`;
+export const getJoinHistory = `query GetJoinHistory($userID: ID) {
+  getJoinHistory(userID: $userID) {
+    user {
+      id
+      name
+      email
+      createAt
+    }
+    userID
+    activityID
+    activityType
+    activityName
+    organizationName
+    formResponseID
+    donationAmount
+    donationTransferDetail {
+      id
+      bankName
+      bankLogo
+      bankBranch
+      bankAccountNumber
+      bankAccountNameHolder
+    }
+    status
+    createAt
+  }
+}
+`;
+export const getParticipants = `query GetParticipants($activityID: ID!, $organizationID: ID!) {
+  getParticipants(activityID: $activityID, organizationID: $organizationID) {
+    activity {
+      id
+      activityName
+      activityType
+      imgThumbnail
+      activityDescription
+      organizationID
+      organizationName
+      organizationSmallLogo
+      isOrganizationVerified
+      isVirtualActivity
+      location
+      fundraisingTarget
+      formID
+      activityDateStart
+      activityDateEnd
+      createAt
+      deletedAt
+    }
+    numberOfParticipants
+    unprocessedParticipants
+    participants {
+      joinDate
+      donationAmount
+      status
+    }
+  }
+}
+`;
+export const getLocation = `query GetLocation {
+  getLocation {
+    id
+    locationName
   }
 }
 `;

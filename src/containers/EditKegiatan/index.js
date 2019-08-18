@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
 import Text from "../../presentationals/Text";
 import styled from "@emotion/styled";
 import {
-  Button,
   Wrapper,
   Item,
-  AreaField,
   TextField,
   ViewWrapper,
   Dropdown

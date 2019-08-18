@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-import Text from '../Text'
-import { TextField, AreaField, UnderlineInput } from '..';
+import React, { Component } from 'react';
+import { UnderlineInput } from '..';
 import FormItem from './FormItem';
 
 class RadioButton extends Component {
@@ -41,7 +40,7 @@ class RadioButton extends Component {
   renderRadio() {
     let view = []
     const {list} = this.state
-    list.map((item, index) => {
+    list.forEach((item, index) => {
       view.push(
         <div key={index} style={{ padiding: 8, display: 'flex', flexDirection: 'row' }}>
           <input style={{ alignItems: 'center', alignSelf: 'center', marginRight: 8 }} type={'radio'} disabled />

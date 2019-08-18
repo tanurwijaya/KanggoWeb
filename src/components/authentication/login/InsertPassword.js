@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Text from '../../../presentationals/Text'
-import { Container, TextField, Item, Button } from '../../../presentationals/index'
+import { TextField, Item, Button } from '../../../presentationals/index'
 import { WHITE } from '../../../themes/Colors';
 
 export default function InsertPassword({ organisasi, onLoginPress, onPasswordChange, onEnterPassword }) {

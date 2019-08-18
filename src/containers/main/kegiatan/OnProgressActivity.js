@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import Text from '../../../presentationals/Text'
 import { ViewWrapper, Wrapper } from '../../../presentationals/index'
 
 const OnProgessActivity = (props) => {
-    const { eventName, numRegistered, numUnprocess, style, onClickDetail } = props
+    const { eventName, numRegistered, numUnprocess, onClickDetail } = props
     return (
         <ViewWrapper style={{marginLeft:32, marginRight:32, marginTop:16,marginBottom:16}} itemCenter flex={1} background={'#000'} spaceBetween>
             <Wrapper>

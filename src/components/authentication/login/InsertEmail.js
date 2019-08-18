@@ -1,6 +1,6 @@
 import React from 'react'
 import Text from '../../../presentationals/Text'
-import { Container, TextField, Item, Button } from '../../../presentationals/index'
+import { TextField, Item, Button } from '../../../presentationals/index'
 import { WHITE, PRIMARY_BLUE } from '../../../themes/Colors';
 import Spinner from "react-spinner-material";
 

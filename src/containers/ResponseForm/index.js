@@ -3,7 +3,6 @@ import React, { Component } from "react";
 // import LongAnswer from '../../presentationals/Form/LongAnswer';
 // import RadioButton from '../../presentationals/Form/RadioButton';
 // import { PRIMARY_BLUE, WHITE } from '../../themes/Colors';
-import gql from 'graphql-tag';
 // import AddQuestions from './AddQuestions';
 import { withApollo } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
@@ -11,7 +10,7 @@ import Text from "../../presentationals/Text";
 import { faCheckCircle, faCircle } from '@fortawesome/free-solid-svg-icons'
 // import { withRouter } from 'react-router-dom';
 import { ViewWrapper, Item, Container } from "../../presentationals";
-import { getParticipants } from '../../graphql/queries'
+// import { getParticipants } from '../../graphql/queries'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PRIMARY_BLUE, LIGHT_GREY } from "../../themes/Colors";
 
@@ -23,8 +22,8 @@ class ResponseForm extends Component {
   }
 
   componentDidMount = async () => {
-    const { client, match } = this.props;
-    var activityID = match.params.event_id
+    // const { client, match } = this.props;
+    // var activityID = match.params.event_id
     // await client.query({
     //   query: gql(getFormID),
     //   variables: { activityID: activityID }
@@ -39,8 +38,8 @@ class ResponseForm extends Component {
   }
 
   getResponses = async (formID) => {
-    const { client, match } = this.props;
-    var activityID = match.params.event_id
+    // const { client, match } = this.props;
+    // var activityID = match.params.event_id
     // await client.query({
     //   query: gql(getAnsweredForm),
     //   variables: { formID: formID }

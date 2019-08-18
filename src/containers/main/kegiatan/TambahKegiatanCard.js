@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Text from "../../../presentationals/Text"
 import { Container, KegiatanCardWrapper } from '../../../presentationals';
-import { WHITE } from '../../../themes/Colors';
 
 export default function TambahKegiatanCard({ onCardClicked }) {
     return (

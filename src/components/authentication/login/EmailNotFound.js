@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Container, Item, SecondaryButton } from '../../../presentationals';
 import Text from '../../../presentationals/Text'
-import { WHITE, BLACK, PRIMARY_BLUE } from '../../../themes/Colors';
+import { WHITE, PRIMARY_BLUE } from '../../../themes/Colors';
 
 export default class EmailNotFound extends Component {
   render() {

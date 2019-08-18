@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Text from '../../presentationals/Text';
-import { PRIMARY_BLUE, RED_ERROR, GREEN } from '../../themes/Colors';
+import { RED_ERROR, GREEN } from '../../themes/Colors';
 
 class ParticipantsList extends Component {
 

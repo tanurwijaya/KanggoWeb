@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { PRIMARY_BLUE, WHITE, BLACK } from "../themes/Colors";
+import { PRIMARY_BLUE, WHITE } from "../themes/Colors";
 import Text from "./Text";
 class SelectablePills extends Component {
   state = {
@@ -9,7 +9,7 @@ class SelectablePills extends Component {
   componentDidMount() {
     const { list } = this.props;
     let processedData = [];
-    list.map(item => {
+    list.forEach((item, index) => {
       processedData.push({
         value: item,
         selected: false
@@ -22,7 +22,7 @@ class SelectablePills extends Component {
     let view = [];
     const {isWrap} = this.props
     // const {isWrap} = this.props
-    this.state.list.map((item, index) => {
+    this.state.list.forEach((item, index) => {
       view.push(
         <div
           key={item.value}
@@ -65,7 +65,7 @@ class SelectablePills extends Component {
   singleSelected = indexSelected => {
     const { list } = this.state;
     let updatedData = [];
-    list.map((item, index) => {
+    list.forEach((item, index) => {
       updatedData.push({
         value: item.value,
         selected: index === indexSelected

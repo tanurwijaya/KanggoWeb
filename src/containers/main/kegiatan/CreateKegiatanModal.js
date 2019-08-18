@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Container, Item, TextField, Button } from "../../../presentationals";
+import React from 'react'
+import { Item, TextField, Button } from "../../../presentationals";
 import Text from "../../../presentationals/Text"
-import { BLACK, WHITE, PRIMARY_BLUE } from '../../../themes/Colors';
+import { WHITE } from '../../../themes/Colors';
 import SelectablePills from '../../../presentationals/SelectablePills';
 import { Modal } from 'react-bootstrap'
 

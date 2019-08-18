@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import MainLogin from './components/authentication/login'
+// import App from './App';
+// import MainLogin from './components/authentication/login'
 import * as serviceWorker from './serviceWorker';
 import AWSAppSyncClient from "aws-appsync";
-import { Rehydrated } from 'aws-appsync-react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
+// import { Rehydrated } from 'aws-appsync-react';
+import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo';
 import {Routes} from './routes'
 import appSyncConfig from './aws-exports'

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   ViewWrapper,
   Wrapper,
-  SecondaryButton,
   TextField,
   AreaField,
   Item

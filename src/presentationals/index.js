@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { LIGHT_GREY, WHITE, DARK_GREY, PRIMARY_BLUE, BLUE_DARKER, BLACK } from '../themes/Colors'
 

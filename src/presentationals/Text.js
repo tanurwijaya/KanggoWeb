@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 const Text = (props) => {
-    const { tiny, small, medium, large, larger, children, center, bold, color, style, centerVertical } = props
+    const { tiny, small, medium, large, larger, children, center, bold, color, style } = props
     let fontSize = 14
 
     if(tiny){

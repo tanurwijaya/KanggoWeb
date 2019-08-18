@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Text from '../../presentationals/Text'
-import { ViewWrapper, Wrapper, Container, Button } from '../../presentationals'
-import {faTrash} from '@fortawesome/free-solid-svg-icons'
+import { ViewWrapper, Wrapper, Button } from '../../presentationals'
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { WHITE } from '../../themes/Colors';
 
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Text from '../../presentationals/Text'
 import { LIGHT_GREY } from '../../themes/Colors';
 import styled from '@emotion/styled'

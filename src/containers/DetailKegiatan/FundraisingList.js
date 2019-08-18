@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import Text from "../../presentationals/Text";
 import {thousandSeparator} from '../../utils/common'
-import { PRIMARY_BLUE, RED_ERROR, GREEN } from "../../themes/Colors";
 
 class FundraisingList extends Component {
   componentDidMount = () => {

@@ -5,10 +5,8 @@ import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
 import { createActivity } from '../../../graphql/mutations'
 import ListKegiatan from './ListKegiatan';
-import OnProgessActivity from './OnProgressActivity';
 import DetailKegiatan from '../../DetailKegiatan';
 import { getActivity } from '../../../graphql/queries'
-import FormKegiatan from '../../DetailKegiatan/Form';
 import EditKegiatan from '../../EditKegiatan';
 import VolunteerForm from '../../VolunteerForm';
 import ResponseForm from '../../ResponseForm';

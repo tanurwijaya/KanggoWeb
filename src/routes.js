@@ -3,7 +3,7 @@ import MainLogin from './components/authentication/login'
 import MainRegister from './components/authentication/register'
 import App from './App'
 
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 
 export const Routes = () => {

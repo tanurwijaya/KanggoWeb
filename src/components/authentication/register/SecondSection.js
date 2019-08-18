@@ -16,8 +16,7 @@ class SecondSection extends Component {
       onContactPersonChange,
       onChangePassword,
       onChangeRetypePassword,
-      onButtonPressed,
-      error
+      onButtonPressed
     } = this.props;
     return (
       <div>

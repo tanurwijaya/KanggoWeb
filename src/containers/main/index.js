@@ -2,12 +2,6 @@ import React, { Component } from 'react'
 import KegiatanScreen from './kegiatan';
 import ProfileScreen from '../Profile'
 
-const TABS = {
-  EVENT: 'tab_event',
-  SETTINGS: 'tab_settings',
-  DASHBOARD: 'tab_dashboard'
-}
-
 class MainScreen extends Component {
 
   render() {

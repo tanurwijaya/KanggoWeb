@@ -3,12 +3,10 @@ import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
 import Text from "../../presentationals/Text";
 import HeaderKegiatan from "./HeaderKegiatan";
-import { Button, Wrapper, Item, TextField, Dropdown } from "../../presentationals";
-import { WHITE, LIGHT_GREY, DARK_GREY } from "../../themes/Colors";
+import { Button, Wrapper, Item } from "../../presentationals";
 import { getActivityDetail, getParticipants } from "../../graphql/queries";
 import ParticipantsList from "./ParticipantsList";
 import Spinner from "react-spinner-material";
-import parse from 'html-react-parser';
 import FundraisingList from "./FundraisingList";
 
 class DetailKegiatan extends Component {
@@ -50,7 +48,7 @@ class DetailKegiatan extends Component {
   };
 
   componentDidUpdate = (_, prevState) => {
-    const { history } = this.props;
+    // const { history } = this.props;
     // alert('update nih')
     // console.log('is same data',prevState.detailData !== this.state.detailData)
     if (

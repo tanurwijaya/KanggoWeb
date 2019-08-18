@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ShortAnswer from '../../presentationals/Form/ShortAnswer';
 import LongAnswer from '../../presentationals/Form/LongAnswer';
 import RadioButton from '../../presentationals/Form/RadioButton';
-import { PRIMARY_BLUE, WHITE } from '../../themes/Colors';
+import { WHITE } from '../../themes/Colors';
 import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
 import AddQuestions from './AddQuestions';
@@ -102,7 +102,7 @@ class VolunteerForm extends Component {
 
   onOptionItemChange = (index, options) => {
     const { forms } = this.state
-    if(forms[index] && forms[index]['options'] != options){
+    if(forms[index] && forms[index]['options'] !== options){
       forms[index]['options'] = options
     this.setState({ forms })
     }

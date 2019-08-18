@@ -43,7 +43,7 @@ class DetailKegiatan extends Component {
         this.setState({ participantData: data });
       })
       .catch(error => {
-        alert('Terjadi kesalahan, silakan coba lagi');
+        alert("Terjadi kesalahan, silakan coba lagi");
       });
   };
 
@@ -86,6 +86,14 @@ class DetailKegiatan extends Component {
 
   renderTable = () => {
     const { detailData, participantData } = this.state;
+    if (
+      participantData &&
+      participantData.getParticipants &&
+      participantData.getParticipants.participants &&
+      participantData.getParticipants.participants.length === 0
+    ) {
+      return <Text>Belum ada</Text>;
+    }
     if (detailData.activityType === "Fundraising") {
       return (
         <>

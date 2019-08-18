@@ -29,7 +29,7 @@ class App extends Component {
           <SidebarHeader/>
           <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
             {listItem.map((item) =>
-              <SidebarItem onClick={()=>this.onSidebarItemPressed(item)} selected={item.label === this.getSelectedTab()}>
+              <SidebarItem key={item.label} onClick={()=>this.onSidebarItemPressed(item)} selected={item.label === this.getSelectedTab()}>
                 <FontAwesomeIcon style={{ height: 32, width: 32, color: item.label === this.getSelectedTab() ? 'black' : 'white', marginRight: 16 }} icon={item.icon} />
                 <Text color={item.label === this.getSelectedTab() ? 'black' : 'white'}>{item.label}</Text>
               </SidebarItem>

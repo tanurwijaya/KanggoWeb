@@ -43,7 +43,7 @@ Text.defaultProps = {
 }
 
 Text.propTypes = {
-    size: PropTypes.string,
+    size: PropTypes.number,
     children: PropTypes.string
 }
 

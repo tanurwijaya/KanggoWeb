@@ -211,7 +211,6 @@ export const SidebarItem = styled.div(props => ({
 
 export const FormItemWrapper = styled.div(props => ({
     display: 'flex',
-
     flexDirection: 'column',
     paddingTop: 32,
     paddingBottom: 16,
@@ -252,6 +251,16 @@ export const FormInputQuestion = styled.input(props => ({
         fontSize: props.placeholderSize
     }
 }))
+
+export const KegiatanInnerWrapper = styled.div(props => ({
+  display: "flex",
+  flex: 1,
+  flexDirection: "column",
+  padding: 16,
+  justifyContent: "flex-end",
+  alignItems: "flex-start",
+  height: "100%"
+}));
 
 // export const SecondaryButton = styled.div(props => ({
 //     border: "1px solid #FF6961",

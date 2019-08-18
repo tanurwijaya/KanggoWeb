@@ -252,6 +252,11 @@ export const getParticipants = `query GetParticipants($activityID: ID!, $organiz
     numberOfParticipants
     unprocessedParticipants
     participants {
+      user {
+        id
+        name
+        email
+      }
       joinDate
       donationAmount
       status

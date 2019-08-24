@@ -20,18 +20,18 @@ class FundraisingList extends Component {
         <table>
           <thead>
             <tr>
-              <th>Nama Pemilik Rekening</th>
+              <th>Nama</th>
               <th>Bank Tujuan</th>
-              <th>Transfer Date</th>
+              <th>Tanggal Transfer</th>
               <th>Jumlah Transfer</th>
             </tr>
           </thead>
           <tbody>
             {data.getParticipants.participants.map(participant => {
-              console.log(data.getParticipants.participants.length);
+              console.log(participant);
               return (
                 <tr key={participant.joinDate}>
-                  <td>Alvin Tanurwijaya</td>
+                  <td>{participant.user && participant.user.name}</td>
                   <td>BCA</td>
                   <td>081212121212</td>
                   <td>{`Rp${thousandSeparator(participant.donationAmount)}`}</td>

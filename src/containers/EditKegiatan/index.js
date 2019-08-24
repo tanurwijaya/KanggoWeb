@@ -54,14 +54,15 @@ class EditKegiatan extends Component {
       })
       .then(({ data }) => {
         if(data.getActivityDetail){
-          const {activityDateEnd, activityDateStart, activityDescription, activityName, activityType, location } = data.getActivityDetail
+          const {activityDateEnd, activityDateStart, activityDescription, activityName, activityType, location, fundraisingTarget } = data.getActivityDetail
           this.setState({ description: activityDescription,
             activityID : activityID,
             startDate: activityDateStart ? moment(activityDateStart, "YYYY-MM-DD").toDate() : null,
             endDate: activityDateEnd ? moment(activityDateEnd, "YYYY-MM-DD").toDate() : null,
             activityName: activityName,
             activityType: activityType,
-            location: location
+            location: location,
+            fundraisingTarget: fundraisingTarget
            });
         }
       })
@@ -103,6 +104,7 @@ class EditKegiatan extends Component {
         activityName : this.state.activityName,
         activityDescription: this.state.description,
         isVirtualActivity : false,
+        fundraisingTarget : parseInt(this.state.fundraisingTarget),
         location : this.state.location,
         dateStart : moment(this.state.startDate,"YYYY-MM-DDTHH:mm:ss.SSSZ").format('YYYY-MM-DD'),
         dateEnd: moment(this.state.endDate,"YYYY-MM-DDTHH:mm:ss.SSSZ").format('YYYY-MM-DD')

@@ -6,7 +6,7 @@ import { WHITE } from '../../themes/Colors';
 
 
 const HeaderKegiatan = (props) => {
-    const { eventName, navigateToEdit } = props
+    const { eventName, navigateToEdit,fundraisingProgress } = props
     return (
       <ViewWrapper itemCenter style={{ marginBottom: 16, marginTop: 16 }}>
         {/* <Container center style={{borderRadius:'50%', background:'grey', width: 48, height:48, marginRight:16}}>
@@ -27,7 +27,7 @@ const HeaderKegiatan = (props) => {
 
             <Wrapper column>
               <Text color={"white"} large bold>
-                Rp 20.190.205
+                {fundraisingProgress}
               </Text>
               <Text color={"white"} medium>
                 Terukumpul

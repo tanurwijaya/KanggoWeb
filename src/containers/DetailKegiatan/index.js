@@ -3,8 +3,8 @@ import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
 import Text from "../../presentationals/Text";
 import HeaderKegiatan from "./HeaderKegiatan";
-import { Button, Wrapper, Item } from "../../presentationals";
-import { getActivityDetail, getParticipants } from "../../graphql/queries";
+import { Button, Wrapper, Item, ViewWrapper } from "../../presentationals";
+import { getActivityDetail, getParticipants, getFundraisingProgress } from "../../graphql/queries";
 import ParticipantsList from "./ParticipantsList";
 import Spinner from "react-spinner-material";
 import FundraisingList from "./FundraisingList";
@@ -12,7 +12,8 @@ import FundraisingList from "./FundraisingList";
 class DetailKegiatan extends Component {
   state = {
     detailData: null,
-    participantData: null
+    participantData: null,
+    fundraisingProgress : 0
   };
 
   onClickForm = () => {
@@ -26,6 +27,7 @@ class DetailKegiatan extends Component {
       let activityID = history.location.pathname.replace("/kegiatan/", "");
       this.getActivityDetail(activityID);
       this.getFundraisingParticipant();
+      this.getFundraisingProgress(activityID);
     }
   };
 
@@ -61,6 +63,26 @@ class DetailKegiatan extends Component {
     }
   };
 
+  getFundraisingProgress = async activityID => {
+    await this.props.client.query({
+      query: gql(getFundraisingProgress),
+      variables: {
+        activityID: activityID
+      }
+    }).then(({data})=> {
+      if (
+        data &&
+        data.getFundraisingProgress &&
+        data.getFundraisingProgress.donationTotal
+      ) {
+        this.setState({
+          fundraisingProgress: data.getFundraisingProgress.donationTotal
+        });
+      }
+    })
+    .catch((error) =>console.log('error',error))
+  }
+
   getActivityDetail = async activityID => {
     const { data } = await this.props.client.query({
       query: gql(getActivityDetail),
@@ -92,7 +114,11 @@ class DetailKegiatan extends Component {
       participantData.getParticipants.participants &&
       participantData.getParticipants.participants.length === 0
     ) {
-      return <Text>Belum ada</Text>;
+      return (
+        <ViewWrapper>
+          <Text center>Belum ada</Text>
+        </ViewWrapper>
+      );
     }
     if (detailData.activityType === "Fundraising") {
       return (
@@ -117,7 +143,7 @@ class DetailKegiatan extends Component {
   };
 
   render() {
-    const { detailData } = this.state;
+    const { detailData, fundraisingProgress } = this.state;
     const { history } = this.props;
     if (!detailData) {
       return (
@@ -136,6 +162,7 @@ class DetailKegiatan extends Component {
           <HeaderKegiatan
             navigateToEdit={() => this.navigateToEdit()}
             eventName={detailData.activityName}
+            fundraisingProgress={fundraisingProgress}
           />
 
           {detailData.activityType === "Volunteer" && (

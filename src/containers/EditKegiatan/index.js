@@ -29,7 +29,7 @@ class EditKegiatan extends Component {
     startDate: "",
     endDate: "",
     activityName: "",
-    location:"",
+    location:"Jakarta",
     activityID: "",
     activityType:"",
     fundraisingTarget:""
@@ -181,7 +181,6 @@ class EditKegiatan extends Component {
           </Text>
           <Dropdown onChange={this.onLocationChange} value={this.state.location} width={"80%"}>
             <option value="Jakarta">Jakarta</option>
-            <option value="Tangerang">Tangerang</option>
             <option value="Bandung">Bandung</option>
           </Dropdown>
         </Wrapper>

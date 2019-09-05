@@ -3,6 +3,7 @@ import Text from '../../presentationals/Text'
 import { ViewWrapper, Wrapper, Button } from '../../presentationals'
 
 import { WHITE } from '../../themes/Colors';
+import { thousandSeparator } from '../../utils/common';
 
 
 const HeaderKegiatan = (props) => {
@@ -27,7 +28,7 @@ const HeaderKegiatan = (props) => {
 
             <Wrapper column>
               <Text color={"white"} large bold>
-                {fundraisingProgress}
+                {`Rp${thousandSeparator(fundraisingProgress)}`}
               </Text>
               <Text color={"white"} medium>
                 Terukumpul

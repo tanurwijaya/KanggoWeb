@@ -3,6 +3,7 @@
 
 export const createFormResponse = `mutation CreateFormResponse($input: FormResponseInput!) {
   createFormResponse(input: $input) {
+    id
     userID
     formID
     formResponse {
@@ -92,6 +93,7 @@ export const joinActivity = `mutation JoinActivity($input: JoinActivityInput!) {
     activityID
     activityType
     activityName
+    activityThumbnail
     organizationName
     formResponseID
     donationAmount
@@ -105,6 +107,8 @@ export const joinActivity = `mutation JoinActivity($input: JoinActivityInput!) {
     }
     status
     createAt
+    updatedAt
+    deletedAt
   }
 }
 `;
@@ -185,8 +189,15 @@ export const deleteAdmin = `mutation DeleteAdmin($input: DeleteAdminInput!) {
 `;
 export const addTransferConfirmation = `mutation AddTransferConfirmation($input: AddTransferConfirmationInput!) {
   addTransferConfirmation(input: $input) {
-    id
-    createAt
+    status
+    updatedAt
+  }
+}
+`;
+export const verifyPayment = `mutation VerifyPayment($input: VerifyPaymentInput) {
+  verifyPayment(input: $input) {
+    message
+    error
   }
 }
 `;

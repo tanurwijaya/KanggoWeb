@@ -13,7 +13,7 @@ class DetailKegiatan extends Component {
   state = {
     detailData: null,
     participantData: null,
-    fundraisingProgress : 0
+    fundraisingProgress: 0
   };
 
   onClickForm = () => {
@@ -64,24 +64,26 @@ class DetailKegiatan extends Component {
   };
 
   getFundraisingProgress = async activityID => {
-    await this.props.client.query({
-      query: gql(getFundraisingProgress),
-      variables: {
-        activityID: activityID
-      }
-    }).then(({data})=> {
-      if (
-        data &&
-        data.getFundraisingProgress &&
-        data.getFundraisingProgress.donationTotal
-      ) {
-        this.setState({
-          fundraisingProgress: data.getFundraisingProgress.donationTotal
-        });
-      }
-    })
-    .catch((error) =>console.log('error',error))
-  }
+    await this.props.client
+      .query({
+        query: gql(getFundraisingProgress),
+        variables: {
+          activityID: activityID
+        }
+      })
+      .then(({ data }) => {
+        if (
+          data &&
+          data.getFundraisingProgress &&
+          data.getFundraisingProgress.donationTotal
+        ) {
+          this.setState({
+            fundraisingProgress: data.getFundraisingProgress.donationTotal
+          });
+        }
+      })
+      .catch(error => console.log("error", error));
+  };
 
   getActivityDetail = async activityID => {
     const { data } = await this.props.client.query({
@@ -126,7 +128,10 @@ class DetailKegiatan extends Component {
           <Text bold color={"#000"}>
             Daftar Donatur
           </Text>
-          <FundraisingList data={participantData} />
+          <FundraisingList
+            activity={detailData}
+            data={participantData}
+          />
         </>
       );
     } else if (detailData.activityType === "Volunteer") {

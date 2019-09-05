@@ -3,6 +3,7 @@
 
 export const getFormResponseByStatus = `query GetFormResponseByStatus($formID: ID!, $status: String!) {
   getFormResponseByStatus(formID: $formID, status: $status) {
+    id
     userID
     formID
     formResponse {
@@ -212,6 +213,7 @@ export const getJoinHistory = `query GetJoinHistory($userID: ID) {
     activityID
     activityType
     activityName
+    activityThumbnail
     organizationName
     formResponseID
     donationAmount
@@ -225,6 +227,8 @@ export const getJoinHistory = `query GetJoinHistory($userID: ID) {
     }
     status
     createAt
+    updatedAt
+    deletedAt
   }
 }
 `;
@@ -256,6 +260,11 @@ export const getParticipants = `query GetParticipants($activityID: ID!, $organiz
         id
         name
         email
+      }
+      transferConfirmation{
+        bankHolderName
+        transferAmount
+        transferDate
       }
       joinDate
       donationAmount

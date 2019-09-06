@@ -262,6 +262,41 @@ export const KegiatanInnerWrapper = styled.div(props => ({
   height: "100%"
 }));
 
+export const SwitchWrapper = styled.label(props =>({
+    position: "relative",
+    display: "inline-block",
+    width: 60,
+    height: 34
+}))
+
+export const CheckboxSwitch = styled.input(props => ({
+    type: "checkbox",
+    opacity: 0,
+    width: 0,
+    height: 0
+}))
+
+export const SliderRoundSwitch = styled.span(props => ({
+    position: "absolute",
+    cursor: "pointer",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor:"#ccc",
+    WebkitTransition: ".4s",
+    transition: ".4s",
+    ":before":{
+        height: 26,
+        width: 26,
+        left: 4,
+        bottom: 4,
+        backgroundColor: "#fff"
+    }
+}))
+
+
+
 // export const SecondaryButton = styled.div(props => ({
 //     border: "1px solid #FF6961",
 //     marginRight: 32,

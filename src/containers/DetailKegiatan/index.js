@@ -165,6 +165,7 @@ class DetailKegiatan extends Component {
       return (
         <div style={{ marginLeft: 32, marginRight: 32 }}>
           <HeaderKegiatan
+            activityType={detailData.activityType}
             navigateToEdit={() => this.navigateToEdit()}
             eventName={detailData.activityName}
             fundraisingProgress={fundraisingProgress}

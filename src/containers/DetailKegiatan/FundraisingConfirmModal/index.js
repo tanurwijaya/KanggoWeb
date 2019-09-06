@@ -111,7 +111,7 @@ export default function FundraisingConfirmModal({
 
         <Modal.Footer>
           {isLoading ? null : (
-            <Button disabled={isButtonDisabled()} onClick={()=>onButtonPress()}>
+            <Button disabled={false} onClick={()=>onButtonPress()}>
               <Text large color={WHITE}>
                 Konfirmasi Pembayaran
               </Text>

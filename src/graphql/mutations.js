@@ -94,6 +94,7 @@ export const joinActivity = `mutation JoinActivity($input: JoinActivityInput!) {
     activityType
     activityName
     activityThumbnail
+    organizationID
     organizationName
     formResponseID
     donationAmount

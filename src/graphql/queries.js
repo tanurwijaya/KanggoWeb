@@ -214,6 +214,7 @@ export const getJoinHistory = `query GetJoinHistory($userID: ID) {
     activityType
     activityName
     activityThumbnail
+    organizationID
     organizationName
     formResponseID
     donationAmount

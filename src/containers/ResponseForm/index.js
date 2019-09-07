@@ -1,110 +1,110 @@
 import React, { Component } from "react";
-// import ShortAnswer from '../../presentationals/Form/ShortAnswer';
-// import LongAnswer from '../../presentationals/Form/LongAnswer';
-// import RadioButton from '../../presentationals/Form/RadioButton';
-// import { PRIMARY_BLUE, WHITE } from '../../themes/Colors';
-// import AddQuestions from './AddQuestions';
-import { withApollo } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
-import Text from "../../presentationals/Text";
-import { faCheckCircle, faCircle } from '@fortawesome/free-solid-svg-icons'
-// import { withRouter } from 'react-router-dom';
-import { ViewWrapper, Item, Container } from "../../presentationals";
-// import { getParticipants } from '../../graphql/queries'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { PRIMARY_BLUE, LIGHT_GREY } from "../../themes/Colors";
+import { withApollo } from "react-apollo";
+import { withRouter } from "react-router-dom";
+import ResponseList from "./ResponseList";
+import ButtonAction from "./ButtonAction";
+import gql from "graphql-tag";
+import { getActivityDetail, getFormResponseByStatus, getParticipants } from "../../graphql/queries";
 
 class ResponseForm extends Component {
-
-  state={
+  state = {
+    detailData : null,
+    participantData: null,
     index: 0,
-    formID : this.props
-  }
+    formID: this.props
+  };
 
   componentDidMount = async () => {
-    // const { client, match } = this.props;
-    // var activityID = match.params.event_id
-    // await client.query({
-    //   query: gql(getFormID),
-    //   variables: { activityID: activityID }
-    // }).then(({data})=>{
-    //   if(data && data.getActivityDetail && data.getActivityDetail.formID){
-    //     this.getResponses(data.getActivityDetail.formID)
-    //   }
-    // }).catch((e)=>{
-    //   console.log('eror',e)
-    //   // alert('Password tidak sesuai')
-    // });
-  }
+    const {match} = this.props
+    const {event_id, user_id}= match.params
+    this.getActivityDetail(event_id)
+    this.getParticipantsList(event_id)
+    this.getResponseByForm()
+  };
 
-  getResponses = async (formID) => {
+  getResponses = async formID => {
     // const { client, match } = this.props;
     // var activityID = match.params.event_id
     // await client.query({
     //   query: gql(getAnsweredForm),
     //   variables: { formID: formID }
     // }).then(({data})=>{
-      
     // }).catch((e)=>{
-      
     // });
+  };
+
+  getParticipantsList = async activityID => {
+    await this.props.client
+      .query({
+        query: gql(getParticipants),
+        variables: { activityID: activityID, organizationID: "" }
+      })
+      .then(({ data }) => {
+        this.setState({ participantData: data.getParticipants.participants });
+      })
+      .catch(error => {
+        alert("Terjadi kesalahan, silakan coba lagi");
+      });
+  }
+
+  getActivityDetail = async activityID => {
+    const { data } = await this.props.client.query({
+      query: gql(getActivityDetail),
+      variables: {
+        activityID: activityID
+      }
+    });
+    this.setActivityDetail(data.getActivityDetail);
+  };
+
+  setActivityDetail = data => {
+    this.setState({ detailData: data });
+  };
+
+  acceptUser = async(userId, joinDate) => {
+
+  }
+
+  rejectUser = async(userId, joinDate) => {
+
+  }
+
+  getParticipantsByUserID = userId => {
+    const {participantData} = this.state
+    return participantData.find(participant => participant.user && participant.user.id === userId)
+  }
+
+  getResponseByForm = async() => {
+    const {client} = this.props
+    const {formID} = this.state
+    await client.query({
+      query: gql(getFormResponseByStatus),
+      variables: {
+        formID: formID,
+        status: "WAITING"
+      }
+    }).then(({data})=>{
+      console.log(data)
+    }).catch((e)=>{
+      console.log('error get response', e)
+    });
   }
 
   render() {
+    const { data } = this.props.location
+    const {match} = this.props
+    const {event_id, user_id}= match.params
+    const {detailData, participantData} = this.state
+    if(!detailData) return null
+    else if(!participantData) return null
+    const participant = this.getParticipantsByUserID(user_id)
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          margin: 32,
-          border: "1px solid black"
-        }}
-      >
-        <ViewWrapper
-          style={{ padding: 16, borderBottom: "1px solid black" }}
-          spaceBetween
-        >
-          <Item column plain>
-            <Text bold>Alvin Tanurwijaya</Text>
-            <Text>email@test.com</Text>
-          </Item>
-          <Item plain>
-            <Text>081291103131</Text>
-          </Item>
-        </ViewWrapper>
-
-        <Container column style={{ padding: 16, borderBottom: "1px solid black" }}>
-          <Text small>Pertanyaan</Text>
-          <Text>Jawaban</Text>
-        </Container>
-
-        <Container column style={{ padding: 16, borderBottom: "1px solid black" }}>
-          <Text small>Pertanyaan</Text>
-          <Text>Jawaban</Text>
-        </Container>
-
-        <Container column style={{ padding: 16, borderBottom: "1px solid black" }}>
-          <Text small>Pertanyaan</Text>
-          <Item>
-          <FontAwesomeIcon style={{ height: 16, width: 16, color: PRIMARY_BLUE, marginRight: 4}} icon={faCheckCircle} />
-          <Text small>Jawaban 1</Text>
-          </Item>
-
-          <Item>
-          <FontAwesomeIcon style={{ height: 16, width: 16, color: LIGHT_GREY, marginRight: 4}} icon={faCircle} />
-          <Text small>Jawaban 2</Text>
-          </Item>
-        </Container>
-
-        <Container column style={{ padding: 16 }}>
-          <Text small style={{borderBottom : '1px solid black'}}>Pertanyaan</Text>
-          <Item style={{marginTop:8, overflowX:'scroll'}} plain>
-              <div style={{height:100, width: 210, marginRight:8, background:'#29BFFF'}}/>
-              <div style={{height:100, width: 210, marginRight:8, background:'#29BFFF'}}/>
-              <div style={{height:100, width: 210, background:'#29BFFF'}}/>
-
-          </Item>
-        </Container>
+      <div>
+        <ResponseList userData={participant.user && participant.user} formData={null} />
+        <ButtonAction
+          onPressAccept={()=>this.acceptUser()}
+          onPressReject={()=>this.rejectUser()}
+        />
       </div>
     );
   }

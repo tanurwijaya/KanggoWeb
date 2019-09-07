@@ -20,6 +20,7 @@ export const Routes = () => {
       <Route exact path="/kegiatan/:event_id/edit" component={App} />
       <Route exact path="/kegiatan/:event_id/form" component={App} />
       <Route exact path="/kegiatan/:event_id/responses" component={App} />
+      <Route exact path="/kegiatan/:event_id/responses/:user_id" component={App} />
       <Route exact path="/profile" component={App} />
       {/* <Route component={Notfound}/> */}
     </Switch>

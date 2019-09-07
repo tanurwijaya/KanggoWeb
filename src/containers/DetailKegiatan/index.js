@@ -140,7 +140,7 @@ class DetailKegiatan extends Component {
           <Text bold color={"#000"}>
             Daftar peserta
           </Text>
-          <ParticipantsList data={participantData} />
+          <ParticipantsList activity={detailData} data={participantData} />
         </>
       );
     }
@@ -148,7 +148,7 @@ class DetailKegiatan extends Component {
   };
 
   render() {
-    const { detailData, fundraisingProgress } = this.state;
+    const { detailData, fundraisingProgress, participantData } = this.state;
     const { history } = this.props;
     if (!detailData) {
       return (
@@ -171,20 +171,23 @@ class DetailKegiatan extends Component {
             fundraisingProgress={fundraisingProgress}
           />
 
-          {detailData.activityType === "Volunteer" && (
-            <Wrapper column style={{ marginTop: 24, marginBottom: 32 }} plain>
-              <Text bold color={"#000"} style={{ marginBottom: 8 }}>
-                Ada 4 peserta yang belum di proses
-              </Text>
-              <Button
-                onClick={() =>
-                  history.push(history.location.pathname + "/responses")
-                }
-              >
-                <Text color={"white"}>Proses Sekarang</Text>
-              </Button>
-            </Wrapper>
-          )}
+          {detailData.activityType === "Volunteer" &&
+            participantData &&
+            participantData.getParticipants &&
+            participantData.getParticipants.unprocessedParticipants ? (
+              <Wrapper column style={{ marginTop: 24, marginBottom: 32 }} plain>
+                <Text bold color={"#000"} style={{ marginBottom: 8 }}>
+                  {`Ada ${participantData.getParticipants.unprocessedParticipants} peserta yang belum di proses`}
+                </Text>
+                <Button
+                  onClick={() =>
+                    history.push(history.location.pathname + "/responses")
+                  }
+                >
+                  <Text color={"white"}>Proses Sekarang</Text>
+                </Button>
+              </Wrapper>
+            ): null}
 
           {this.renderTable()}
         </div>

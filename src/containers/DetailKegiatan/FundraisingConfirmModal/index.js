@@ -15,7 +15,6 @@ export default function FundraisingConfirmModal({
   isLoading
 }) {
   
-  console.log('donationAmount1',donationAmount)
   const [bankHolderName, setBankHolderName] = useState('')
   const [transferAmount, setTransferAmount] = useState(donationAmount)
   const [transferDate, setTransferDate] = useState(new Date().toISOString().substring(0, 10))
@@ -32,7 +31,7 @@ export default function FundraisingConfirmModal({
   const sanitizeNumber = (numb) => {
     if(!numb){
       return 0
-    }else if(numb.trim == 0){
+    }else if(numb.trim === 0){
       return numb
     }
     return numb.replace(/^0+/, '')

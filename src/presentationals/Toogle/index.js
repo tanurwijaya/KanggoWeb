@@ -4,7 +4,6 @@ import "./style.css";
 export default function Toogle({ onToggleOn, onToogleOff,isToogleOn }) {
 
   const handleChange = ({target}) => {
-    console.log("target", target);
     if (target.checked){
       target.removeAttribute('checked');
       onToggleOn()
@@ -14,7 +13,6 @@ export default function Toogle({ onToggleOn, onToogleOff,isToogleOn }) {
    }
   }
 
-  console.log('isToogleOn',isToogleOn)
 
   return (
     <label class="switch">

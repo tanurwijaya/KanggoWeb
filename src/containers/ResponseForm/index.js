@@ -4,22 +4,28 @@ import { withRouter } from "react-router-dom";
 import ResponseList from "./ResponseList";
 import ButtonAction from "./ButtonAction";
 import gql from "graphql-tag";
-import { getActivityDetail, getFormResponseByStatus, getParticipants } from "../../graphql/queries";
+import {
+  getActivityDetail,
+  getFormResponseByStatus,
+  getParticipants,
+  getUserHistory
+} from "../../graphql/queries";
 
 class ResponseForm extends Component {
   state = {
-    detailData : null,
+    detailData: null,
     participantData: null,
+    userHistory: null,
     index: 0,
     formID: this.props
   };
 
   componentDidMount = async () => {
-    const {match} = this.props
-    const {event_id, user_id}= match.params
-    this.getActivityDetail(event_id)
-    this.getParticipantsList(event_id)
-    this.getResponseByForm()
+    const { match } = this.props;
+    const { event_id } = match.params;
+    this.getActivityDetail(event_id);
+    this.getParticipantsList(event_id);
+    this.getResponseByForm();
   };
 
   getResponses = async formID => {
@@ -45,7 +51,7 @@ class ResponseForm extends Component {
       .catch(error => {
         alert("Terjadi kesalahan, silakan coba lagi");
       });
-  }
+  };
 
   getActivityDetail = async activityID => {
     const { data } = await this.props.client.query({
@@ -61,49 +67,85 @@ class ResponseForm extends Component {
     this.setState({ detailData: data });
   };
 
-  acceptUser = async(userId, joinDate) => {
+  acceptUser = async (userId, joinDate) => {};
 
-  }
-
-  rejectUser = async(userId, joinDate) => {
-
-  }
+  rejectUser = async (userId, joinDate) => {};
 
   getParticipantsByUserID = userId => {
-    const {participantData} = this.state
-    return participantData.find(participant => participant.user && participant.user.id === userId)
-  }
+    const { participantData } = this.state;
+    return participantData.find(
+      participant => participant.user && participant.user.id === userId
+    );
+  };
 
-  getResponseByForm = async() => {
-    const {client} = this.props
-    const {formID} = this.state
-    await client.query({
-      query: gql(getFormResponseByStatus),
-      variables: {
-        formID: formID,
-        status: "WAITING"
-      }
-    }).then(({data})=>{
-      console.log(data)
-    }).catch((e)=>{
-      console.log('error get response', e)
-    });
-  }
+  getResponseByForm = async () => {
+    // const {client} = this.props
+    // const {formID} = this.state
+    // await client.query({
+    //   query: gql(getFormResponseByStatus),
+    //   variables: {
+    //     formID: formID,
+    //     status: "WAITING"
+    //   }
+    // }).then(({data})=>{
+    //   console.log(data)
+    // }).catch((e)=>{
+    //   console.log('error get response', e)
+    // });
+  };
+
+  getPreviousUserActivity = async () => {
+    const { client, match } = this.props;
+    const { detailData } = this.state;
+    const { user_id } = match.params;
+    const orgzId = localStorage.getItem("userid");
+    await client
+      .query({
+        query: gql(getUserHistory),
+        variables: {
+          userID: user_id
+        }
+      })
+      .then(({ data }) => {
+        const { userHistory } = this.state;
+        const arrJoin = [];
+        const joinHistory = data && data.getJoinHistory;
+        joinHistory.forEach(history => {
+          if (
+            history.organizationID === orgzId &&
+            history.activityID !== (detailData && detailData.id)
+          ) {
+            arrJoin.push(history);
+          }
+        });
+
+        if (userHistory == null) {
+          this.setState({ userHistory: arrJoin });
+        }
+      })
+      .catch(e => {
+        console.log("error get response", e);
+      });
+  };
 
   render() {
-    const { data } = this.props.location
-    const {match} = this.props
-    const {event_id, user_id}= match.params
-    const {detailData, participantData} = this.state
-    if(!detailData) return null
-    else if(!participantData) return null
-    const participant = this.getParticipantsByUserID(user_id)
+    const { match } = this.props;
+    const { user_id } = match.params;
+    const { detailData, participantData, userHistory } = this.state;
+    this.getPreviousUserActivity();
+    if (!detailData) return null;
+    else if (!participantData) return null;
+    const participant = this.getParticipantsByUserID(user_id);
     return (
       <div>
-        <ResponseList userData={participant.user && participant.user} formData={null} />
+        <ResponseList
+          userData={participant.user && participant.user}
+          formData={null}
+          userHistory={userHistory}
+        />
         <ButtonAction
-          onPressAccept={()=>this.acceptUser()}
-          onPressReject={()=>this.rejectUser()}
+          onPressAccept={() => this.acceptUser()}
+          onPressReject={() => this.rejectUser()}
         />
       </div>
     );

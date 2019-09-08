@@ -84,7 +84,6 @@ class FundraisingList extends Component {
   };
 
   openModal = (confirmationData, user, joinDate, amount) => {
-    console.log('amount',amount);
     this.setState({
       confirmationData: confirmationData ? confirmationData : {},
       user: user,

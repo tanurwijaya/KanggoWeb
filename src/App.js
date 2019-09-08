@@ -13,7 +13,6 @@ class App extends Component {
 
   handleLogout = async() => {
     await localStorage.clear()
-    console.log(this.props)
     this.props.history.replace('/')
   }
 

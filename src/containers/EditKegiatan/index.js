@@ -67,7 +67,6 @@ class EditKegiatan extends Component {
             fundraisingTarget,
             formID
           } = data.getActivityDetail;
-          console.log("data.getActivityDetail", data.getActivityDetail);
           this.setState({
             description: activityDescription,
             activityID: activityID,

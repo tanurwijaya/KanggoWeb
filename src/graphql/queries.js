@@ -201,14 +201,8 @@ export const getActivity = `query GetActivity(
   }
 }
 `;
-export const getJoinHistory = `query GetJoinHistory($userID: ID) {
+export const getUserHistory = `query GetJoinHistory($userID: ID) {
   getJoinHistory(userID: $userID) {
-    user {
-      id
-      name
-      email
-      createAt
-    }
     userID
     activityID
     activityType
@@ -216,20 +210,6 @@ export const getJoinHistory = `query GetJoinHistory($userID: ID) {
     activityThumbnail
     organizationID
     organizationName
-    formResponseID
-    donationAmount
-    donationTransferDetail {
-      id
-      bankName
-      bankLogo
-      bankBranch
-      bankAccountNumber
-      bankAccountNameHolder
-    }
-    status
-    createAt
-    updatedAt
-    deletedAt
   }
 }
 `;

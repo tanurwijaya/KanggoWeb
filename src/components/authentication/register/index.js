@@ -31,7 +31,6 @@ class MainRegister extends Component {
 
   componentDidMount = () => {
     const {match} = this.props
-    console.log(match)
     if(match && match.params && match.params.email){
       this.setState({email:match.params.email})
     }

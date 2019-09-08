@@ -33,7 +33,6 @@ class KegiatanScreen extends Component {
       loadingCreate
     } = this.state;
     const { history, client } = this.props;
-    console.log("history", history.location.pathname);
     if (
       history.location.pathname.includes("/kegiatan/") &&
       !history.location.pathname.includes("edit") &&

@@ -3,9 +3,9 @@ import { ViewWrapper, Item, Container } from "../../presentationals";
 import Text from "../../presentationals/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PRIMARY_BLUE, LIGHT_GREY } from "../../themes/Colors";
-import { faCheckCircle, faCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faCircle } from "@fortawesome/free-solid-svg-icons";
 
-export default function ResponseList({userData}) {
+export default function ResponseList({ userData, userHistory }) {
   return (
     <div
       style={{
@@ -23,9 +23,7 @@ export default function ResponseList({userData}) {
           <Text bold>{userData.name}</Text>
           <Text>{userData.email}</Text>
         </Item>
-        <Item plain>
-          {/* <Text>081291103131</Text> */}
-        </Item>
+        <Item plain>{/* <Text>081291103131</Text> */}</Item>
       </ViewWrapper>
 
       <Container
@@ -72,25 +70,22 @@ export default function ResponseList({userData}) {
       </Container>
 
       <Container column style={{ padding: 16 }}>
-        <Text small>Kegiatan Nama Komunitas lainnya yang diikuti</Text>
+        <Text small>Kegiatan lainnya yang diikuti</Text>
         <Item style={{ marginTop: 8, overflowX: "scroll" }} plain>
-          <div
-            style={{
-              height: 100,
-              width: 210,
-              marginRight: 8,
-              background: "#29BFFF"
-            }}
-          />
-          <div
-            style={{
-              height: 100,
-              width: 210,
-              marginRight: 8,
-              background: "#29BFFF"
-            }}
-          />
-          <div style={{ height: 100, width: 210, background: "#29BFFF" }} />
+          {userHistory &&
+            userHistory.map(history => (
+              <div
+                key={history.activityID}
+                style={{
+                  height: 100,
+                  width: 210,
+                  marginRight: 8,
+                  background: "#29BFFF"
+                }}
+              >
+                <Text>{history.activityName}</Text>
+              </div>
+            ))}
         </Item>
       </Container>
     </div>

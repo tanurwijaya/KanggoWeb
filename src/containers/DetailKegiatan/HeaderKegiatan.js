@@ -12,7 +12,6 @@ const HeaderKegiatan = props => {
     fundraisingProgress,
     activityType
   } = props;
-  console.log('activityType',activityType)
   return (
     <ViewWrapper itemCenter style={{ marginBottom: 16, marginTop: 16 }}>
       {/* <Container center style={{borderRadius:'50%', background:'grey', width: 48, height:48, marginRight:16}}>

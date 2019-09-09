@@ -1,18 +1,19 @@
 import React from "react";
 import { ViewWrapper, Item } from "../../presentationals";
-import { RED_ERROR, GREEN } from "../../themes/Colors";
+import Text from "../../presentationals/Text";
+import { RED_ERROR, GREEN, WHITE } from "../../themes/Colors";
 
-export default function ButtonAction(){
+export default function ButtonAction({onPressAccept, onPressReject}){
     return(
         <ViewWrapper
           spaceBetween
         >
           <Item/>
           <div style={{ marginLeft: 32, marginRight: 32 }}>
-            <button style={{ marginRight: 16, background: RED_ERROR }}>
-              Tolak
+            <button onClick={()=>onPressReject()} style={{ marginRight: 16, background: RED_ERROR }}>
+              <Text color={WHITE}>Tolak</Text>
             </button>
-            <button style={{ background: GREEN }}>Terima</button>
+            <button onClick={()=>onPressAccept()} style={{ background: GREEN }}><Text color={WHITE}>Terima</Text></button>
           </div>
         </ViewWrapper>
     )

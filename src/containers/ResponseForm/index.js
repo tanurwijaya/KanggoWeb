@@ -11,6 +11,8 @@ import {
   getJoinHistory,
   getUserAnsweredForm
 } from "../../graphql/queries";
+import Header from "./Header";
+import PagingHandler from "./PagingHandler";
 
 class ResponseForm extends Component {
   state = {
@@ -18,7 +20,8 @@ class ResponseForm extends Component {
     participantData: null,
     userHistory: null,
     index: 0,
-    formID: this.props
+    formID: this.props,
+    formResponse: null
   };
 
   componentDidMount = async () => {
@@ -27,17 +30,6 @@ class ResponseForm extends Component {
     this.getActivityDetail(event_id);
     this.getParticipantsList(event_id);
     this.getResponseByForm();
-  };
-
-  getResponses = async formID => {
-    const { client, match } = this.props;
-    var activityID = match.params.event_id
-    await client.query({
-      query: gql(getUserAnsweredForm),
-      variables: { formID: formID }
-    }).then(({data})=>{
-    }).catch((e)=>{
-    });
   };
 
   getParticipantsList = async activityID => {
@@ -68,9 +60,25 @@ class ResponseForm extends Component {
     this.setState({ detailData: data });
   };
 
-  acceptUser = async (userId, joinDate) => {};
+  acceptUser = async (userId, joinDate) => {
+    const { history, match } = this.props;
+    const {event_id} = match.params
+    await this.sleep(200)
+    alert('Berhasil menerima peserta')
+    history.push(`/kegiatan/${event_id}`)
+  };
 
-  rejectUser = async (userId, joinDate) => {};
+  sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  rejectUser = async (userId, joinDate) => {
+    const { history, match } = this.props;
+    const {event_id} = match.params
+    await this.sleep(200)
+    alert('Peserta berhasil ditolak')
+    history.push(`/kegiatan/${event_id}`)
+  };
 
   getParticipantsByUserID = userId => {
     const { participantData } = this.state;
@@ -113,8 +121,7 @@ class ResponseForm extends Component {
         const joinHistory = data && data.getJoinHistory;
         joinHistory.forEach(history => {
           if (
-            history.organizationID === orgzId &&
-            history.activityID !== detailData.id
+            history.organizationID === orgzId
           ) {
             arrJoin.push(history);
           }
@@ -129,19 +136,70 @@ class ResponseForm extends Component {
       });
   };
 
+  getFormResponse = () => {
+    const { userHistory, formResponse } = this.state;
+    const { match } = this.props;
+    var activityID = match.params.event_id
+    const currentActitivy =  userHistory && userHistory.find(
+      history => history.activityID === activityID
+    );
+    console.log('getFormResponse curr', currentActitivy.formResponse)
+    console.log('state', formResponse)
+    console.log('isSame', formResponse == currentActitivy.formResponse)
+    if(formResponse != currentActitivy.formResponse){
+      console.log('update')
+      this.setState({formResponse: currentActitivy && currentActitivy.formResponse})
+    }
+  }
+
+  onPressNext = () => {
+    const { history, match } = this.props;
+    const {event_id} = match.params
+    const { participantData, userHistory } = this.state;
+    console.log('participantData.length',participantData.length)
+    console.log('this.getCurrentIndex()',this.getCurrentIndex())
+    if(this.getCurrentIndex() < participantData.length+1){
+      const nextUser = participantData[this.getCurrentIndex()+1]
+      // this.setState({formResponse: userHistory[this.getCurrentIndex()+1].formResponse})
+      history.push(`/kegiatan/${event_id}/responses/${nextUser.user.id}`)
+    }
+  }
+
+  onPressPrev = () => {
+    const { history, match } = this.props;
+    const {event_id} = match.params
+    const { participantData } = this.state;
+    if(this.getCurrentIndex() !== 0){
+      const nextUser = participantData[this.getCurrentIndex()-1]
+      history.push(`/kegiatan/${event_id}/responses/${nextUser.user.id}`)
+      this.getFormResponse()
+    }
+  }
+
+  getCurrentIndex = () => {
+    const { client, match } = this.props;
+    const { user_id } = match.params;
+    console.log()
+    const { participantData } = this.state;
+    return participantData.findIndex(data => data.user && data.user.id === user_id)
+  }
+
   render() {
     const { match } = this.props;
     const { user_id } = match.params;
-    const { detailData, participantData, userHistory } = this.state;
+    const { detailData, participantData, userHistory, formResponse } = this.state;
     this.getPreviousUserActivity();
     if (!detailData) return null;
     else if (!participantData) return null;
     const participant = this.getParticipantsByUserID(user_id);
+    this.getFormResponse()
     return (
-      <div>
+      <div style={{marginBottom:32}}>
+        <Header activityName={detailData.activityName}/>
+        <PagingHandler current={this.getCurrentIndex()+1} max={participantData.length} onPressNext={()=>this.onPressNext()} onPressPrev={()=>this.onPressPrev()}/>
         <ResponseList
           userData={participant.user && participant.user}
-          formData={null}
+          formData={formResponse}
           userHistory={userHistory}
         />
         <ButtonAction

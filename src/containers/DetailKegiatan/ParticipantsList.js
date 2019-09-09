@@ -92,7 +92,7 @@ class ParticipantsList extends Component {
               <th>Email</th>
               <th>Tanggal mendaftar</th>
               <th>Status</th>
-              <th>Aksi</th>
+              {/* <th>Aksi</th> */}
             </tr>
           </thead>
           <tbody>
@@ -105,10 +105,10 @@ class ParticipantsList extends Component {
                     {moment(
                       participant.joinDate,
                       "YYYY-MM-DDTHH:mm:ss.SSSZ"
-                    ).format("DD-MM-YYYY")}
+                    ).format("DD MMMM YYYY")}
                   </td>
                   <td>{this.getStatus(participant.status)}</td>
-                  <td>{this.getActionItem(participant.user.id, participant.status)}</td>
+                  {/* <td>{this.getActionItem(participant.user.id, participant.status)}</td> */}
                 </tr>
               );
             })}

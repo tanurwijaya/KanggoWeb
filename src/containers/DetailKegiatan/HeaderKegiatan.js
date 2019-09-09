@@ -10,7 +10,8 @@ const HeaderKegiatan = props => {
     eventName,
     navigateToEdit,
     fundraisingProgress,
-    activityType
+    activityType,
+    participantAmount
   } = props;
   return (
     <ViewWrapper itemCenter style={{ marginBottom: 16, marginTop: 16 }}>
@@ -34,7 +35,16 @@ const HeaderKegiatan = props => {
                 Terukumpul
               </Text>
             </Wrapper>
-          ) : null}
+          ) : (
+            <Wrapper column>
+              <Text color={"white"} large bold>
+                {participantAmount}
+              </Text>
+              <Text color={"white"} medium>
+                Mendaftar
+              </Text>
+            </Wrapper>
+          )}
           <Wrapper>
             <Button onClick={() => navigateToEdit()}>
               <Text color={WHITE}>Edit</Text>

@@ -150,6 +150,7 @@ class DetailKegiatan extends Component {
   render() {
     const { detailData, fundraisingProgress, participantData } = this.state;
     const { history } = this.props;
+    console.log('participantData',participantData)
     if (!detailData) {
       return (
         <Item center>
@@ -169,6 +170,7 @@ class DetailKegiatan extends Component {
             navigateToEdit={() => this.navigateToEdit()}
             eventName={detailData.activityName}
             fundraisingProgress={fundraisingProgress}
+            participantAmount={participantData && participantData.getParticipants && participantData.getParticipants.numberOfParticipants }
           />
 
           {detailData.activityType === "Volunteer" &&
@@ -181,7 +183,7 @@ class DetailKegiatan extends Component {
                 </Text>
                 <Button
                   onClick={() =>
-                    history.push(history.location.pathname + "/responses")
+                    history.push(history.location.pathname + "/responses/"+participantData.getParticipants.participants[0].user.id)
                   }
                 >
                   <Text color={"white"}>Proses Sekarang</Text>

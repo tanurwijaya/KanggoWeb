@@ -221,3 +221,11 @@ export const cancelActivity = `mutation CancelActivity($input: CancelActivityInp
   }
 }
 `;
+export const updateJoinStatus = `mutation UpdateJoinStatus($input: UpdateJoinStatusInput!) {
+  updateJoinStatus(input: $input) {
+    message
+    updatedAt
+    error
+  }
+}
+`;

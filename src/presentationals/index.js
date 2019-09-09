@@ -124,9 +124,9 @@ export const AreaField = styled.textarea(props => ({
 }))
 
 export const Button = styled.button(props => ({
-    background: !props.disabled ? PRIMARY_BLUE : LIGHT_GREY,
+    background: !props.disabled ? (props.color?props.color: PRIMARY_BLUE) : LIGHT_GREY,
     padding: '4px 24px',
-    border: `1px solid ${!props.disabled ? PRIMARY_BLUE : LIGHT_GREY}`,
+    border: `1px solid ${!props.disabled ? (props.color?props.color: PRIMARY_BLUE) : LIGHT_GREY}`,
     borderRadius: '4px',
     ":hover": {
         cursor: !props.disabled && 'pointer'

@@ -10,7 +10,7 @@ import {
   Dropdown,
   Button
 } from "../../presentationals";
-import { LIGHT_GREY, DARK_GREY, WHITE } from "../../themes/Colors";
+import { LIGHT_GREY, DARK_GREY, WHITE, RED_ERROR } from "../../themes/Colors";
 import { getActivityDetail } from "../../graphql/queries";
 import Spinner from "react-spinner-material";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -306,6 +306,8 @@ class EditKegiatan extends Component {
             {this.renderFormField()}
           </Wrapper>
         )}
+
+        <Button style={{marginTop:32}} color={RED_ERROR}><Text color={WHITE}>Batalkan Kegiatan</Text></Button>
       </div>
     );
   }

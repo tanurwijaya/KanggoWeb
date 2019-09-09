@@ -11,9 +11,9 @@ export default function AddQuestions({onAddQuestionPressed}) {
         <Text>Short Answer</Text>
       </AddWrapper>
 
-      <AddWrapper onClick={()=>onAddQuestionPressed('LongAnswer')}>
+      {/* <AddWrapper onClick={()=>onAddQuestionPressed('LongAnswer')}>
         <Text>Long Answer</Text>
-      </AddWrapper>
+      </AddWrapper> */}
 
       <AddWrapper onClick={()=>onAddQuestionPressed('RadioButton')}>
         <Text>Radio Button</Text>

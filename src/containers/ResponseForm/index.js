@@ -8,7 +8,8 @@ import {
   getActivityDetail,
   getFormResponseByStatus,
   getParticipants,
-  getUserHistory
+  getUserHistory,
+  getUserAnsweredForm
 } from "../../graphql/queries";
 
 class ResponseForm extends Component {
@@ -29,14 +30,14 @@ class ResponseForm extends Component {
   };
 
   getResponses = async formID => {
-    // const { client, match } = this.props;
-    // var activityID = match.params.event_id
-    // await client.query({
-    //   query: gql(getAnsweredForm),
-    //   variables: { formID: formID }
-    // }).then(({data})=>{
-    // }).catch((e)=>{
-    // });
+    const { client, match } = this.props;
+    var activityID = match.params.event_id
+    await client.query({
+      query: gql(getUserAnsweredForm),
+      variables: { formID: formID }
+    }).then(({data})=>{
+    }).catch((e)=>{
+    });
   };
 
   getParticipantsList = async activityID => {
@@ -79,19 +80,19 @@ class ResponseForm extends Component {
   };
 
   getResponseByForm = async () => {
-    // const {client} = this.props
-    // const {formID} = this.state
-    // await client.query({
-    //   query: gql(getFormResponseByStatus),
-    //   variables: {
-    //     formID: formID,
-    //     status: "WAITING"
-    //   }
-    // }).then(({data})=>{
-    //   console.log(data)
-    // }).catch((e)=>{
-    //   console.log('error get response', e)
-    // });
+    const {client} = this.props
+    const {formID} = this.state
+    await client.query({
+      query: gql(getFormResponseByStatus),
+      variables: {
+        formID: formID,
+        status: "WAITING"
+      }
+    }).then(({data})=>{
+      console.log(data)
+    }).catch((e)=>{
+      console.log('error get response', e)
+    });
   };
 
   getPreviousUserActivity = async () => {
@@ -113,7 +114,7 @@ class ResponseForm extends Component {
         joinHistory.forEach(history => {
           if (
             history.organizationID === orgzId &&
-            history.activityID !== (detailData && detailData.id)
+            history.activityID !== detailData.id
           ) {
             arrJoin.push(history);
           }

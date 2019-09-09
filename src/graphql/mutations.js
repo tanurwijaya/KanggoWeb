@@ -20,6 +20,7 @@ export const createFormResponse = `mutation CreateFormResponse($input: FormRespo
 export const addFormToActivity = `mutation AddFormToActivity($input: AddFormToActivityInput!) {
   addFormToActivity(input: $input) {
     message
+    updatedAt
     error
   }
 }
@@ -70,6 +71,7 @@ export const createActivity = `mutation CreateActivity($input: CreateActivityInp
 export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInput!) {
   updateActivity(input: $input) {
     message
+    updatedAt
     error
   }
 }
@@ -77,6 +79,7 @@ export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInp
 export const deleteActivity = `mutation DeleteActivity($input: DeleteActivityInput!) {
   deleteActivity(input: $input) {
     message
+    updatedAt
     error
   }
 }
@@ -97,6 +100,13 @@ export const joinActivity = `mutation JoinActivity($input: JoinActivityInput!) {
     organizationID
     organizationName
     formResponseID
+    formResponse {
+      type
+      question
+      answer
+      options
+      selected
+    }
     donationAmount
     donationTransferDetail {
       id
@@ -198,6 +208,15 @@ export const addTransferConfirmation = `mutation AddTransferConfirmation($input:
 export const verifyPayment = `mutation VerifyPayment($input: VerifyPaymentInput) {
   verifyPayment(input: $input) {
     message
+    updatedAt
+    error
+  }
+}
+`;
+export const cancelActivity = `mutation CancelActivity($input: CancelActivityInput!) {
+  cancelActivity(input: $input) {
+    message
+    updatedAt
     error
   }
 }

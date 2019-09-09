@@ -8,7 +8,7 @@ import {
   getActivityDetail,
   getFormResponseByStatus,
   getParticipants,
-  getUserHistory,
+  getJoinHistory,
   getUserAnsweredForm
 } from "../../graphql/queries";
 
@@ -102,7 +102,7 @@ class ResponseForm extends Component {
     const orgzId = localStorage.getItem("userid");
     await client
       .query({
-        query: gql(getUserHistory),
+        query: gql(getJoinHistory),
         variables: {
           userID: user_id
         }

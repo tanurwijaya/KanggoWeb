@@ -20,7 +20,7 @@ export default function PagingHandler({current, max, onPressNext, onPressPrev}) 
         spaceBetween
       >
         <ViewWrapper />
-        <ButtonPrevNext onClick={()=>onPressPrev()} style={{ marginRight: 16 }}>
+        <ButtonPrevNext onClick={onPressPrev} style={{ marginRight: 16 }}>
           <Text bold large>
             {"<"}
           </Text>
@@ -28,7 +28,7 @@ export default function PagingHandler({current, max, onPressNext, onPressPrev}) 
         <Text color={DARK_GREY} large>{current}</Text>
         <Text color={DARK_GREY} large>{" / "}</Text>
         <Text color={DARK_GREY} large>{max}</Text>
-        <ButtonPrevNext onClick={()=>onPressNext()} style={{ marginLeft: 16 }}>
+        <ButtonPrevNext onClick={onPressNext} style={{ marginLeft: 16 }}>
           <Text bold large>
             {">"}
           </Text>

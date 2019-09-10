@@ -63,12 +63,6 @@ class ResponseForm extends Component {
 
   acceptUser = async (userId, joinDate) => {
     this.updateJoinStatusHandler('SUCCESS')
-    // alert("Berhasil menerima peserta");
-    // history.push(`/kegiatan/${event_id}`);
-  };
-
-  sleep = ms => {
-    return new Promise(resolve => setTimeout(resolve, ms));
   };
 
   updateJoinStatusHandler = async (status) => {
@@ -166,15 +160,14 @@ class ResponseForm extends Component {
     const currentActitivy =
       userHistory &&
       userHistory.find(history => history.activityID === activityID);
-    console.log("getFormResponse curr", currentActitivy.formResponse);
-    console.log("state", formResponse);
-    console.log("isSame", formResponse == currentActitivy.formResponse);
-    if (formResponse != currentActitivy.formResponse) {
+    if (formResponse !== currentActitivy.formResponse) {
       console.log("update");
       this.setState({
         formResponse: currentActitivy && currentActitivy.formResponse
       });
+      return currentActitivy.formResponse
     }
+    return formResponse
   };
 
   onPressNext = () => {
@@ -183,9 +176,9 @@ class ResponseForm extends Component {
     const { participantData, userHistory } = this.state;
     console.log("participantData.length", participantData.length);
     console.log("this.getCurrentIndex()", this.getCurrentIndex());
-    if (this.getCurrentIndex() < participantData.length + 1) {
+    if (this.getCurrentIndex() < participantData.length-1) {
       const nextUser = participantData[this.getCurrentIndex() + 1];
-      // this.setState({formResponse: userHistory[this.getCurrentIndex()+1].formResponse})
+      this.setState({formResponse: userHistory[this.getCurrentIndex()+1].formResponse})
       history.push(`/kegiatan/${event_id}/responses/${nextUser.user.id}`);
     }
   };

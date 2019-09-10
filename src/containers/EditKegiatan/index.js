@@ -12,6 +12,7 @@ import {
 } from "../../presentationals";
 import { LIGHT_GREY, DARK_GREY, WHITE, RED_ERROR } from "../../themes/Colors";
 import { getActivityDetail } from "../../graphql/queries";
+import { cancelActivity } from "../../graphql/mutations";
 import Spinner from "react-spinner-material";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,6 +24,7 @@ import Header from "./Header";
 import moment from 'moment'
 import { updateActivity } from '../../graphql/mutations'
 import Toogle from "../../presentationals/Toogle/index";
+import ModalCancel from "./ModalCancel";
 
 class EditKegiatan extends Component {
   state = {
@@ -30,11 +32,11 @@ class EditKegiatan extends Component {
     startDate: "",
     endDate: "",
     activityName: "",
-    location: "Jakarta",
     activityID: "",
     activityType: "",
     fundraisingTarget: "",
     formID: "",
+    isModalShow: false,
     isRequiredForm: false
   };
 
@@ -78,7 +80,7 @@ class EditKegiatan extends Component {
               : null,
             activityName: activityName,
             activityType: activityType,
-            location: location,
+            location: location ? location : "Jakarta",
             formID: formID,
             isRequiredForm: formID !== null,
             fundraisingTarget: fundraisingTarget
@@ -190,8 +192,31 @@ class EditKegiatan extends Component {
     }
   };
 
+  onCancelPress = async(reason) => {
+    const { client, activity } = this.props;
+    const {activityID} = this.state
+    await client
+      .mutate({
+        mutation: gql(cancelActivity),
+        variables: {
+          input: {
+            activityID: activityID,
+            organizationID: localStorage.getItem("userid"),
+            reason: reason
+          }
+        }
+      })
+      .then(({ data }) => {
+        alert(data.cancelActivity && data.cancelActivity.message);
+        this.setState({isModalShow: false})
+      })
+      .catch(err => {
+        alert("Gagal memverifikasi pembayaran");
+      });
+  }
+
   render() {
-    const { activityName, formID } = this.state;
+    const { activityName, formID, isModalShow } = this.state;
     if (!activityName) {
       return (
         <Item center>
@@ -206,6 +231,11 @@ class EditKegiatan extends Component {
     }
     return (
       <div style={{ marginLeft: 32, marginRight: 32, paddingBottom: 32 }}>
+        <ModalCancel
+          show={isModalShow}
+          close={() => this.setState({ isModalShow: false })}
+          onCancelPress={reason => this.onCancelPress(reason)}
+        />
         <Header
           eventName={activityName}
           onSavePressed={() => this.onSavePressed()}
@@ -307,7 +337,15 @@ class EditKegiatan extends Component {
           </Wrapper>
         )}
 
-        <Button style={{marginTop:32}} color={RED_ERROR}><Text color={WHITE}>Batalkan Kegiatan</Text></Button>
+        {this.state.activityType === "Volunteer" && (
+          <Button
+            onClick={() => this.setState({ isModalShow: true })}
+            style={{ marginTop: 32 }}
+            color={RED_ERROR}
+          >
+            <Text color={WHITE}>Batalkan Kegiatan</Text>
+          </Button>
+        )}
       </div>
     );
   }

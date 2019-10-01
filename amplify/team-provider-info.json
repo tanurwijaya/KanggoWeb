@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "kanggoweb-20190429213208-authRole",
+            "UnauthRoleArn": "arn:aws:iam::996768769543:role/kanggoweb-20190429213208-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::996768769543:role/kanggoweb-20190429213208-authRole",
+            "Region": "ap-southeast-1",
+            "DeploymentBucketName": "kanggoweb-20190429213208-deployment",
+            "UnauthRoleName": "kanggoweb-20190429213208-unauthRole",
+            "StackName": "kanggoweb-20190429213208",
+            "StackId": "arn:aws:cloudformation:ap-southeast-1:996768769543:stack/kanggoweb-20190429213208/91a922d0-6a8b-11e9-af23-0a14ee878cf4"
+        }
+    }
+}

@@ -8,6 +8,7 @@ import { getActivityDetail, getParticipants, getFundraisingProgress } from "../.
 import ParticipantsList from "./ParticipantsList";
 import Spinner from "react-spinner-material";
 import FundraisingList from "./FundraisingList";
+import DetailWidget from "./DetailWidget";
 
 class DetailKegiatan extends Component {
   state = {
@@ -163,6 +164,7 @@ class DetailKegiatan extends Component {
         </Item>
       );
     } else {
+      const {activityDateStart,activityDateEnd, location} = detailData
       return (
         <div style={{ marginLeft: 32, marginRight: 32 }}>
           <HeaderKegiatan
@@ -171,6 +173,12 @@ class DetailKegiatan extends Component {
             eventName={detailData.activityName}
             fundraisingProgress={fundraisingProgress}
             participantAmount={participantData && participantData.getParticipants && participantData.getParticipants.numberOfParticipants }
+          />
+
+          <DetailWidget
+            activityDateStart={activityDateStart}
+            activityDateEnd={activityDateEnd}
+            location={location}
           />
 
           {detailData.activityType === "Volunteer" &&
